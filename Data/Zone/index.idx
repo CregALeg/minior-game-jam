@@ -18,7 +18,8 @@
 "CountedFloors": 0,
 "Rogue": 0,
 "Grounds": [
-"character_select"
+"character_select",
+"crash_site"
 ],
 "Maps": [],
 "Name": {

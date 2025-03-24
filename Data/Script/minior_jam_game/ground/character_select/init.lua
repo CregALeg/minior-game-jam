@@ -61,6 +61,10 @@ end
 -------------------------------
 -- Function for starting the GAME
 function character_select.StartGame()
+  GAME:CutsceneMode(true)
+  UI:ResetSpeaker()
+  GAME:MoveCamera(132, 120, 1, false) -- Set Camera Position
+  GAME:FadeIn(20) --Fade in
   --remove any team members that may exist by default for some reason
 	local party_count = _DATA.Save.ActiveTeam.Players.Count
 	for ii = 1, party_count, 1 do
@@ -71,12 +75,126 @@ function character_select.StartGame()
 	for i = 1, assembly_count, 1 do
 	   _DATA.Save.ActiveTeam.Assembly.RemoveAt(i-1)--not sure if this permanently deletes or not...
 	end
-
-
-  UI:WaitShowVoiceOver("Test", -1)
+  GAME:WaitFrames(60)
+  --Run code to get starter Minior & Partner + nickname both
   character_select.MiniorSelect()
   character_select.PartnerSelect()
+
+  --Respawn partner?
+  --COMMON.RespawnStarterPartner()
+  COMMON:RespawnAllies()
+  GROUND:RefreshPlayer() --Reset player (Mostly for Debug)
+
+  --** Cutcsene starts here **--
+  local player = CH('PLAYER')
+  local partner = CH('PARTNER')
+
+  GAME:WaitFrames(30)
+  GAME:MoveCamera(132, 240, 240, false)
+
+  GROUND:MoveInDirection(partner, Direction.Up, 114, false, 1)
+
+  GAME:WaitFrames(60)
+
+  UI:SetSpeaker(partner)
+  GROUND:CharSetEmote(partner, "sweatdrop", 1)
+  SOUND:PlaySE("Battle/EVT_Emote_Sweatdrop")
+  GAME:WaitFrames(8)
+  UI:SetSpeakerEmotion("Sigh")
+  UI:WaitShowDialogue("Sigh...it's not fair...")
+  UI:SetSpeakerEmotion("Sad")
+  UI:WaitShowDialogue("Everyone else gets to go out on adventures...[pause=30]Everyone except me.")
+  UI:WaitShowDialogue("Gramps says I have to have a partner, but...")
+  GROUND:CharSetEmote(partner, "angry", 1)
+  SOUND:PlaySE("Battle/EVT_Emote_Complain_2")
+  GAME:WaitFrames(8)
+  UI:SetSpeakerEmotion("Angry")
+  UI:WaitShowDialogue("There's nobody else here!")
+  UI:WaitShowDialogue("There's no other Pokémon my age in the village...")
+  GAME:WaitFrames(30)
+  GROUND:MoveInDirection(partner, Direction.Down, 8, false, 1)
+  UI:SetSpeakerEmotion("Determined")
+  UI:WaitShowDialogue("Shows what he knows![pause=30] I made it all the way out here on my own!")
+  UI:SetSpeakerEmotion("Worried")
+  UI:WaitShowDialogue("But... it still would be nice to have a partner I guess...")
+  GAME:WaitFrames(30)
+  GROUND:MoveInDirection(partner, Direction.Up, 4, false, 1)
+  UI:SetSpeakerEmotion("Normal")
+  UI:WaitShowDialogue("I should probably get back soon.")
+  UI:WaitShowDialogue("Otherwise Gramps will get mad...")
+
+  -- Shooting stars anim here--
+  GAME:MoveCamera(132, 160, 180, false)
+  local emitter = RogueEssence.Content.SingleEmitter(RogueEssence.Content.AnimData("Wish", 3))
+  emitter.LocHeight = 8
+  GROUND:PlayVFX(emitter, 60, 84)
+  --
+  GAME:WaitFrames(30)
+  GROUND:CharSetEmote(partner, "question", 1)
+  UI:SetSpeakerEmotion("Stunned")
+  UI:WaitShowDialogue("Huh?[pause=20] What was that?")
+  GROUND:PlayVFX(emitter, 120, 80)
+  GAME:WaitFrames(20)
+  GROUND:PlayVFX(emitter, 200, 90)
+  GROUND:CharSetEmote(partner, "glowing", 1)
+  UI:SetSpeakerEmotion("inspired")
+  UI:WaitShowDialogue("Woah![pause=20] Shooting stars!")
+  GROUND:PlayVFX(emitter, 125, 75) -- Stars again
+  UI:SetSpeakerEmotion("Normal")
+  UI:WaitShowDialogue("Should I...[pause=30] make a wish?")
+  GROUND:PlayVFX(emitter, 120, 80)
+  GAME:WaitFrames(10)
+  GROUND:PlayVFX(emitter, 200, 90)
+  GAME:WaitFrames(10)
+  GROUND:PlayVFX(emitter, 125, 75) -- Stars again
+  UI:WaitShowDialogue("I wish...")
+  UI:WaitShowDialogue("I wish for...")
+  GROUND:PlayVFX(emitter, 120, 115)
+  GAME:WaitFrames(120)
+  UI:WaitShowDialogue("...")
+  UI:WaitShowDialogue("I should get back before it gets too late.")
+  --Goes to leave
+  GAME:MoveCamera(132, 0, 240, false)
+  --GROUND:MoveInDirection(partner, Direction.Down, 8, false, 1) --Camera reset--
+  --Minior falls from the sky--
+  GROUND:Hide("PLAYER")
+  SOUND:PlayBGM("", true)
+  GROUND:TeleportTo(player, 216, 48, Direction.DownLeft)
+  local emitter2 = RogueEssence.Content.SingleEmitter(RogueEssence.Content.AnimData("Leer", 3))
+  emitter2.LocHeight = 8
+  GROUND:PlayVFX(emitter2, player.Bounds.Center.X, player.Bounds.Center.Y)
+  GAME:WaitFrames(120)
+  GROUND:Unhide("PLAYER")
+  GROUND:AnimateInDirection(player, "Hurt", Direction.DownLeft, Direction.DownLeft, 148, 148, 1)
+
+  --Collide with ground, screen shake, explosion sfx and screen flash--
+  GROUND:MoveScreen(RogueEssence.Content.ScreenMover(0, 16, 30))
+  local emitter3 = RogueEssence.Content.FlashEmitter()
+  emitter3.FadeInTime = 8
+  emitter3.HoldTime = 32
+  emitter3.FadeOutTime = 64
+  emitter3.StartColor = Color(0, 0, 0, 0)
+  emitter3.Layer = DrawLayer.Top
+  emitter3.Anim = RogueEssence.Content.BGAnimData("White", 0)
+  GROUND:PlayVFX(emitter3, player.MapLoc.X, player.MapLoc.Y)
+  SOUND:PlaySE("Battle/DUN_Explosion")
+  -- Game.ResetSpeaker()
+  -- Game.SetSpeaker(player)
+  -- UI:SetSpeakerEmotion(crying)
+  -- UI:WaitShowDialogue("(Waaaaaaaaaaaaaaaaaaaaaaaaaaaaaaah!)")
+  UI:SetSpeakerEmotion("surprised")
+  GROUND:Hide("PLAYER")
+  GAME:MoveCamera(132, 240, 32, false)
+  UI:WaitShowDialogue("What?![pause=30] What was that?!")
+  UI:WaitShowDialogue("It looked like something fell from the sky and landed in the forest!")
+  UI:WaitShowDialogue("I need to check that out!")
+  GROUND:MoveInDirection(partner, Direction.Down, 110, false, 1)
+  --** Cutscene Ends Here **--
+  GAME:CutsceneMode(false)
+  GAME:FadeOut(false, 20)
+  GAME:EnterGroundMap("crash_site", "EntranceSouth")
 end
+
 -- Function for choosing partner
 function character_select.PartnerSelect()
   local msg = "Choose a Pokémon."
@@ -112,7 +230,7 @@ function character_select.PartnerSelect()
 		UI:WaitForChoice()
 		yesnoResult = UI:ChoiceResult()
 	end
-
+  -- Set Partner Data
   partner = _DATA.Save.ActiveTeam:CreatePlayer(_DATA.Save.Rand, partner_choice, 15, "", 0)
   tbl = LTBL(partner)
   tbl.Importance = "Partner"
