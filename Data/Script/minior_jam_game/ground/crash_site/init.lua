@@ -68,10 +68,10 @@ function crash_site.cutscene1()
   local partner = CH("PARTNER")
   GROUND:CharSetAnim(player, "Sleep", true)
   --** Cutscene starts here**--
-  GAME:MoveCamera(0, 0, 120, true)
-  GROUND:MoveToPosition(partner, 184, 275, false, 3)
 
   GAME:FadeIn(20)
+  GAME:MoveCamera(0, 0, 120, true)
+  GROUND:MoveToPosition(partner, 184, 275, false, 3)
   GAME:WaitFrames(30)
   --Start talking
   GROUND:CharSetEmote(partner, "shock", 1)
@@ -115,10 +115,111 @@ function crash_site.cutscene1()
 
   UI:SetSpeaker(partner)
   UI:SetSpeakerEmotion("Shouting")
-  UI:WaitShowDialogue("Hey![pause=30] Just calm down, you're not making any sense!")
+  UI:WaitShowDialogue("Hey![pause=30] Calm down, you're not making any sense!")
   UI:SetSpeakerEmotion("Normal")
+  UI:WaitShowDialogue("Just calm down. What's your name?")
+
+  UI:SetSpeaker(player)
+  GROUND:CharSetEmote(player, "sweating", 1)
+  SOUND:PlaySE("Battle/EVT_Emote_Sweating")
+  GAME:WaitFrames(30)
+  UI:SetSpeakerEmotion("Worried")
+  UI:WaitShowDialogue("Uh... I'm[pause=20] " ..player:GetDisplayName()..".")
+
+  UI:SetSpeaker(partner)
+  UI:SetSpeakerEmotion("Normal")
+  UI:WaitShowDialogue("Nice to meet you, I'm " ..partner:GetDisplayName()..".")
+  UI:SetSpeakerEmotion("Worried")
+  UI:WaitShowDialogue("So what happened to you? Why did you fall out of the sky like that?")
+
+  UI:SetSpeaker(player)
+  UI:SetSpeakerEmotion("Worried")
+  UI:WaitShowDialogue("I'm a Minior. I live in space with my friends.")
+  UI:WaitShowDialogue("But something happened. There was this big green Pokémon, and it attacked us.")
+  UI:SetSpeakerEmotion("Crying")
+  UI:WaitShowDialogue("It sent us all crashing down to the ground, but we got separated!")
+  UI:WaitShowDialogue("Now I'm lost, they're lost, I don't know how to get home or how to find them and, and...")
+
+  UI:SetSpeaker(partner)
+  UI:SetSpeakerEmotion("worried")
+  UI:WaitShowDialogue("Hmm...")
+  GAME:WaitFrames(30)
+  UI:SetSpeakerEmotion("joyous")
+  UI:WaitShowDialogue("This is great!")
+
+  UI:SetSpeaker(player)
+  UI:SetSpeakerEmotion("Teary-Eyed")
+  UI:WaitShowDialogue("Wh- what?")
+
+  UI:SetSpeaker(partner)
+  UI:SetSpeakerEmotion("joyous")
+  UI:WaitShowDialogue("Yeah, this is great!")
+  UI:SetSpeakerEmotion("normal")
+  UI:WaitShowDialogue("I can help you find your friends, and help you get back home!")
+
+  UI:SetSpeaker(player)
+  UI:SetSpeakerEmotion("Teary-Eyed")
+  UI:WaitShowDialogue("You- you can?")
+
+  UI:SetSpeaker(partner)
+  UI:SetSpeakerEmotion("happy")
+  UI:WaitShowDialogue("Yeah! [pause=30][emote=normal] I might not look it, but I'm tough!")
+  UI:WaitShowDialogue("I've been training to become an adventurer since I was little.")
+  UI:WaitShowDialogue("Stick with me, and I'll get you where you need to go.")
+  UI:SetSpeakerEmotion("inspired")
+  UI:WaitShowDialogue("We can form our own adventuring team until we get you home!")
+
+  UI:SetSpeaker(player)
+  UI:SetSpeakerEmotion("Teary-Eyed")
+  UI:WaitShowDialogue("O- okay...")
+  UI:SetSpeakerEmotion("Inspired")
+  UI:WaitShowDialogue("Okay! Yeah! Let's do it!")
+
+  UI:SetSpeaker(partner)
+  UI:SetSpeakerEmotion("worried")
+  UI:WaitShowDialogue("But...[pause=20] How do we get you back to space?[pause=30]")
+  UI:SetSpeakerEmotion("joyous")
+  UI:WaitShowDialogue("I know! [pause=30]We can ask Gramps!")
+  UI:SetSpeakerEmotion("normal")
+  UI:WaitShowDialogue("Yeah, he's been around forever! He's sure to know a way to get you and your friends back home.")
+  UI:WaitShowDialogue("We'll need to head through the nearby Mystery Dungeon to get to Mellow Town.")
+
+  UI:SetSpeaker(player)
+  UI:SetSpeakerEmotion("Worried")
+  UI:WaitShowDialogue("Mystery Dungeon?")
+
+  UI:SetSpeaker(partner)
+  UI:SetSpeakerEmotion("Normal")
+  UI:WaitShowDialogue("They're these mysterious places full of rare items and dangerous Pokémon.")
+  UI:WaitShowDialogue("Apparently, they're supposed to change every time you go into them.")
+  UI:WaitShowDialogue("There's loads around here.[pause=30] Adventuring teams of Pokémon come from all over to take them on.")
+
+  GROUND:CharSetEmote(player, "sweatdrop", 1)
+  SOUND:PlaySE("Battle/EVT_Emote_Sweatdrop")
+  GAME:WaitFrames(30)
+
+  UI:SetSpeakerEmotion("joyous")
+  UI:WaitShowDialogue("Don't worry, as long as you stick with me, you'll be fine!")
+  UI:SetSpeakerEmotion("normal")
+  UI:WaitShowDialogue("I'll let you lead the way. When you're ready to go, head to the south. That'll take us to the Wishing Woods.")
+
+  COMMON.UnlockWithFanfare("1_wishing_woods", false)
+
   --** Cutscene ends here**--
   GAME:CutsceneMode(false)
+end
+
+function crash_site.PARTNER_Action(chara, activator)
+  DEBUG.EnableDbgCoro()
+  local partner = CH("Teammate1")
+  UI:ResetSpeaker()
+  UI:SetSpeaker(partner)
+  UI:SetSpeakerEmotion("Normal")
+  UI:WaitShowDialogue("I'll let you lead the way. When you're ready to go, head to the south. That'll take us to the Wishing Woods.")
+end
+
+function crash_site.EntranceSouth_Touch(obj, activator)
+  COMMON.ShowDestinationMenu("1_wishing_woods","")
 end
 
 return crash_site

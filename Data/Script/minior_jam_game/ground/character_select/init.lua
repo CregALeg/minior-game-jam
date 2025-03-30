@@ -192,7 +192,7 @@ function character_select.StartGame()
   --** Cutscene Ends Here **--
   GAME:CutsceneMode(false)
   GAME:FadeOut(false, 20)
-  GAME:EnterGroundMap("crash_site", "EntranceSouth")
+  GAME:EnterGroundMap("crash_site", "SPAWN")
 end
 
 -- Function for choosing partner
@@ -203,6 +203,7 @@ function character_select.PartnerSelect()
                   RogueEssence.Dungeon.MonsterID("litten", 0, "normal", Gender.Male),
                   RogueEssence.Dungeon.MonsterID("totodile", 0, "normal", Gender.Male),
                   RogueEssence.Dungeon.MonsterID("zorua", 0, "normal", Gender.Female),
+                  RogueEssence.Dungeon.MonsterID("zorua", 1, "normal", Gender.Female),
                   RogueEssence.Dungeon.MonsterID("rockruff", 0, "normal", Gender.Male)}
 
   local continue = false

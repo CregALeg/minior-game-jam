@@ -1,0 +1,64 @@
+﻿{
+"Version": "0.8.9.0",
+"Object": {
+"$type": "System.Collections.Generic.Dictionary`2[[System.String, System.Private.CoreLib],[RogueEssence.Data.EntrySummary, RogueEssence]], System.Private.CoreLib",
+"kecleon": {
+"$type": "RogueEssence.Data.MonsterEntrySummary, RogueEssence",
+"Forms": [
+{
+"Name": {
+"DefaultText": "Kecleon",
+"LocalTexts": {
+"ja": "カクレオン",
+"ko": "켈리몬",
+"zh-hant": "變隱龍",
+"fr": "Kecleon",
+"de": "Kecleon",
+"es": "Kecleon",
+"it": "Kecleon",
+"ja-jp": "カクレオン",
+"zh-hans": "变隐龙"
+}
+},
+"Released": true,
+"Temporary": false
+},
+{
+"Name": {
+"DefaultText": "Purple Kecleon",
+"LocalTexts": {
+"ja": "カクレオン",
+"ko": "켈리몬",
+"zh-hant": "變隱龍",
+"fr": "Kecleon",
+"de": "Kecleon",
+"es": "Kecleon",
+"it": "Kecleon",
+"ja-jp": "カクレオン",
+"zh-hans": "变隐龙"
+}
+},
+"Released": true,
+"Temporary": false
+}
+],
+"Name": {
+"DefaultText": "Kecleon",
+"LocalTexts": {
+"ja": "カクレオン",
+"ko": "켈리몬",
+"zh-hant": "變隱龍",
+"fr": "Kecleon",
+"de": "Kecleon",
+"es": "Kecleon",
+"it": "Kecleon",
+"ja-jp": "カクレオン",
+"zh-hans": "变隐龙"
+}
+},
+"Released": true,
+"Comment": "",
+"SortOrder": 352
+}
+}
+}

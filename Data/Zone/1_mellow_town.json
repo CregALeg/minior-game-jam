@@ -3,10 +3,10 @@
 "Object": {
 "$type": "RogueEssence.Data.ZoneData, RogueEssence",
 "Name": {
-"DefaultText": "Jam Intro",
+"DefaultText": "Mellow Town",
 "LocalTexts": {}
 },
-"Released": true,
+"Released": false,
 "Comment": "",
 "NoEXP": false,
 "ExpPercent": 100,
@@ -24,8 +24,7 @@
 "Rogue": 0,
 "Segments": [],
 "GroundMaps": [
-"character_select",
-"crash_site"
+"mellow_town"
 ]
 }
 }
