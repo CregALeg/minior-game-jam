@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.NetStandard.ResXResourceReader, System.Resources.NetStandard, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.NetStandard.ResXResourceWriter, System.Resources.NetStandard, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </resheader>
+  <data name="STORAGE_KANGA_INTRO" xml:space="preserve">
+    <value>[emote=Happy]Hello, there!\nWelcome to [color=#98C379]Kangaskhan Storage.[color]</value>
+  </data>
+  <data name="Box_Intro" xml:space="preserve">
+    <value>[emote=Happy]Hiiii!~\u266A Welcome to [color=#98C379]Tinkaton's Box Busting.[color]\n[emote=Normal]Only {0} to open a box!\u266A</value>
+  </data>
+  <data name="Box_Return" xml:space="preserve">
+    <value>Need anything else?~\u266A</value>
+  </data>
+  <data name="Box_Option_Open" xml:space="preserve">
+    <value>Open Boxes</value>
+  </data>
+  <data name="Box_Choose" xml:space="preserve">
+    <value>Okay!~\u266A Pick a box you want me to open! Or, choose multiple with {0}.</value>
+  </data>
+  <data name="Box_Bag_Empty" xml:space="preserve">
+    <value>Awww... [pause=20] You've not got any items in your bag...</value>
+  </data>
+  <data name="Box_Info_001" xml:space="preserve">
+    <value>Hey! So, y'know those boxes you can find in dungeons?~\u266A</value>
+  </data>
+  <data name="Box_Info_002" xml:space="preserve">
+    <value>They're locked up tight![pause=20] There's nothing that can open them!</value>
+  </data>
+  <data name="Box_Info_003" xml:space="preserve">
+    <value>[emote=Inspired]Well...[pause=20] nothing except my hammer!</value>
+  </data>
+  <data name="Box_Info_004" xml:space="preserve">
+    <value>It'll cost you {0} for each box you want me to open.</value>
+  </data>
+  <data name="Box_Goodbye" xml:space="preserve">
+    <value>Okay~\u266A See you next time!</value>
+  </data>
+  <data name="Box_No_Money" xml:space="preserve">
+    <value>[emote=Worried]Umm...[pause=20] You don't have enough \uE024....</value>
+  </data>
+  <data name="Box_Choose_One" xml:space="preserve">
+    <value>Okay~\u266A I can open that {1} for {0}.</value>
+  </data>
+  <data name="Box_Choose_Multi" xml:space="preserve">
+    <value>Okay~\u266A I can open all that for {0}.</value>
+  </data>
+  <data name="Box_Choose_Max" xml:space="preserve">
+    <value>[emote=surprised]Wha- [pause=20][emote=normal]That's a lot, but I can do it for {0}.</value>
+  </data>
+  <data name="Box_Start_Max" xml:space="preserve">
+    <value>[emote=determined]Okay! Here goes![pause=20]\n[emote=angry]Rrraaahhhh!</value>
+  </data>
+  <data name="Box_End_Max_001" xml:space="preserve">
+    <value>[emote=sigh]Whew...[pause=30]\n[emote=normal]Okay, all done~\u266A</value>
+  </data>
+  <data name="Box_End_Max_002" xml:space="preserve">
+    <value>[emote=inspired]Okay~\u266A[pause=20] Here's your treasure!</value>
+  </data>
+  <data name="Box_Start" xml:space="preserve">
+    <value>Okay~\u266A Leave it to me!</value>
+  </data>
+  <data name="Box_End" xml:space="preserve">
+    <value>[emote=inspired]Okay~\u266A[pause=20] Here's your treasure!</value>
+  </data>
+</root>

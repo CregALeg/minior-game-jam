@@ -61,40 +61,42 @@ end
 -------------------------------
 
 function mellow_town.STORAGE_COUNTER_Action(obj, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   UI:ResetSpeaker()
 
   local state = 0
 
+  local chara = CH("STORAGE_Kangaskhan")
+  UI:SetSpeaker(chara)
+
   while state > -1 do
+    local has_items = GAME:GetPlayerBagCount() + GAME:GetPlayerEquippedCount() > 0
+    local has_storage = GAME:GetPlayerStorageCount() > 0
 
-  local has_items = GAME:GetPlayerBagCount() + GAME:GetPlayerEquippedCount() > 0
-  local has_storage = GAME:GetPlayerStorageCount() > 0
 
-
-  local storage_choices = { { STRINGS:FormatKey('MENU_STORAGE_STORE'), has_items},
-  { STRINGS:FormatKey('MENU_STORAGE_TAKE_ITEM'), has_storage},
-  { STRINGS:FormatKey('MENU_STORAGE_STORE_ALL'), has_items},
-  { STRINGS:FormatKey("MENU_CANCEL"), true}}
-  UI:BeginChoiceMenu(STRINGS:FormatKey('DLG_WHAT_DO'), storage_choices, 1, 5)
-  UI:WaitForChoice()
-  local result = UI:ChoiceResult()
-
-  if result == 1 then
-    UI:StorageMenu()
+    local storage_choices = { { STRINGS:FormatKey('MENU_STORAGE_STORE'), has_items},
+    { STRINGS:FormatKey('MENU_STORAGE_TAKE_ITEM'), has_storage},
+    { STRINGS:FormatKey('MENU_STORAGE_STORE_ALL'), has_items},
+    { STRINGS:FormatKey("MENU_CANCEL"), true}}
+    UI:BeginChoiceMenu(STRINGS:Format(STRINGS.MapStrings["STORAGE_KANGA_INTRO"]), storage_choices, 1, 5)
     UI:WaitForChoice()
-  elseif result == 2 then
-    UI:WithdrawMenu()
-    UI:WaitForChoice()
-    elseif result == 3 then
-      UI:ChoiceMenuYesNo(STRINGS:FormatKey('DLG_STORE_ALL_CONFIRM'), false);
+    local result = UI:ChoiceResult()
+
+    if result == 1 then
+      UI:StorageMenu()
       UI:WaitForChoice()
-      if UI:ChoiceResult() then
-        GAME:DepositAll()
-      end
-  elseif result == 4 then
-    state = -1
-  end
-
+    elseif result == 2 then
+      UI:WithdrawMenu()
+      UI:WaitForChoice()
+      elseif result == 3 then
+        UI:ChoiceMenuYesNo(STRINGS:FormatKey('DLG_STORE_ALL_CONFIRM'), false);
+        UI:WaitForChoice()
+        if UI:ChoiceResult() then
+          GAME:DepositAll()
+        end
+    elseif result == 4 then
+      state = -1
+    end
   end
 end
 
@@ -102,6 +104,197 @@ end
 function mellow_town.BANK_COUNTER_Action(obj, activator)
   UI:BankMenu()
   UI:WaitForChoice()
+end
+
+-- Tinkaton Boxes
+function mellow_town.BOX_COUNTER_Action(obj, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+
+  local state = 0
+  local repeated = false
+  local cart = {}
+  local price = 150
+  local chara = CH('BOX_Tinkaton') --Get Tinkaton
+  UI:SetSpeaker(chara)
+	while state > -1 do
+		if state == 0 then
+			local msg = STRINGS:Format(STRINGS.MapStrings['Box_Intro'], STRINGS:FormatKey("MONEY_AMOUNT", price))
+			if repeated == true then
+				msg = STRINGS:Format(STRINGS.MapStrings['Box_Return'])
+			end
+			local shop_choices = {STRINGS:Format(STRINGS.MapStrings['Box_Option_Open']),
+			STRINGS:FormatKey("MENU_INFO"),
+			STRINGS:FormatKey("MENU_EXIT")}
+			UI:BeginChoiceMenu(msg, shop_choices, 1, 3)
+			UI:WaitForChoice()
+			local result = UI:ChoiceResult()
+			repeated = true
+			if result == 1 then
+				local bag_count = GAME:GetPlayerBagCount() + GAME:GetPlayerEquippedCount()
+				if bag_count > 0 then
+					UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Box_Choose'], STRINGS:LocalKeyString(26)))
+					state = 1
+				else
+					UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Box_Bag_Empty']))
+				end
+			elseif result == 2 then
+				UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Box_Info_001']))
+				UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Box_Info_002']))
+				UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Box_Info_003']))
+				UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Box_Info_004'], STRINGS:FormatKey("MONEY_AMOUNT", price)))
+			else
+				UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Box_Goodbye']))
+				state = -1
+			end
+		elseif state == 1 then
+			UI:AppraiseMenu()
+			UI:WaitForChoice()
+			local result = UI:ChoiceResult()
+
+			if #result > 0 then
+				cart = result
+				state = 2
+			else
+				state = 0
+			end
+		elseif state == 2 then
+			local total = #cart * price
+
+			if total > GAME:GetPlayerMoney() then
+				UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Box_No_Money']))
+				state = 1
+			else
+				local msg
+				if #cart == 1 then
+					local item
+					if cart[1].IsEquipped then
+						item = GAME:GetPlayerEquippedItem(cart[1].Slot)
+					else
+						item = GAME:GetPlayerBagItem(cart[1].Slot)
+					end
+					msg = STRINGS:Format(STRINGS.MapStrings['Box_Choose_One'], STRINGS:FormatKey("MONEY_AMOUNT", total), item:GetDisplayName())
+				elseif #cart < 24 then
+					msg = STRINGS:Format(STRINGS.MapStrings['Box_Choose_Multi'], STRINGS:FormatKey("MONEY_AMOUNT", total))
+				else
+					msg = STRINGS:Format(STRINGS.MapStrings['Box_Choose_Max'], STRINGS:FormatKey("MONEY_AMOUNT", total))
+
+				end
+				UI:ChoiceMenuYesNo(msg, false)
+				UI:WaitForChoice()
+				result = UI:ChoiceResult()
+
+				UI:SetSpeakerEmotion("Normal")
+
+				local treasure = {}
+				if result then
+					for ii = #cart, 1, -1 do
+						local box = nil
+						local stack = 0
+						if cart[ii].IsEquipped then
+							box = GAME:GetPlayerEquippedItem(cart[ii].Slot)
+							GAME:TakePlayerEquippedItem(cart[ii].Slot, true)
+						else
+							box = GAME:GetPlayerBagItem(cart[ii].Slot)
+							GAME:TakePlayerBagItem(cart[ii].Slot, true)
+						end
+
+						local treasure_item = box.HiddenValue
+						local itemEntry = _DATA:GetItem(treasure_item)
+						local treasure_choice = { Box = box, Item = RogueEssence.Dungeon.InvItem(treasure_item,false,itemEntry.MaxStack)}
+						table.insert(treasure, treasure_choice)
+
+						-- note high rarity items
+						if itemEntry.Rarity > 0 then
+							SV.unlocked_trades[treasure_item] = true
+						end
+					end
+					SOUND:PlayBattleSE("DUN_Money")
+					GAME:RemoveFromPlayerMoney(total)
+					cart = {}
+          -- Special anim for max amount???
+					if #treasure >= 24 then
+					  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Box_Start_Max']))
+            -- Just one big bonk
+            GROUND:EntTurn(chara, Direction.Up)
+            GAME:WaitFrames(20)
+            GROUND:CharSetAnim(chara, "Charge", true)
+            GAME:WaitFrames(40)
+            GROUND:CharSetAnim(chara, "Attack", false)
+            GAME:WaitFrames(23)
+            local shake = RogueEssence.Content.ScreenMover(0, 8, 60)
+            GROUND:MoveScreen(shake)
+            SOUND:PlayBattleSE("_UNK_DUN_Break")
+					  SOUND:PlayBattleSE("DUN_Explosion")
+            GAME:WaitFrames(40)
+
+					  GROUND:EntTurn(chara, Direction.Down)
+					  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Box_End_Max_001']))
+					  SOUND:PlayFanfare("Fanfare/Treasure")
+					  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Box_End_Max_002']))
+          -- Anim if several
+					elseif #treasure >= 8 then
+					  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Box_Start']))
+
+            GROUND:EntTurn(chara, Direction.Up)
+            GAME:WaitFrames(20)
+            GROUND:CharSetAnim(chara, "Attack", false)
+            GAME:WaitFrames(23)
+            local shake = RogueEssence.Content.ScreenMover(0, 8, 30)
+            GROUND:MoveScreen(shake)
+            SOUND:PlayBattleSE("_UNK_DUN_Break")
+            GAME:WaitFrames(20)
+
+            -- Again
+            GROUND:CharSetAnim(chara, "Attack", false)
+            GAME:WaitFrames(23)
+            local shake = RogueEssence.Content.ScreenMover(0, 8, 30)
+            GROUND:MoveScreen(shake)
+            SOUND:PlayBattleSE("_UNK_DUN_Break")
+            GAME:WaitFrames(10)
+            -- Again
+            GROUND:CharSetAnim(chara, "Attack", false)
+            GAME:WaitFrames(23)
+            local shake = RogueEssence.Content.ScreenMover(0, 8, 30)
+            GROUND:MoveScreen(shake)
+            SOUND:PlayBattleSE("_UNK_DUN_Break")
+            GAME:WaitFrames(30)
+
+            GROUND:EntTurn(chara, Direction.Down)
+            SOUND:PlayFanfare("Fanfare/Treasure")
+            UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Box_End']))
+          -- Anim if just one
+					else
+					  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Box_Start']))
+
+					  GROUND:EntTurn(chara, Direction.Up)
+					  GAME:WaitFrames(20)
+            GROUND:CharSetAnim(chara, "Attack", false)
+					  GAME:WaitFrames(23)
+					  local shake = RogueEssence.Content.ScreenMover(0, 8, 30)
+					  GROUND:MoveScreen(shake)
+					  SOUND:PlayBattleSE("_UNK_DUN_Break")
+					  GAME:WaitFrames(20)
+					  GROUND:EntTurn(chara, Direction.Down)
+					  SOUND:PlayFanfare("Fanfare/Treasure")
+					  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Box_End']))
+					end
+
+					UI:SpoilsMenu(treasure)
+					UI:WaitForChoice()
+
+					for ii = 1, #treasure, 1 do
+						local item = treasure[ii].Item
+
+						GAME:GivePlayerItem(item.ID, item.Amount, false, item.HiddenValue)
+					end
+
+					state = 0
+				else
+					state = 1
+				end
+			end
+		end
+	end
 end
 
 return mellow_town
