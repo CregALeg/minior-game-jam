@@ -6,6 +6,8 @@
 -- Commonly included lua functions and data
 require 'origin.common'
 
+local mellow_town_tutor = require 'minior_jam_game.ground.mellow_town.mellow_town_tutor'
+
 -- Package name
 local mellow_town = {}
 
@@ -65,6 +67,7 @@ function mellow_town.STORAGE_COUNTER_Action(obj, activator)
   UI:ResetSpeaker()
 
   local state = 0
+  local repeated = false
 
   local chara = CH("STORAGE_Kangaskhan")
   UI:SetSpeaker(chara)
@@ -73,19 +76,24 @@ function mellow_town.STORAGE_COUNTER_Action(obj, activator)
     local has_items = GAME:GetPlayerBagCount() + GAME:GetPlayerEquippedCount() > 0
     local has_storage = GAME:GetPlayerStorageCount() > 0
 
-
+    local msg = STRINGS:Format(STRINGS.MapStrings['STORAGE_KANGA_INTRO'])
+    if repeated == true then
+      msg = STRINGS:Format(STRINGS.MapStrings['STORAGE_KANGA_INTRO_2'])
+    end
     local storage_choices = { { STRINGS:FormatKey('MENU_STORAGE_STORE'), has_items},
     { STRINGS:FormatKey('MENU_STORAGE_TAKE_ITEM'), has_storage},
     { STRINGS:FormatKey('MENU_STORAGE_STORE_ALL'), has_items},
     { STRINGS:FormatKey("MENU_CANCEL"), true}}
-    UI:BeginChoiceMenu(STRINGS:Format(STRINGS.MapStrings["STORAGE_KANGA_INTRO"]), storage_choices, 1, 5)
+    UI:BeginChoiceMenu(msg, storage_choices, 1, 4)
     UI:WaitForChoice()
     local result = UI:ChoiceResult()
-
+    repeated = true
     if result == 1 then
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storage_Store'], STRINGS:LocalKeyString(26)))
       UI:StorageMenu()
       UI:WaitForChoice()
     elseif result == 2 then
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storage_Unstore'], STRINGS:LocalKeyString(26)))
       UI:WithdrawMenu()
       UI:WaitForChoice()
       elseif result == 3 then
@@ -95,15 +103,411 @@ function mellow_town.STORAGE_COUNTER_Action(obj, activator)
           GAME:DepositAll()
         end
     elseif result == 4 then
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storage_Goodbye']))
       state = -1
+    end
+  end
+end
+
+-- function mellow_town.ShopReroll_Action(obj, activator)
+--   print(COMMON.ESSENTIALS)
+--   COMMON.EndDayCycle()
+-- end
+
+function mellow_town.SHOP_LEFT_COUNTER_Action(obj, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+
+  local state = 0
+  local repeated = false
+  local cart = {}
+  local catalog = { }
+  for ii = 1, #SV.mart_shop, 1 do
+  local base_data = SV.mart_shop[ii]
+  local item_data = { Item = RogueEssence.Dungeon.InvItem(base_data.Index, false, base_data.Amount), Price = base_data.Price }
+  table.insert(catalog, item_data)
+  end
+
+
+  local chara = CH('MART_Kecleon_Left')
+  UI:SetSpeaker(chara)
+
+  while state > -1 do
+    if state == 0 then
+      local msg = STRINGS:Format(STRINGS.MapStrings['Shop_Intro'])
+      if repeated == true then
+        msg = STRINGS:Format(STRINGS.MapStrings['Shop_Intro_Return'])
+      end
+      local shop_choices = {STRINGS:Format(STRINGS.MapStrings['Shop_Option_Buy']), STRINGS:Format(STRINGS.MapStrings['Shop_Option_Sell']),
+      STRINGS:FormatKey("MENU_INFO"),
+      STRINGS:FormatKey("MENU_EXIT")}
+      UI:BeginChoiceMenu(msg, shop_choices, 1, 4)
+      UI:WaitForChoice()
+      local result = UI:ChoiceResult()
+      repeated = true
+      if result == 1 then
+        if #catalog > 0 then
+          --TODO: use the enum instead of a hardcoded number
+          UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Shop_Buy'], STRINGS:LocalKeyString(26)))
+          state = 1
+        else
+          UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Shop_Buy_Empty']))
+        end
+      elseif result == 2 then
+        local bag_count = GAME:GetPlayerBagCount() + GAME:GetPlayerEquippedCount()
+        if bag_count > 0 then
+          --TODO: use the enum instead of a hardcoded number
+          UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Shop_Sell'], STRINGS:LocalKeyString(26)))
+          state = 3
+        else
+          UI:SetSpeakerEmotion("Angry")
+          UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Shop_Bag_Empty']))
+          UI:SetSpeakerEmotion("Normal")
+        end
+      elseif result == 3 then
+        UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Shop_Info_001']))
+        UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Shop_Info_002']))
+        UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Shop_Info_003']))
+        UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Shop_Info_004']))
+        UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Shop_Info_005']))
+      else
+        UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Shop_Goodbye']))
+        state = -1
+      end
+    elseif state == 1 then
+      UI:ShopMenu(catalog)
+      UI:WaitForChoice()
+      local result = UI:ChoiceResult()
+      if #result > 0 then
+        local bag_count = GAME:GetPlayerBagCount() + GAME:GetPlayerEquippedCount()
+        local bag_cap = GAME:GetPlayerBagLimit()
+        if bag_count == bag_cap then
+          UI:SetSpeakerEmotion("Angry")
+          UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Shop_Bag_Full']))
+          UI:SetSpeakerEmotion("Normal")
+        else
+          cart = result
+          state = 2
+        end
+      else
+        state = 0
+      end
+    elseif state == 2 then
+      local total = 0
+      for ii = 1, #cart, 1 do
+        total = total + catalog[cart[ii]].Price
+      end
+      local msg
+      if total > GAME:GetPlayerMoney() then
+        UI:SetSpeakerEmotion("Angry")
+        UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Shop_Buy_No_Money']))
+        UI:SetSpeakerEmotion("Normal")
+        state = 1
+      else
+        if #cart == 1 then
+          local name = catalog[cart[1]].Item:GetDisplayName()
+          msg = STRINGS:Format(STRINGS.MapStrings['Shop_Buy_One'], STRINGS:FormatKey("MONEY_AMOUNT", total), name)
+        else
+          msg = STRINGS:Format(STRINGS.MapStrings['Shop_Buy_Multi'], STRINGS:FormatKey("MONEY_AMOUNT", total))
+        end
+        UI:ChoiceMenuYesNo(msg, false)
+        UI:WaitForChoice()
+        result = UI:ChoiceResult()
+
+        if result then
+          GAME:RemoveFromPlayerMoney(total)
+          for ii = 1, #cart, 1 do
+            local item = catalog[cart[ii]].Item
+            GAME:GivePlayerItem(item.ID, item.Amount, false)
+          end
+          for ii = #cart, 1, -1 do
+            table.remove(catalog, cart[ii])
+            table.remove(SV.mart_shop, cart[ii])
+          end
+
+          cart = {}
+          SOUND:PlayBattleSE("DUN_Money")
+          UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Shop_Buy_Complete']))
+          state = 0
+        else
+          state = 1
+        end
+      end
+    elseif state == 3 then
+      UI:SellMenu()
+      UI:WaitForChoice()
+      local result = UI:ChoiceResult()
+
+      if #result > 0 then
+        cart = result
+        state = 4
+      else
+        state = 0
+      end
+    elseif state == 4 then
+      local total = 0
+      for ii = 1, #cart, 1 do
+        local item
+        if cart[ii].IsEquipped then
+          item = GAME:GetPlayerEquippedItem(cart[ii].Slot)
+        else
+          item = GAME:GetPlayerBagItem(cart[ii].Slot)
+        end
+        total = total + item:GetSellValue()
+      end
+      local msg
+      if #cart == 1 then
+        local item
+        if cart[1].IsEquipped then
+          item = GAME:GetPlayerEquippedItem(cart[1].Slot)
+        else
+          item = GAME:GetPlayerBagItem(cart[1].Slot)
+        end
+        msg = STRINGS:Format(STRINGS.MapStrings['Shop_Sell_One'], STRINGS:FormatKey("MONEY_AMOUNT", total), item:GetDisplayName())
+      else
+        msg = STRINGS:Format(STRINGS.MapStrings['Shop_Sell_Multi'], STRINGS:FormatKey("MONEY_AMOUNT", total))
+      end
+      UI:ChoiceMenuYesNo(msg, false)
+      UI:WaitForChoice()
+      result = UI:ChoiceResult()
+
+      if result then
+        for ii = #cart, 1, -1 do
+          if cart[ii].IsEquipped then
+            GAME:TakePlayerEquippedItem(cart[ii].Slot, true)
+          else
+            GAME:TakePlayerBagItem(cart[ii].Slot, true)
+          end
+        end
+        SOUND:PlayBattleSE("DUN_Money")
+        GAME:AddToPlayerMoney(total)
+        cart = {}
+        UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Shop_Sell_Complete']))
+        state = 0
+      else
+        state = 3
+      end
+    end
+  end
+end
+
+function mellow_town.SHOP_RIGHT_COUNTER_Action(obj, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+
+  local state = 0
+  local repeated = false
+  local cart = {}
+  local catalog = { }
+  for ii = 1, #SV.wares_shop, 1 do
+  local base_data = SV.wares_shop[ii]
+  local item_data = { Item = RogueEssence.Dungeon.InvItem(base_data.Index, false, base_data.Amount), Price = base_data.Price }
+  table.insert(catalog, item_data)
+  end
+
+
+  local chara = CH('MART_Kecleon_Right')
+  UI:SetSpeaker(chara)
+
+  while state > -1 do
+    if state == 0 then
+      local msg = STRINGS:Format(STRINGS.MapStrings['Shop_Intro'])
+      if repeated == true then
+        msg = STRINGS:Format(STRINGS.MapStrings['Shop_Intro_Return'])
+      end
+      local shop_choices = {STRINGS:Format(STRINGS.MapStrings['Shop_Option_Buy']), STRINGS:Format(STRINGS.MapStrings['Shop_Option_Sell']),
+      STRINGS:FormatKey("MENU_INFO"),
+      STRINGS:FormatKey("MENU_EXIT")}
+      UI:BeginChoiceMenu(msg, shop_choices, 1, 4)
+      UI:WaitForChoice()
+      local result = UI:ChoiceResult()
+      repeated = true
+      if result == 1 then
+        if #catalog > 0 then
+          --TODO: use the enum instead of a hardcoded number
+          UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Shop_Buy'], STRINGS:LocalKeyString(26)))
+          state = 1
+        else
+          UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Shop_Buy_Empty']))
+        end
+      elseif result == 2 then
+        local bag_count = GAME:GetPlayerBagCount() + GAME:GetPlayerEquippedCount()
+        if bag_count > 0 then
+          --TODO: use the enum instead of a hardcoded number
+          UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Shop_Sell'], STRINGS:LocalKeyString(26)))
+          state = 3
+        else
+          UI:SetSpeakerEmotion("Angry")
+          UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Shop_Bag_Empty']))
+          UI:SetSpeakerEmotion("Normal")
+        end
+      elseif result == 3 then
+        UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Shop_Info_001']))
+        UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Shop_Info_002']))
+        UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Shop_Info_003']))
+        UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Shop_Info_004']))
+        UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Shop_Info_005']))
+      else
+        UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Shop_Goodbye']))
+        state = -1
+      end
+    elseif state == 1 then
+      UI:ShopMenu(catalog)
+      UI:WaitForChoice()
+      local result = UI:ChoiceResult()
+      if #result > 0 then
+        local bag_count = GAME:GetPlayerBagCount() + GAME:GetPlayerEquippedCount()
+        local bag_cap = GAME:GetPlayerBagLimit()
+        if bag_count == bag_cap then
+          UI:SetSpeakerEmotion("Angry")
+          UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Shop_Bag_Full']))
+          UI:SetSpeakerEmotion("Normal")
+        else
+          cart = result
+          state = 2
+        end
+      else
+        state = 0
+      end
+    elseif state == 2 then
+      local total = 0
+      for ii = 1, #cart, 1 do
+        total = total + catalog[cart[ii]].Price
+      end
+      local msg
+      if total > GAME:GetPlayerMoney() then
+        UI:SetSpeakerEmotion("Angry")
+        UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Shop_Buy_No_Money']))
+        UI:SetSpeakerEmotion("Normal")
+        state = 1
+      else
+        if #cart == 1 then
+          local name = catalog[cart[1]].Item:GetDisplayName()
+          msg = STRINGS:Format(STRINGS.MapStrings['Shop_Buy_One'], STRINGS:FormatKey("MONEY_AMOUNT", total), name)
+        else
+          msg = STRINGS:Format(STRINGS.MapStrings['Shop_Buy_Multi'], STRINGS:FormatKey("MONEY_AMOUNT", total))
+        end
+        UI:ChoiceMenuYesNo(msg, false)
+        UI:WaitForChoice()
+        result = UI:ChoiceResult()
+
+        if result then
+          GAME:RemoveFromPlayerMoney(total)
+          for ii = 1, #cart, 1 do
+            local item = catalog[cart[ii]].Item
+            GAME:GivePlayerItem(item.ID, item.Amount, false)
+          end
+          for ii = #cart, 1, -1 do
+            table.remove(catalog, cart[ii])
+            table.remove(SV.wares_shop, cart[ii])
+          end
+
+          cart = {}
+          SOUND:PlayBattleSE("DUN_Money")
+          UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Shop_Buy_Complete']))
+          state = 0
+        else
+          state = 1
+        end
+      end
+    elseif state == 3 then
+      UI:SellMenu()
+      UI:WaitForChoice()
+      local result = UI:ChoiceResult()
+
+      if #result > 0 then
+        cart = result
+        state = 4
+      else
+        state = 0
+      end
+    elseif state == 4 then
+      local total = 0
+      for ii = 1, #cart, 1 do
+        local item
+        if cart[ii].IsEquipped then
+          item = GAME:GetPlayerEquippedItem(cart[ii].Slot)
+        else
+          item = GAME:GetPlayerBagItem(cart[ii].Slot)
+        end
+        total = total + item:GetSellValue()
+      end
+      local msg
+      if #cart == 1 then
+        local item
+        if cart[1].IsEquipped then
+          item = GAME:GetPlayerEquippedItem(cart[1].Slot)
+        else
+          item = GAME:GetPlayerBagItem(cart[1].Slot)
+        end
+        msg = STRINGS:Format(STRINGS.MapStrings['Shop_Sell_One'], STRINGS:FormatKey("MONEY_AMOUNT", total), item:GetDisplayName())
+      else
+        msg = STRINGS:Format(STRINGS.MapStrings['Shop_Sell_Multi'], STRINGS:FormatKey("MONEY_AMOUNT", total))
+      end
+      UI:ChoiceMenuYesNo(msg, false)
+      UI:WaitForChoice()
+      result = UI:ChoiceResult()
+
+      if result then
+        for ii = #cart, 1, -1 do
+          if cart[ii].IsEquipped then
+            GAME:TakePlayerEquippedItem(cart[ii].Slot, true)
+          else
+            GAME:TakePlayerBagItem(cart[ii].Slot, true)
+          end
+        end
+        SOUND:PlayBattleSE("DUN_Money")
+        GAME:AddToPlayerMoney(total)
+        cart = {}
+        UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Shop_Sell_Complete']))
+        state = 0
+      else
+        state = 3
+      end
     end
   end
 end
 
 -- Gholdengo Bank
 function mellow_town.BANK_COUNTER_Action(obj, activator)
-  UI:BankMenu()
-  UI:WaitForChoice()
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  UI:ResetSpeaker()
+
+  local state = 0
+  local repeated = false
+
+  local chara = CH("BANK_Gholdengo")
+  UI:SetSpeaker(chara)
+
+  while state > -1 do
+    local msg = STRINGS:Format(STRINGS.MapStrings['Bank_Intro_001'])
+    if repeated == true then
+      msg = STRINGS:Format(STRINGS.MapStrings['Bank_Intro_002'])
+    end
+    local bank_choices = { { STRINGS:FormatKey('MENU_BANK_MANAGE'), true},
+    { STRINGS:FormatKey('MENU_INFO'), true},
+    { STRINGS:FormatKey("MENU_CANCEL"), true}}
+    UI:BeginChoiceMenu(msg, bank_choices, 1, 3)
+    UI:WaitForChoice()
+    local result = UI:ChoiceResult()
+    repeated = true
+    if result == 1 then -- Bank
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Bank_Manage'], STRINGS:LocalKeyString(26)))
+      UI:BankMenu()
+      UI:WaitForChoice()
+    elseif result == 2 then
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Bank_Info_001']))
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Bank_Info_002']))
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Bank_Info_003']))
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Bank_Info_004']))
+    elseif result == 3 then
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Bank_Goodbye']))
+      state = -1
+    end
+  end
+end
+
+--Mienshao Moves
+function mellow_town.MOVES_COUNTER_Action(obj, activator)
+  mellow_town_tutor.MOVES_COUNTER_Action(obj, activator)
 end
 
 -- Tinkaton Boxes

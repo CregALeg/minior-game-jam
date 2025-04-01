@@ -801,6 +801,9 @@
   <data name="MENU_BANK_BANK" xml:space="preserve">
     <value>Bank:</value>
     <comment></comment>  </data>
+  <data name="MENU_BANK_MANAGE" xml:space="preserve">
+    <value>Manage Funds</value>
+    <comment></comment>  </data>
   <data name="MENU_BANK_MONEY" xml:space="preserve">
     <value>Money:</value>
     <comment></comment>  </data>

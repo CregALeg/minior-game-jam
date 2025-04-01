@@ -118,4 +118,109 @@
   <data name="Box_End" xml:space="preserve">
     <value>[emote=inspired]Okay~\u266A[pause=20] Here's your treasure!</value>
   </data>
+  <data name="Storage_Store" xml:space="preserve">
+    <value>What do you want to store? You can choose more than one item using {0}.</value>
+  </data>
+  <data name="STORAGE_KANGA_INTRO_2" xml:space="preserve">
+    <value>Anything else, dear?</value>
+  </data>
+  <data name="Storage_Goodbye" xml:space="preserve">
+    <value>[emote=happy]Thank you, sweetie. Come again!</value>
+  </data>
+  <data name="Storage_Unstore" xml:space="preserve">
+    <value>What do you want to take? You can choose more than one item using {0}.</value>
+  </data>
+  <data name="Shop_Bag_Empty" xml:space="preserve">
+    <value>Oh?[pause=0] Nothing to sell?</value>
+  </data>
+  <data name="Shop_Bag_Full" xml:space="preserve">
+    <value>Oh![pause=0] You have no more space for items!</value>
+  </data>
+  <data name="Shop_Buy" xml:space="preserve">
+    <value>Very well![pause=0] Feel free to examine my merchandise! (You can use {0} to choose multiple items.)</value>
+  </data>
+  <data name="Shop_Buy_Complete" xml:space="preserve">
+    <value>Thank you! All yours~</value>
+  </data>
+  <data name="Shop_Buy_Empty" xml:space="preserve">
+    <value>I'm sold out.[pause=0] Please forgive me.[pause=0] I will have new merchandise tomorrow!</value>
+  </data>
+  <data name="Shop_Buy_Multi" xml:space="preserve">
+    <value>Altogether, that comes to {0}. Is that OK?</value>
+  </data>
+  <data name="Shop_Buy_No_Money" xml:space="preserve">
+    <value>What?[pause=0] You don't seem to have the money.</value>
+  </data>
+  <data name="Shop_Buy_One" xml:space="preserve">
+    <value>That {1}? That will be {0}.</value>
+  </data>
+  <data name="Shop_Goodbye" xml:space="preserve">
+    <value>Thanks! \u266A Please come again \u266A</value>
+  </data>
+  <data name="Shop_Info_001" xml:space="preserve">
+    <value>This shop specializes in selling items!</value>
+  </data>
+  <data name="Shop_Info_002" xml:space="preserve">
+    <value>Items are useful for your dungeon adventures!</value>
+  </data>
+  <data name="Shop_Info_003" xml:space="preserve">
+    <value>Use items with imagination! And invent new uses for them!</value>
+  </data>
+  <data name="Shop_Info_004" xml:space="preserve">
+    <value>If the shop sells out,[pause=0] we'll always have new things to sell on the next day!</value>
+  </data>
+  <data name="Shop_Info_005" xml:space="preserve">
+    <value>So spend time in dungeons until we restock! Visit us when you return~</value>
+  </data>
+  <data name="Shop_Intro" xml:space="preserve">
+    <value>Hello~\u266A \nWelcome to the Kecleon Shop~\u266A</value>
+  </data>
+  <data name="Shop_Intro_Return" xml:space="preserve">
+    <value>May I help you with anything else?</value>
+  </data>
+  <data name="Shop_Option_Buy" xml:space="preserve">
+    <value>Buy</value>
+  </data>
+  <data name="Shop_Option_Sell" xml:space="preserve">
+    <value>Sell</value>
+  </data>
+  <data name="Shop_Sell" xml:space="preserve">
+    <value>Very well! What will you sell? (You can use {0} to choose multiple items.)</value>
+  </data>
+  <data name="Shop_Sell_Complete" xml:space="preserve">
+    <value>Done deal! Thank you~\u266A</value>
+  </data>
+  <data name="Shop_Sell_Multi" xml:space="preserve">
+    <value>I can pay {0} for everything. Is that acceptable?</value>
+  </data>
+  <data name="Shop_Sell_One" xml:space="preserve">
+    <value>I can pay {0} for that {1}. Is that acceptable?</value>
+  </data>
+  <data name="Bank_Menu_Bank2" xml:space="preserve">
+    <value>Manage Funds</value>
+  </data>
+  <data name="Bank_Info_001" xml:space="preserve">
+    <value>You can store your hard-earned \uE024 here at  [color=#98C379]Gholdengo Bank[color], clink~</value>
+  </data>
+  <data name="Bank_Info_002" xml:space="preserve">
+    <value>If you're defeated in a dungeon, you'll usually lose most of your money!</value>
+  </data>
+  <data name="Bank_Info_003" xml:space="preserve">
+    <value>We'll safeguard your \uE024 so you can adventure to your heart's content, without fear of losing anything.</value>
+  </data>
+  <data name="Bank_Info_004" xml:space="preserve">
+    <value>You can deposit or withdraw as much as you like.</value>
+  </data>
+  <data name="Bank_Intro_001" xml:space="preserve">
+    <value>Welcome to [color=#98C379]Gholdengo Bank[color], clink~\nHow can we be of service?</value>
+  </data>
+  <data name="Bank_Intro_002" xml:space="preserve">
+    <value>Anything else we can help with, clink~?</value>
+  </data>
+  <data name="Bank_Goodbye" xml:space="preserve">
+    <value>Thank you for your patronage. Please come again.</value>
+  </data>
+  <data name="Bank_Manage" xml:space="preserve">
+    <value>Certainly, here are your funds, clink~</value>
+  </data>
 </root>

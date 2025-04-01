@@ -25004,7 +25004,7 @@
 "Width": 8,
 "Height": 8
 },
-"Tags": 0
+"Tags": 1
 },
 {
 "Bounds": {
@@ -25013,7 +25013,7 @@
 "Width": 8,
 "Height": 8
 },
-"Tags": 0
+"Tags": 1
 },
 {
 "Bounds": {
@@ -25546,7 +25546,7 @@
 "Width": 8,
 "Height": 8
 },
-"Tags": 0
+"Tags": 1
 },
 {
 "Bounds": {
@@ -25555,7 +25555,7 @@
 "Width": 8,
 "Height": 8
 },
-"Tags": 0
+"Tags": 1
 },
 {
 "Bounds": {
@@ -26070,7 +26070,7 @@
 "Width": 8,
 "Height": 8
 },
-"Tags": 0
+"Tags": 1
 },
 {
 "Bounds": {
@@ -26079,7 +26079,7 @@
 "Width": 8,
 "Height": 8
 },
-"Tags": 0
+"Tags": 1
 },
 {
 "Bounds": {
@@ -26169,7 +26169,7 @@
 "Width": 8,
 "Height": 8
 },
-"Tags": 0
+"Tags": 1
 },
 {
 "Bounds": {
@@ -64022,20 +64022,7 @@
 {
 "AutoTileset": "",
 "Associates": [],
-"Layers": [
-{
-"Frames": [
-{
-"Sheet": "Mellow Town Trees",
-"TexLoc": {
-"X": 14,
-"Y": 5
-}
-}
-],
-"FrameLength": 60
-}
-],
+"Layers": [],
 "NeighborCode": -1
 },
 {
@@ -64224,39 +64211,13 @@
 {
 "AutoTileset": "",
 "Associates": [],
-"Layers": [
-{
-"Frames": [
-{
-"Sheet": "Mellow Town Trees",
-"TexLoc": {
-"X": 15,
-"Y": 1
-}
-}
-],
-"FrameLength": 60
-}
-],
+"Layers": [],
 "NeighborCode": -1
 },
 {
 "AutoTileset": "",
 "Associates": [],
-"Layers": [
-{
-"Frames": [
-{
-"Sheet": "Mellow Town Trees",
-"TexLoc": {
-"X": 15,
-"Y": 2
-}
-}
-],
-"FrameLength": 60
-}
-],
+"Layers": [],
 "NeighborCode": -1
 },
 {
@@ -64300,20 +64261,7 @@
 {
 "AutoTileset": "",
 "Associates": [],
-"Layers": [
-{
-"Frames": [
-{
-"Sheet": "Mellow Town Trees",
-"TexLoc": {
-"X": 15,
-"Y": 5
-}
-}
-],
-"FrameLength": 60
-}
-],
+"Layers": [],
 "NeighborCode": -1
 },
 {
@@ -64476,20 +64424,7 @@
 {
 "AutoTileset": "",
 "Associates": [],
-"Layers": [
-{
-"Frames": [
-{
-"Sheet": "Mellow Town Trees",
-"TexLoc": {
-"X": 16,
-"Y": 1
-}
-}
-],
-"FrameLength": 60
-}
-],
+"Layers": [],
 "NeighborCode": -1
 },
 {
@@ -68449,8 +68384,8 @@
 },
 "CollisionDisabled": false,
 "Collider": {
-"X": 0,
-"Y": 0,
+"X": 508,
+"Y": 145,
 "Width": 16,
 "Height": 16
 }
@@ -70195,6 +70130,49 @@
 "X": 149,
 "Y": 176,
 "Width": 22,
+"Height": 16
+}
+},
+{
+"EntName": "ShopReroll",
+"Direction": 0,
+"EntEnabled": true,
+"EntOrder": 0,
+"InteractOrder": 0,
+"triggerType": 1,
+"ObjectAnim": {
+"$type": "RogueEssence.Content.ObjAnimData, RogueEssence",
+"AnimIndex": "",
+"FrameTime": 1,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"Passable": false,
+"CurrentAnim": {
+"$type": "RogueEssence.Content.ObjAnimData, RogueEssence",
+"AnimIndex": "",
+"FrameTime": 1,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"AnimTime": {
+"Ticks": 0
+},
+"Cycles": 0,
+"DrawOffset": {
+"X": 0,
+"Y": 0
+},
+"Collider": {
+"X": 470,
+"Y": 152,
+"Width": 16,
 "Height": 16
 }
 }
