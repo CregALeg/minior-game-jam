@@ -108,6 +108,12 @@ SV.magnagate =
 -----------------------------------------------
 -- Level Specific Defaults
 -----------------------------------------------
+SV.mellow_town = {
+  TutorOpen = false,
+  TutorMoves = {}
+}
+
+--
 SV.test_grounds =
 {
   SpokeToPooch = false,

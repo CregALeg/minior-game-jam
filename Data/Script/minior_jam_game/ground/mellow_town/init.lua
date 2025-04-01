@@ -7,6 +7,7 @@
 require 'origin.common'
 
 local mellow_town_tutor = require 'minior_jam_game.ground.mellow_town.mellow_town_tutor'
+local mellow_town_tea = require 'minior_jam_game.ground.mellow_town.mellow_town_juice'
 
 -- Package name
 local mellow_town = {}
@@ -699,6 +700,11 @@ function mellow_town.BOX_COUNTER_Action(obj, activator)
 			end
 		end
 	end
+end
+
+-- Polteagiest brew
+function mellow_town.TEA_COUNTER_Action(obj, activator)
+  mellow_town_tea.TEA_COUNTER_Action(chara, activator)
 end
 
 return mellow_town

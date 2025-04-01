@@ -223,4 +223,103 @@
   <data name="Bank_Manage" xml:space="preserve">
     <value>Certainly, here are your funds, clink~</value>
   </data>
+  <data name="Tutor_Intro" xml:space="preserve">
+    <value>[emote=joyous]Welcome to [color=#98C379]Mienshao Moves.[color][pause=0][emote=normal] Are you here to relearn a move? The cost is just {0}.</value>
+  </data>
+  <data name="Tutor_Intro_Return" xml:space="preserve">
+    <value>Anything else, child?</value>
+  </data>
+  <data name="Tutor_Option_Tutor" xml:space="preserve">
+    <value>Tutor Move</value>
+  </data>
+  <data name="Tutor_Goodbye" xml:space="preserve">
+    <value>Very well. Return when you wish to relearn a move.</value>
+  </data>
+  <data name="Tutor_No_Money" xml:space="preserve">
+    <value>[emote=stunned]What is this? [pause=20]You have no money, child.</value>
+  </data>
+  <data name="Tutor_Remember_Who" xml:space="preserve">
+    <value>Who wishes to remember a move?</value>
+  </data>
+  <data name="Tutor_Remember_What" xml:space="preserve">
+    <value>I see...[pause=20] And which move shall {0} relearn?</value>
+  </data>
+  <data name="Tutor_Remember_Replace" xml:space="preserve">
+    <value>You will need to forget a move first.[pause=0] Which one, child?</value>
+  </data>
+  <data name="Tutor_Remember_Begin" xml:space="preserve">
+    <value>Very well. Let us begin.</value>
+  </data>
+  <data name="Tutor_Remember_Success" xml:space="preserve">
+    <value>It is done.[pause=0] {0} relearned {1}.</value>
+  </data>
+  <data name="Tutor_Forget_Who" xml:space="preserve">
+    <value>Who wishes to forget a move?</value>
+  </data>
+  <data name="Tutor_Forget_What" xml:space="preserve">
+    <value>I see...[pause=20] And which move shall {0} forget?</value>
+  </data>
+  <data name="Tutor_Forget_Begin" xml:space="preserve">
+    <value>Very well. Let us begin.</value>
+  </data>
+  <data name="Tutor_Forget_Success" xml:space="preserve">
+    <value>It is done.[pause=0]. {0} forgot {1}.</value>
+  </data>
+  <data name="Tutor_Teach_Who" xml:space="preserve">
+    <value>Who wishes to learn a move?</value>
+  </data>
+  <data name="Tutor_Teach_What" xml:space="preserve">
+    <value>I see...[pause=20] And which move shall {0} learn?</value>
+  </data>
+  <data name="Tutor_Teach_Success" xml:space="preserve">
+    <value>It is done.[pause=0] {0} has learned {1}.</value>
+  </data>
+  <data name="Tutor_Info_001" xml:space="preserve">
+    <value>If you wish to relearn a forgotten move, then I am capable of teaching them to you once again.</value>
+  </data>
+  <data name="Tutor_Info_002" xml:space="preserve">
+    <value>For a small fee, of course.[br]I can also help you forget a move, if that is what you wish.</value>
+  </data>
+  <data name="Tea_Bag_Empty" xml:space="preserve">
+    <value>Oi, you've got nothin' to brew with!</value>
+  </data>
+  <data name="Tea_Goodbye" xml:space="preserve">
+    <value>Alright, see you later.</value>
+  </data>
+  <data name="Tea_Info_001" xml:space="preserve">
+    <value>If you gimme food items from ya bag, I can brew up a a delish tea for you to enjoy![br]Food boosts ya EXP, berries and gummis boost stats, grimy food removes EXP, herbs remove stats.[br]There are no bonus chances so there's no benefit in saving your vitamins just for this shop.</value>
+  </data>
+  <data name="Tea_Info_002" xml:space="preserve">
+    <value>I can also brew specialty tea with special effects!</value>
+  </data>
+  <data name="Tea_Intro_1" xml:space="preserve">
+    <value>Come on in, this is [color=#98C379]Polteageist Brew[color].</value>
+  </data>
+  <data name="Tea_Intro_2" xml:space="preserve">
+    <value>Teeaaaa!!</value>
+  </data>
+  <data name="Tea_Intro_Return" xml:space="preserve">
+    <value>Alright, anythin' else?</value>
+  </data>
+  <data name="Tea_Option_Order" xml:space="preserve">
+    <value>Order</value>
+  </data>
+  <data name="Tea_Option_Specialties" xml:space="preserve">
+    <value>Specialties</value>
+  </data>
+  <data name="Tea_Order_Begin" xml:space="preserve">
+    <value>Comin' right up!</value>
+  </data>
+  <data name="Tea_Order_Drink" xml:space="preserve">
+    <value>{0} drank the tea.</value>
+  </data>
+  <data name="Tea_Order_Result_None" xml:space="preserve">
+    <value>{0} felt happy!</value>
+  </data>
+  <data name="Tea_Order_What" xml:space="preserve">
+    <value>What do you want in it? (You can select multiple items with {0})</value>
+  </data>
+  <data name="Tea_Order_Who" xml:space="preserve">
+    <value>Who am I makin' this for?</value>
+  </data>
 </root>

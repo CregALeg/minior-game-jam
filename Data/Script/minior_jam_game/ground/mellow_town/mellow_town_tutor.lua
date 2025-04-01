@@ -9,7 +9,7 @@ local mellow_town_tutor = {}
 
 function mellow_town_tutor.Tutor_Sequence()
 
-	local chara = CH('Tutor_Owner')
+	local chara = CH('MOVES_Mienshao')
 	GAME:WaitFrames(10)
 	GROUND:CharSetAnim(chara, "Strike", false)
 	GAME:WaitFrames(15)
@@ -206,12 +206,12 @@ function mellow_town_tutor.MOVES_COUNTER_Action(obj, activator)
   local price = 250
   local tutor_moves = {}
   local can_tutor = false
-  for move_key in pairs(SV.base_town.TutorMoves) do
-    if COMMON.TUTOR[move_key] ~= nil then
-      tutor_moves[move_key] = COMMON.TUTOR[move_key]
-	  can_tutor = true
-    end
-  end
+  -- for move_key in pairs(SV.mellow_town.TutorMoves) do
+  --   if COMMON.TUTOR[move_key] ~= nil then
+  --     tutor_moves[move_key] = COMMON.TUTOR[move_key]
+	--   can_tutor = true
+  --   end
+  -- end
 
 
   local state = 0
@@ -219,17 +219,17 @@ function mellow_town_tutor.MOVES_COUNTER_Action(obj, activator)
   local chara = CH('MOVES_Mienshao')
   UI:SetSpeaker(chara)
 
-  -- if SV.guildmaster_summit.GameComplete and SV.base_town.FreeRelearn == false then
+  -- if SV.guildmaster_summit.GameComplete and SV.mellow_town.FreeRelearn == false then
   --   UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Tutor_Now_Free']))
-  --   SV.base_town.FreeRelearn = true
+  --   SV.mellow_town.FreeRelearn = true
   -- end
-	--
-  -- if can_tutor and SV.base_town.TutorOpen == false then
-  --   UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Tutor_Now_Teaches']))
-	-- SV.base_town.TutorOpen = true
-  -- end
-	--
-  -- if SV.base_town.FreeRelearn then
+
+  if can_tutor and SV.mellow_town.TutorOpen == false then
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Tutor_Now_Teaches']))
+	SV.mellow_town.TutorOpen = true
+  end
+
+  -- if SV.mellow_town.FreeRelearn then
   --   price = 0
   -- end
 
@@ -270,12 +270,12 @@ function mellow_town_tutor.MOVES_COUNTER_Action(obj, activator)
 			    mellow_town_tutor.Tutor_Teach_Flow(tutor_moves)
 			elseif result == 4 then
 				UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Tutor_Info_001']))
-				if SV.base_town.FreeRelearn then
-				    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Tutor_Info_003']))
-				else
-				    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Tutor_Info_002']))
-				end
-				if SV.base_town.TutorOpen then
+				-- if SV.mellow_town.FreeRelearn then
+				--     UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Tutor_Info_003']))
+				-- else
+				UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Tutor_Info_002']))
+				-- end
+				if SV.mellow_town.TutorOpen then
 				    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Tutor_Info_004']))
 				end
 			else
