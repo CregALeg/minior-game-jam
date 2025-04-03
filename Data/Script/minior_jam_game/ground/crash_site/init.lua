@@ -214,7 +214,7 @@ function crash_site.cutscene1()
   UI:SetSpeakerEmotion("normal")
   UI:WaitShowDialogue("I'll let you lead the way. When you're ready to go, head to the south. That'll take us to the Wishing Woods.")
 
-  COMMON.UnlockWithFanfare("minior_wishing_woods", false)
+  COMMON.UnlockWithFanfare("wishing_woods", false)
   SV.crash_site.intro_cutscene_played = true
   --** Cutscene ends here**--
   GAME:CutsceneMode(false)
@@ -230,7 +230,7 @@ function crash_site.PARTNER_Action(chara, activator)
 end
 
 function crash_site.EntranceSouth_Touch(obj, activator)
-  COMMON.ShowDestinationMenu({"minior_wishing_woods"},"")
+  COMMON.ShowDestinationMenu({"wishing_woods"},"")
 end
 
 return crash_site

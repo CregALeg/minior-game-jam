@@ -160,7 +160,7 @@
   <DefaultSkill>attack</DefaultSkill>
   <DefaultMonster>missingno</DefaultMonster>
   <StartMap>
-    <Zone>1_jam_intro</Zone>
+    <Zone>jam_intro</Zone>
     <Segment>-1</Segment>
     <ID>0</ID>
     <Entry>0</Entry>

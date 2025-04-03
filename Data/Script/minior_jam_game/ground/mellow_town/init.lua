@@ -715,7 +715,7 @@ end
 
 --East Exit
 function mellow_town.EastExit_Touch(obj, activator)
-  COMMON.ShowDestinationMenu({"minior_wishing_woods", "dreamscape_cavern"},"")
+  COMMON.ShowDestinationMenu({"wishing_woods", "dreamscape_cavern"},"")
 end
 
 return mellow_town

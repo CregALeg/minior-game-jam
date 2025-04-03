@@ -44,7 +44,7 @@ null
 "Comment": "",
 "SortOrder": 0
 },
-"1_jam_intro": {
+"jam_intro": {
 "$type": "RogueEssence.Data.ZoneEntrySummary, RogueEssence",
 "ExpPercent": 100,
 "Level": -1,
@@ -72,7 +72,7 @@ null
 "Comment": "",
 "SortOrder": 0
 },
-"1_mellow_town": {
+"mellow_town": {
 "$type": "RogueEssence.Data.ZoneEntrySummary, RogueEssence",
 "ExpPercent": 100,
 "Level": -1,
@@ -99,7 +99,7 @@ null
 "Comment": "",
 "SortOrder": 0
 },
-"minior_wishing_woods": {
+"wishing_woods": {
 "$type": "RogueEssence.Data.ZoneEntrySummary, RogueEssence",
 "ExpPercent": 100,
 "Level": -1,
@@ -130,39 +130,6 @@ null
 },
 "Released": false,
 "Comment": "",
-"SortOrder": 0
-},
-"1_wishing_woods": {
-"$type": "RogueEssence.Data.ZoneEntrySummary, RogueEssence",
-"ExpPercent": 100,
-"Level": 15,
-"LevelCap": false,
-"KeepSkills": false,
-"TeamRestrict": false,
-"TeamSize": -1,
-"MoneyRestrict": false,
-"BagRestrict": -1,
-"KeepTreasure": false,
-"BagSize": -1,
-"Rescues": 0,
-"CountedFloors": 0,
-"Rogue": 0,
-"Grounds": [],
-"Maps": [
-[
-0,
-1,
-2,
-3,
-4
-]
-],
-"Name": {
-"DefaultText": "Wishing Woods",
-"LocalTexts": {}
-},
-"Released": true,
-"Comment": "First dungeon. Mostly serves as a tutorial.\r\nThe last 2x floors are slightly larger with slightly higher item and enemy spawns",
 "SortOrder": 0
 }
 }
