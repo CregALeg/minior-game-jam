@@ -23,7 +23,13 @@ end
 --Engine callback function
 function crash_site.Enter(map)
 
-  crash_site.cutscene1()
+  if SV.crash_site.intro_cutscene_played == false then
+    crash_site.cutscene1()
+  else
+    COMMON:RespawnAllies() --Setup partner to spawn
+    chara = CH("PARTNER")
+    GROUND:TeleportTo(chara, 184, 275, Direction.Up)
+  end
 end
 
 ---crash_site.Exit(map)
@@ -51,8 +57,13 @@ end
 --Engine callback function
 function crash_site.GameLoad(map)
 
-
-  crash_site.cutscene1()
+  if SV.crash_site.intro_cutscene_played == false then
+    crash_site.cutscene1()
+  else
+    COMMON:RespawnAllies() --Setup partner to spawn
+    chara = CH("PARTNER")
+    GROUND:TeleportTo(chara, 184, 275, Direction.Up)
+  end
 end
 
 -------------------------------
@@ -182,7 +193,7 @@ function crash_site.cutscene1()
   UI:WaitShowDialogue("I know! [pause=30]We can ask Gramps!")
   UI:SetSpeakerEmotion("normal")
   UI:WaitShowDialogue("Yeah, he's been around forever! He's sure to know a way to get you and your friends back home.")
-  UI:WaitShowDialogue("We'll need to head through the nearby Mystery Dungeon to get to Mellow Town.")
+  UI:WaitShowDialogue("We'll need to head through the nearby Mystery Dungeon to get to Mellow Town first.")
 
   UI:SetSpeaker(player)
   UI:SetSpeakerEmotion("Worried")
@@ -203,23 +214,23 @@ function crash_site.cutscene1()
   UI:SetSpeakerEmotion("normal")
   UI:WaitShowDialogue("I'll let you lead the way. When you're ready to go, head to the south. That'll take us to the Wishing Woods.")
 
-  COMMON.UnlockWithFanfare("1_wishing_woods", false)
-
+  COMMON.UnlockWithFanfare("minior_wishing_woods", false)
+  SV.crash_site.intro_cutscene_played = true
   --** Cutscene ends here**--
   GAME:CutsceneMode(false)
 end
 
 function crash_site.PARTNER_Action(chara, activator)
   DEBUG.EnableDbgCoro()
-  local partner = CH("Teammate1")
-  UI:ResetSpeaker()
+  local partner = CH("PARTNER")
+  -- UI:ResetSpeaker()
   UI:SetSpeaker(partner)
   UI:SetSpeakerEmotion("Normal")
   UI:WaitShowDialogue("I'll let you lead the way. When you're ready to go, head to the south. That'll take us to the Wishing Woods.")
 end
 
 function crash_site.EntranceSouth_Touch(obj, activator)
-  COMMON.ShowDestinationMenu("1_wishing_woods","")
+  COMMON.ShowDestinationMenu({"minior_wishing_woods"},"")
 end
 
 return crash_site

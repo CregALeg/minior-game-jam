@@ -707,4 +707,15 @@ function mellow_town.TEA_COUNTER_Action(obj, activator)
   mellow_town_tea.TEA_COUNTER_Action(chara, activator)
 end
 
+--North Exit
+function mellow_town.NorthExit_Touch(obj, activator)
+  local dungeon_entrances = {"windswept_trail", "frigid_lake", "verdant meadow", "magma_tunnel", "lunar_barrow", "primal_canyon","stardust_peak"}
+  COMMON.ShowDestinationMenu(dungeon_entrances,"")
+end
+
+--East Exit
+function mellow_town.EastExit_Touch(obj, activator)
+  COMMON.ShowDestinationMenu({"minior_wishing_woods", "dreamscape_cavern"},"")
+end
+
 return mellow_town

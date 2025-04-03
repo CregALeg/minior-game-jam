@@ -113,6 +113,10 @@ SV.mellow_town = {
   TutorMoves = {}
 }
 
+SV.crash_site = {
+  intro_cutscene_played = false
+}
+
 --
 SV.test_grounds =
 {
