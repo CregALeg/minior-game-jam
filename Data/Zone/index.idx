@@ -276,6 +276,42 @@ null
 "Released": false,
 "Comment": "Second dungeon. Introduces gummies, apricorns an orbs to the item pool.\r\n6th floor spawns a special secret stair unlocked by hidden switch.",
 "SortOrder": 0
+},
+"verdant_meadow": {
+"$type": "RogueEssence.Data.ZoneEntrySummary, RogueEssence",
+"ExpPercent": 100,
+"Level": 22,
+"LevelCap": false,
+"KeepSkills": false,
+"TeamRestrict": false,
+"TeamSize": -1,
+"MoneyRestrict": false,
+"BagRestrict": -1,
+"KeepTreasure": false,
+"BagSize": -1,
+"Rescues": 0,
+"CountedFloors": 0,
+"Rogue": 0,
+"Grounds": [],
+"Maps": [
+[
+0,
+1,
+2,
+3,
+4,
+5,
+6,
+7
+]
+],
+"Name": {
+"DefaultText": "Verdant Meadow",
+"LocalTexts": {}
+},
+"Released": false,
+"Comment": "Third/fourth dungeon. Uses the tall grass to create obscurity.",
+"SortOrder": 0
 }
 }
 }
