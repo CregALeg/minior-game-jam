@@ -55,7 +55,7 @@ COMMON = {}
 
 require 'origin.common_talk'
 require 'minior_jam_game.common_shop'
-require 'origin.common_vars'
+require 'minior_jam_game.common_vars'
 require 'origin.common_tutor'
 
 --Automatically load the appropriate localization for the specified package, or defaults to english!

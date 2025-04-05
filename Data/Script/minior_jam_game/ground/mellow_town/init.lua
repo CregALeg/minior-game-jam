@@ -718,4 +718,15 @@ function mellow_town.EastExit_Touch(obj, activator)
   COMMON.ShowDestinationMenu({"wishing_woods", "dreamscape_cavern"},"")
 end
 
+-- Mission Test
+function mellow_town.MissionTest_Action(obj, activator)
+  COMMON.CreateMission("MiniorQuest1",
+  { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_RESCUE,
+    DestZone = "windswept_trail", DestSegment = 1, DestFloor = 0,
+    FloorUnknown = true,
+    TargetSpecies = RogueEssence.Dungeon.MonsterID("minior", 0, "normal", Gender.Genderless),
+    ClientSpecies = RogueEssence.Dungeon.MonsterID("minior", 0, "normal", Gender.Genderless) }
+  )
+end
+
 return mellow_town

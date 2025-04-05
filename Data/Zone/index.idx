@@ -2,6 +2,51 @@
 "Version": "0.8.9.0",
 "Object": {
 "$type": "System.Collections.Generic.Dictionary`2[[System.String, System.Private.CoreLib],[RogueEssence.Data.EntrySummary, RogueEssence]], System.Private.CoreLib",
+"faultline_ridge": {
+"$type": "RogueEssence.Data.ZoneEntrySummary, RogueEssence",
+"ExpPercent": 100,
+"Level": 15,
+"LevelCap": false,
+"KeepSkills": false,
+"TeamRestrict": false,
+"TeamSize": -1,
+"MoneyRestrict": false,
+"BagRestrict": -1,
+"KeepTreasure": false,
+"BagSize": -1,
+"Rescues": 2,
+"CountedFloors": 10,
+"Rogue": 1,
+"Grounds": [],
+"Maps": [
+[
+0,
+1,
+2,
+3,
+4,
+5,
+6,
+7,
+8,
+9
+],
+null,
+null
+],
+"Name": {
+"DefaultText": "Faultline Ridge",
+"LocalTexts": {
+"fr": "Crète Fracturée",
+"de": "Grat der Bruchlinie",
+"it": "Crepaccio della Faglia",
+"zh-hans": "断层山脊"
+}
+},
+"Released": true,
+"Comment": "",
+"SortOrder": 0
+},
 "tropical_path": {
 "$type": "RogueEssence.Data.ZoneEntrySummary, RogueEssence",
 "ExpPercent": 75,
@@ -38,6 +83,68 @@ null
 "es": "Paso Tropical",
 "it": "Passaggio Tropicale",
 "zh-hans": "热带小径"
+}
+},
+"Released": true,
+"Comment": "",
+"SortOrder": 0
+},
+"veiled_ridge": {
+"$type": "RogueEssence.Data.ZoneEntrySummary, RogueEssence",
+"ExpPercent": 80,
+"Level": 35,
+"LevelCap": false,
+"KeepSkills": false,
+"TeamRestrict": false,
+"TeamSize": -1,
+"MoneyRestrict": false,
+"BagRestrict": -1,
+"KeepTreasure": false,
+"BagSize": -1,
+"Rescues": 2,
+"CountedFloors": 17,
+"Rogue": 1,
+"Grounds": [],
+"Maps": [
+[
+0,
+1,
+2,
+3,
+4,
+5,
+6,
+7,
+8,
+9,
+10,
+11,
+12,
+13,
+14,
+15,
+16
+],
+[
+0,
+1,
+2,
+3,
+4,
+5
+],
+null,
+null,
+null
+],
+"Name": {
+"DefaultText": "Veiled Ridge",
+"LocalTexts": {
+"fr": "Crète Voilée",
+"de": "Verdeckter Grat",
+"es": "Ladera Velada",
+"it": "Crinale Velato",
+"zh-hans": "朦胧山脊"
 }
 },
 "Released": true,
@@ -102,7 +209,7 @@ null
 "wishing_woods": {
 "$type": "RogueEssence.Data.ZoneEntrySummary, RogueEssence",
 "ExpPercent": 100,
-"Level": -1,
+"Level": 15,
 "LevelCap": false,
 "KeepSkills": false,
 "TeamRestrict": false,
@@ -128,8 +235,46 @@ null
 "DefaultText": "Wishing Woods",
 "LocalTexts": {}
 },
+"Released": true,
+"Comment": "First dungeon. Mostly serves as a tutorial.\r\nThe last 2x floors are slightly larger with slightly higher item and enemy spawns",
+"SortOrder": 0
+},
+"windswept_trail": {
+"$type": "RogueEssence.Data.ZoneEntrySummary, RogueEssence",
+"ExpPercent": 100,
+"Level": 18,
+"LevelCap": false,
+"KeepSkills": false,
+"TeamRestrict": false,
+"TeamSize": -1,
+"MoneyRestrict": false,
+"BagRestrict": -1,
+"KeepTreasure": false,
+"BagSize": -1,
+"Rescues": 0,
+"CountedFloors": 0,
+"Rogue": 0,
+"Grounds": [],
+"Maps": [
+[
+0,
+1,
+2,
+3,
+4,
+5,
+6
+],
+[
+0
+]
+],
+"Name": {
+"DefaultText": "Windswept Trail",
+"LocalTexts": {}
+},
 "Released": false,
-"Comment": "",
+"Comment": "Second dungeon. Introduces gummies, apricorns an orbs to the item pool.\r\n6th floor spawns a special secret stair unlocked by hidden switch.",
 "SortOrder": 0
 }
 }
