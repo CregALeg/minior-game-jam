@@ -110,7 +110,11 @@ SV.magnagate =
 -----------------------------------------------
 SV.mellow_town = {
   TutorOpen = false,
-  TutorMoves = {}
+  TutorMoves = {},
+  CutsceneIntro = false,
+  CutsceneGlamourArrival = false,
+  CutsceneGlamourReturn = false,
+  CutscenePyroArrive = false
 }
 
 SV.crash_site = {

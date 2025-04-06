@@ -1427,5 +1427,5 @@ function COMMON.EndDayCycle()
 	end
 
 
-  --COMMON.UpdateDayEndVars()
+  COMMON.UpdateDayEndVars()
 end

@@ -61,6 +61,7 @@ end
 -------------------------------
 -- Function for starting the GAME
 function character_select.StartGame()
+  _DATA.Save.NoSwitching = true --Disable leader swtiching
   GAME:CutsceneMode(true)
   UI:ResetSpeaker()
   GAME:MoveCamera(132, 120, 1, false) -- Set Camera Position

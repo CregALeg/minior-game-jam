@@ -4,6 +4,8 @@
 # Credits
 ## Engine
 - **Audino** - PMDO developer
+- **Palika** - script help and reference
+- **MistressNebula** - Script help
 
 ## Graphics
 - **redblueyellow** - Spindas Cafe, Treasure Town, Sharpedo Bluff tile rips.

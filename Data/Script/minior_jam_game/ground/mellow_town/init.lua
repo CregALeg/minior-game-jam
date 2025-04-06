@@ -18,14 +18,17 @@ local mellow_town = {}
 ---mellow_town.Init(map)
 --Engine callback function
 function mellow_town.Init(map)
-
-
+  COMMON.RespawnAllies()
+  local partner = CH('Teammate1')
+  AI:SetCharacterAI(partner, "origin.ai.ground_partner", CH('PLAYER'), partner.Position)
+  partner.CollisionDisabled = true
 end
 
 ---mellow_town.Enter(map)
 --Engine callback function
 function mellow_town.Enter(map)
-
+  local player = CH("PLAYER")
+  GROUND:TeleportTo(CH("Teammate1"), player.Bounds.Center.X, player.Bounds.Center.Y, Direction.Up)
   GAME:FadeIn(20)
 
 end
@@ -54,7 +57,8 @@ end
 ---mellow_town.GameLoad(map)
 --Engine callback function
 function mellow_town.GameLoad(map)
-
+  local player = CH("PLAYER")
+  GROUND:TeleportTo(CH("Teammate1"), player.Bounds.Center.X, player.Bounds.Center.Y, Direction.Up)
   GAME:FadeIn(20)
 
 end
@@ -718,15 +722,30 @@ function mellow_town.EastExit_Touch(obj, activator)
   COMMON.ShowDestinationMenu({"wishing_woods", "dreamscape_cavern"},"")
 end
 
+-- Assembly
+function mellow_town.Assembly_Action(obj, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  UI:ResetSpeaker()
+  COMMON.ShowTeamAssemblyMenu(obj, COMMON.RespawnAllies)
+end
+
 -- Mission Test
 function mellow_town.MissionTest_Action(obj, activator)
-  COMMON.CreateMission("MiniorQuest1",
+  COMMON.CreateMission("RedMiniorRescue",
   { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_RESCUE,
-    DestZone = "windswept_trail", DestSegment = 1, DestFloor = 0,
+    DestZone = "windswept_trail", DestSegment = 1, DestFloor = 2,
     FloorUnknown = true,
     TargetSpecies = RogueEssence.Dungeon.MonsterID("minior", 0, "normal", Gender.Genderless),
     ClientSpecies = RogueEssence.Dungeon.MonsterID("minior", 0, "normal", Gender.Genderless) }
   )
+  print(SV.missions.Missions["RedMiniorRescue"])
+end
+
+-- Cutscenes --
+function mellow_town.Cutscene_Intro()
+  if SV.mellow_town.CutsceneIntro == false then
+    local player = CH("PLAYER")
+  end
 end
 
 return mellow_town

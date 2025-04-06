@@ -35,7 +35,7 @@ function windswept_trail.ExitSegment(zone, result, rescue, segmentID, mapID)
   elseif segmentID == 1 then
     COMMON.UnlockWithFanfare('frigid_lake', true)
   end
-  COMMON.EndDungeonDay(result, 'mellow_town', -1, 0,0)
+  COMMON.EndDungeonDay(result, 'mellow_town', -1, 0, 1)
 end
 
 ---windswept_trail.Rescued(zone, name, mail)
