@@ -32,7 +32,7 @@ end
 function wishing_woods.ExitSegment(zone, result, rescue, segmentID, mapID)
   PrintInfo("=>> Exit_wishing_woods")
   if segmentID == 0 then
-    COMMON.EndDungeonDay(result, 'mellow_town', -1, 0, 0)
+    COMMON.EndDungeonDay(result, 'mellow_town', -1, 0, 2)
   else
     PrintInfo("No exit procedure found!")
   COMMON.EndDungeonDay(result, SV.checkpoint.Zone, SV.checkpoint.Segment, SV.checkpoint.Map, SV.checkpoint.Entry)

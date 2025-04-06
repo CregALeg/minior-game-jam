@@ -6,7 +6,7 @@
 "DefaultText": "Verdant Meadow",
 "LocalTexts": {}
 },
-"Released": false,
+"Released": true,
 "Comment": "Third/fourth dungeon. Uses the tall grass to create obscurity.",
 "NoEXP": false,
 "ExpPercent": 100,

@@ -29,8 +29,13 @@ end
 ---windswept_trail.ExitSegment(zone, result, rescue, segmentID, mapID)
 --Engine callback function
 function windswept_trail.ExitSegment(zone, result, rescue, segmentID, mapID)
-
-
+  PrintInfo("=>> ExitSegment_windswept_trail result "..tostring(result).." segment "..tostring(segmentID))
+  if segmentID == 0 then
+    COMMON.UnlockWithFanfare('verdant_meadow', true)
+  elseif segmentID == 1 then
+    COMMON.UnlockWithFanfare('frigid_lake', true)
+  end
+  COMMON.EndDungeonDay(result, 'mellow_town', -1, 0,0)
 end
 
 ---windswept_trail.Rescued(zone, name, mail)
@@ -41,4 +46,3 @@ function windswept_trail.Rescued(zone, name, mail)
 end
 
 return windswept_trail
-

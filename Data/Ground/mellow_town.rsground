@@ -70310,14 +70310,14 @@
 "Markers": [
 {
 "EntName": "ExitEast",
-"Direction": 0,
+"Direction": 2,
 "EntEnabled": true,
 "EntOrder": 0,
 "InteractOrder": 0,
 "triggerType": 0,
 "Collider": {
 "X": 689,
-"Y": 197,
+"Y": 196,
 "Width": 16,
 "Height": 16
 }

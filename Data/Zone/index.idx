@@ -2,6 +2,57 @@
 "Version": "0.8.9.0",
 "Object": {
 "$type": "System.Collections.Generic.Dictionary`2[[System.String, System.Private.CoreLib],[RogueEssence.Data.EntrySummary, RogueEssence]], System.Private.CoreLib",
+"faded_trail": {
+"$type": "RogueEssence.Data.ZoneEntrySummary, RogueEssence",
+"ExpPercent": 75,
+"Level": 10,
+"LevelCap": false,
+"KeepSkills": false,
+"TeamRestrict": false,
+"TeamSize": -1,
+"MoneyRestrict": false,
+"BagRestrict": -1,
+"KeepTreasure": false,
+"BagSize": -1,
+"Rescues": 2,
+"CountedFloors": 7,
+"Rogue": 1,
+"Grounds": [],
+"Maps": [
+[
+0,
+1,
+2,
+3,
+4,
+5,
+6
+],
+[
+0,
+1,
+2
+],
+null,
+null
+],
+"Name": {
+"DefaultText": "Faded Trail",
+"LocalTexts": {
+"fr": "Sentier Évanoui",
+"de": "Verbleichender Pfad",
+"es": "Sendero Desvanecido ",
+"it": "Sentiero Sbiadito",
+"ko": "빛바랜 산길",
+"ja": "いろあせたさんどう",
+"ja-jp": "色あせた山道",
+"zh-hans": "消逝山道"
+}
+},
+"Released": true,
+"Comment": "",
+"SortOrder": 0
+},
 "faultline_ridge": {
 "$type": "RogueEssence.Data.ZoneEntrySummary, RogueEssence",
 "ExpPercent": 100,
@@ -266,6 +317,11 @@ null
 6
 ],
 [
+0,
+1,
+2
+],
+[
 0
 ]
 ],
@@ -273,8 +329,8 @@ null
 "DefaultText": "Windswept Trail",
 "LocalTexts": {}
 },
-"Released": false,
-"Comment": "Second dungeon. Introduces gummies, apricorns an orbs to the item pool.\r\n6th floor spawns a special secret stair unlocked by hidden switch.",
+"Released": true,
+"Comment": "Second dungeon. Introduces gummies, apricorns an orbs to the item pool.\r\n5th floor spawns a special secret stair unlocked by hidden switch.",
 "SortOrder": 0
 },
 "verdant_meadow": {
@@ -309,7 +365,7 @@ null
 "DefaultText": "Verdant Meadow",
 "LocalTexts": {}
 },
-"Released": false,
+"Released": true,
 "Comment": "Third/fourth dungeon. Uses the tall grass to create obscurity.",
 "SortOrder": 0
 }

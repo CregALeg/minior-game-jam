@@ -709,7 +709,7 @@ end
 
 --North Exit
 function mellow_town.NorthExit_Touch(obj, activator)
-  local dungeon_entrances = {"windswept_trail", "frigid_lake", "verdant meadow", "magma_tunnel", "lunar_barrow", "primal_canyon","stardust_peak"}
+  local dungeon_entrances = {"windswept_trail", "frigid_lake", "verdant_meadow", "magma_tunnel", "lunar_barrow", "primal_canyon","stardust_peak"}
   COMMON.ShowDestinationMenu(dungeon_entrances,"")
 end
 
