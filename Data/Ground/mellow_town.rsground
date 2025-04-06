@@ -68976,8 +68976,8 @@
 },
 "CollisionDisabled": false,
 "Collider": {
-"X": 0,
-"Y": 0,
+"X": 373,
+"Y": 162,
 "Width": 16,
 "Height": 16
 }
@@ -70363,6 +70363,49 @@
 "Width": 19,
 "Height": 19
 }
+},
+{
+"EntName": "Cutscene_Test",
+"Direction": 0,
+"EntEnabled": true,
+"EntOrder": 0,
+"InteractOrder": 0,
+"triggerType": 1,
+"ObjectAnim": {
+"$type": "RogueEssence.Content.ObjAnimData, RogueEssence",
+"AnimIndex": "",
+"FrameTime": 1,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"Passable": false,
+"CurrentAnim": {
+"$type": "RogueEssence.Content.ObjAnimData, RogueEssence",
+"AnimIndex": "",
+"FrameTime": 1,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"AnimTime": {
+"Ticks": 0
+},
+"Cycles": 0,
+"DrawOffset": {
+"X": 0,
+"Y": 0
+},
+"Collider": {
+"X": 604,
+"Y": 160,
+"Width": 16,
+"Height": 16
+}
 }
 ],
 "Spawners": [
@@ -70624,7 +70667,7 @@
 "triggerType": 0,
 "EntityCallbacks": [],
 "Collider": {
-"X": 411,
+"X": 412,
 "Y": 1,
 "Width": 16,
 "Height": 16
@@ -70654,7 +70697,21 @@
 "InteractOrder": 0,
 "triggerType": 0,
 "Collider": {
-"X": 411,
+"X": -10,
+"Y": 50,
+"Width": 16,
+"Height": 16
+}
+},
+{
+"EntName": "ExitNorth",
+"Direction": 0,
+"EntEnabled": true,
+"EntOrder": 0,
+"InteractOrder": 0,
+"triggerType": 0,
+"Collider": {
+"X": 412,
 "Y": 17,
 "Width": 16,
 "Height": 16

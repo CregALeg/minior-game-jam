@@ -28,7 +28,7 @@ end
 --Engine callback function
 function mellow_town.Enter(map)
   local player = CH("PLAYER")
-  GROUND:TeleportTo(CH("Teammate1"), player.Bounds.Center.X, player.Bounds.Center.Y, Direction.Up)
+  mellow_town.Cutscene_Intro()
   GAME:FadeIn(20)
 
 end
@@ -741,11 +741,255 @@ function mellow_town.MissionTest_Action(obj, activator)
   print(SV.missions.Missions["RedMiniorRescue"])
 end
 
+function mellow_town.Cutscene_Test_Action(obj, activator)
+  choices = {"Intro", "Glamour 1", "Glamour 2", "Pyro"}
+  UI:BeginChoiceMenu("Choose Cutscene", choices, 1 ,3)
+  UI:WaitForChoice()
+  result = UI:ChoiceResult()
+  if result == 1 then
+    SV.mellow_town.CutsceneIntro = false
+    GAME:FadeOut(false, 20)
+    mellow_town.Cutscene_Intro()
+  end
+end
+
 -- Cutscenes --
 function mellow_town.Cutscene_Intro()
   if SV.mellow_town.CutsceneIntro == false then
     local player = CH("PLAYER")
+    local partner = CH("Teammate1")
+    local gramps = CH("NPC_Gramps")
+    GAME:CutsceneMode(true)
+    UI:ResetSpeaker()
+    AI:DisableCharacterAI(partner)
+    GROUND:Hide("NPC_Drilbur") -- He's in the way so hide him
+    GROUND:Hide("NPC_Gramps")
+    GROUND:TeleportTo(player, 686, 192, Direction.Left)
+    GROUND:TeleportTo(partner, 686, 212, Direction.Left)
+    GROUND:TeleportTo(gramps, 412, 24, Direction.Down)
+    GAME:FadeIn(20)
+
+    local coro1 = TASK:BranchCoroutine(function() mellow_town.Coro_Walk(partner, Direction.Left, 262, false, 1) end)
+    local coro2 = TASK:BranchCoroutine(function() mellow_town.Coro_Walk(player, Direction.Left, 290, false, 1) end)
+    TASK:JoinCoroutines({coro1, coro2})
+    GROUND:EntTurn(player, Direction.DownRight)
+    GROUND:EntTurn(partner, Direction.UpLeft)
+    --First Convo Start
+    UI:SetSpeaker(partner)
+    UI:SetSpeakerEmotion("Joyous")
+    UI:WaitShowDialogue("Welcome to Mellow Town!")
+    UI:SetSpeakerEmotion("Normal")
+    UI:WaitShowDialogue("It's a little small and empty...[pause=20] But it has everything aspiring adventurers like us need to take on Mystery Dungeons!")
+    GROUND:EntTurn(partner, Direction.Right)
+    GROUND:EntTurn(player, Direction.Right)
+    UI:WaitShowDialogue("Look over here.")
+
+    -- Move Camera
+    GAME:MoveCamera(528, 156, 60, false)
+    UI:WaitShowDialogue(STRINGS:Format("Pokémon run all sorts of different shops in town, that we can use in exchange for \\uE024."))
+    UI:SetSpeakerEmotion("Joyous")
+    UI:WaitShowDialogue("The Kecleon Brothers sell loads different goods.[br]The green Kecleon will sell food, throwing items, berries and more.[br]While the purple Kecleon on the right will sell orbs, TMs and other special items!")
+
+    -- Move Camera
+    GROUND:EntTurn(partner, Direction.Left)
+    GROUND:EntTurn(player, Direction.Left)
+    GAME:MoveCamera(216, 168, 60, false)
+    UI:SetSpeakerEmotion("Normal")
+    UI:WaitShowDialogue(STRINGS:Format("Gholdengo and Gimmighoul run a bank where we can store our spare \\uE024."))
+    UI:WaitShowDialogue("And Mrs Kangaskhan on the right can keep our items safe.")
+
+    -- Move Camera
+    GROUND:EntTurn(partner, Direction.DownLeft)
+    GROUND:EntTurn(player, Direction.DownLeft)
+    GAME:MoveCamera(252, 328, 60, false)
+    UI:WaitShowDialogue("Mienshao can help us remember or learn new moves..")
+
+    -- Move Camera
+    GROUND:EntTurn(partner, Direction.DownRight)
+    GROUND:EntTurn(player, Direction.DownRight)
+    GAME:MoveCamera(575, 328, 60, false)
+    UI:WaitShowDialogue("And Tinkaton can crack open any locked boxes we find.")
+    UI:WaitShowDialogue("Polteagiest and Sinistea moved in recently, I think they're opening up a tea stand or something?")
+
+    -- Move Camera
+    GAME:MoveCamera(0, 0, 60, true)
+    GROUND:EntTurn(partner, Direction.UpLeft)
+    GROUND:EntTurn(player, Direction.DownRight)
+    UI:SetSpeakerEmotion("Joyous")
+    UI:WaitShowDialogue("But yeah! [pause=20]That's pretty much everything.")
+    UI:SetSpeakerEmotion("Normal")
+    UI:WaitShowDialogue("There's not many of us in town. A lot of the Pokémon that come through here stop for a bit while they take on the Mystery Dungeons.")
+    UI:WaitShowDialogue("Speaking of which...[pause=0][emote=worried]\nWhere's Gramps? I hope he's not still upset...")
+
+    UI:ResetSpeaker()
+    shake = RogueEssence.Content.ScreenMover(0, 12, 20)
+    GROUND:MoveScreen(shake)
+    SOUND:PlayBattleSE("EVT_Roar")
+    UI:WaitShowDialogue(STRINGS:Format("\\uE040: " ..partner:GetDisplayName().. "![pause=0] Where have you been!"))
+    GROUND:Unhide("NPC_Gramps")
+    GROUND:EntTurn(partner, Direction.Up)
+    GROUND:EntTurn(player, Direction.Up)
+    GROUND:CharSetEmote(player, "shock", 1)
+    GROUND:CharSetEmote(partner, "shock", 1)
+    SOUND:PlaySE("Battle/EVT_Emote_Startled_2")
+    GAME:WaitFrames(30)
+    GROUND:MoveInDirection(gramps, Direction.Down, 130, false, 1)
+    UI:SetSpeaker(gramps)
+    UI:SetSpeakerEmotion("Angry")
+    UI:WaitShowDialogue("[speed=0.7] I've been besides myself with worry all night!\nWhat do you have to say for yourself!")
+
+    GROUND:CharSetEmote(partner, "sweating", 1)
+    SOUND:PlaySE("Battle/EVT_Emote_Sweating")
+    GAME:WaitFrames(30)
+    UI:SetSpeaker(partner)
+    UI:SetSpeakerEmotion("surprised")
+    UI:WaitShowDialogue("G-gramps![pause=20] I was just-")
+
+    GROUND:CharSetEmote(gramps, "angry", 1)
+    SOUND:PlaySE("Battle/EVT_Emote_Complain_2")
+    GAME:WaitFrames(30)
+    UI:SetSpeaker(gramps)
+    UI:SetSpeakerEmotion("Angry")
+    UI:WaitShowDialogue("[speed=0.7]I don't want to hear it!")
+    UI:WaitShowDialogue("[speed=0.7]You're grounded!")
+
+    UI:SetSpeaker(partner)
+    UI:SetSpeakerEmotion("Angry")
+    UI:WaitShowDialogue("What? That's not fair!\n I promised to get " ..player:GetDisplayName().. " home!")
+
+
+    UI:SetSpeaker(gramps)
+    UI:SetSpeakerEmotion("determined")
+    UI:WaitShowDialogue("[speed=0.7]What?")
+    GROUND:EntTurn(gramps, Direction.DownLeft)
+    UI:SetSpeakerEmotion("surprised")
+    UI:WaitShowDialogue("[speed=0.7]What!")
+    SOUND:PlaySE("Battle/EVT_Emote_Shock_2")
+    UI:WaitShowDialogue("[speed=0.7]You're a Minior, aren't you?[pause=20]")
+    UI:SetSpeakerEmotion("worried")
+    UI:WaitShowDialogue("[speed=0.7]What are you doing here?")
+
+    UI:SetSpeaker(partner)
+    UI:SetSpeakerEmotion("determined")
+    UI:WaitShowDialogue("They crashed near [color=#F8A0F8]Wishing Woods[color]!")
+    UI:SetSpeakerEmotion("worried")
+    UI:WaitShowDialogue("All their friends are missing, so I promised to get them home...")
+
+    GROUND:EntTurn(gramps, Direction.Down)
+    UI:SetSpeaker(gramps)
+    UI:SetSpeakerEmotion("sad")
+    UI:WaitShowDialogue("[speed=0.7]Oh " ..partner:GetDisplayName().. "...")
+
+    UI:SetSpeaker(partner)
+    UI:SetSpeakerEmotion("worried")
+    UI:WaitShowDialogue("And I need your help, Gramps. How can we get " ..player:GetDisplayName().. " and their friends back home to space?")
+
+    GROUND:CharSetEmote(gramps, "sweatdrop", 1)
+    SOUND:PlaySE("Battle/EVT_Emote_Sweatdrop")
+    GROUND:EntTurn(gramps, Direction.Right)
+    UI:SetSpeaker(gramps)
+    UI:SetSpeakerEmotion("worried")
+    UI:WaitShowDialogue("[speed=0.5]........[pause=60]")
+    GROUND:EntTurn(gramps, Direction.Down)
+    UI:WaitShowDialogue("You made it all the way through [color=#F8A0F8]Wishing Woods[color] and back?")
+
+    GROUND:CharSetAnim(partner, "Nod", false)
+    GAME:WaitFrames(30)
+
+    UI:SetSpeakerEmotion("normal")
+    UI:WaitShowDialogue("[speed=0.7]Then maybe... [pause=30][color=#F8A0F8]Stardust Peak[color] is the best way to get your friend home.")
+    UI:WaitShowDialogue("[speed=0.7]Legends say the mountain is the bridge between our lands and the stars above...")
+    UI:WaitShowDialogue("[speed=0.7]And that it's the home of a terrible Pokémon who rules the skies!")
+
+    UI:SetSpeaker(partner)
+    UI:SetSpeakerEmotion("inspired")
+    UI:WaitShowDialogue("Woah! Cool!")
+
+    UI:SetSpeaker(gramps)
+    UI:SetSpeakerEmotion("determined")
+    UI:WaitShowDialogue("[speed=0.7]No! Not cool! Dangerous!")
+
+    UI:SetSpeaker(partner)
+    UI:SetSpeakerEmotion("worried")
+    UI:WaitShowDialogue("Gramps...")
+    UI:SetSpeakerEmotion("happy")
+    UI:WaitShowDialogue("Me and " ..player:GetDisplayName().. " can handle it!")
+    UI:WaitShowDialogue("Especially if we can recruit some other friends along the way!")
+
+    UI:SetSpeaker(gramps)
+    UI:SetSpeakerEmotion("worried")
+    UI:WaitShowDialogue("[speed=0.7]It's dangerous, " ..partner:GetDisplayName().. ", you know that, right?")
+    UI:WaitShowDialogue("[speed=0.7]You'll have to go through many other Mystery Dungeons to even get to the foot of the mountain.")
+
+    UI:SetSpeaker(partner)
+    UI:SetSpeakerEmotion("worried")
+    UI:WaitShowDialogue("Yeah, but...")
+    GROUND:EntTurn(partner, Direction.UpLeft)
+    UI:SetSpeakerEmotion("happy")
+    UI:WaitShowDialogue("As long as " ..player:GetDisplayName().. " is with me, I'll be okay! They're strong!")
+
+    UI:SetSpeaker(gramps)
+    UI:SetSpeakerEmotion("worried")
+    GROUND:EntTurn(gramps, Direction.DownLeft)
+    UI:WaitShowDialogue("[speed=0.7]Well then, " ..player:GetDisplayName().. ".")
+
+    UI:ChoiceMenuYesNo("[speed=0.7]Will you keep my " ..partner:GetDisplayName().. " safe?", false)
+    UI:WaitForChoice()
+    ch = UI:ChoiceResult()
+    if ch then
+      UI:SetSpeaker(gramps)
+      UI:SetSpeakerEmotion("sigh")
+      UI:WaitShowDialogue("[speed=0.7]Good...")
+      UI:SetSpeakerEmotion("determined")
+      UI:WaitShowDialogue("[speed=0.7]Then I'm counting on you! If " ..partner:GetDisplayName().. " gets hurt, it's on you!")
+    else
+        UI:WaitShowDialogue()
+    end
+    GROUND:EntTurn(gramps, Direction.Down)
+    UI:SetSpeakerEmotion("normal")
+    UI:WaitShowDialogue("[speed=0.7]If you really want to do this, then I shouldn't stand in your way.")
+    UI:SetSpeakerEmotion("teary-eyed")
+    UI:WaitShowDialogue("[speed=0.7]Oh...[pause=20] I suppose you had to grow up some day... sniffle...")
+    GAME:WaitFrames(30)
+    UI:SetSpeakerEmotion("normal")
+    UI:WaitShowDialogue("[speed=0.7]Ahem...[pause=20]I think you should probably start your journey at [color=#F8A0F8]Windswept Trail[color].")
+    UI:WaitShowDialogue("[speed=0.7]It's a Mystery Dungeon that runs down by the coast, and will get you a step closer to [color=#F8A0F8]Stardust Peak[color].")
+    UI:WaitShowDialogue("[speed=0.7]I also have a hunch...[br]If your friend here was found near a Mystery Dungeon, then chances are their other friends will have been drawn to them as well.")
+    UI:WaitShowDialogue("[speed=0.7]You may have to look out for hidden areas to find them.")
+    UI:WaitShowDialogue("[speed=0.7]Once you clear a dungeon for the first time, it'll be a lot easier to get back there to continue your journey.")
+    UI:WaitShowDialogue("[speed=0.7]Make sure you come back to town to rest and resupply before heading out again.")
+    UI:WaitShowDialogue("[speed=0.7]And one more thing...")
+    UI:ResetSpeaker()
+    UI:WaitShowDialogue("Gramps gave you an [color=#F8F800]Adventurer's Badge[color]!")
+    UI:WaitShowDialogue("[speed=0.7]You can use that to rescue any of " ..player:GetDisplayName().."\'s friends you do encounter.")
+
+    UI:SetSpeaker(partner)
+    UI:SetSpeakerEmotion("teary-eyed")
+    UI:WaitShowDialogue("Sniffle...[pause=20] Thanks, Gramps.")
+
+    UI:SetSpeaker(gramps)
+    UI:SetSpeakerEmotion("teary-eyed")
+    UI:WaitShowDialogue("[speed=0.7]Be safe, and don't do anything reckless...")
+    UI:WaitShowDialogue("[speed=0.7]And if you need any advice, just ask.")
+
+    GROUND:CharSetAnim(partner, "Nod", false)
+    GAME:WaitFrames(30)
+    UI:SetSpeaker(partner)
+    UI:SetSpeakerEmotion("teary-eyed")
+    UI:WaitShowDialogue("Okay!")
+    UI:SetSpeakerEmotion("determined")
+    GROUND:EntTurn(partner, Direction.UpLeft)
+    UI:WaitShowDialogue(""..player:GetDisplayName()"! Let's go find your friends and get to [color=#F8A0F8]Stardust Peak[color].")
+    --End
+    COMMON.UnlockWithFanfare("windswept_trail", false)
+    SV.mellow_town.CutsceneIntro = true
+    GAME:CutsceneMode(false)
+    AI:EnableCharacterAI(partner)
   end
+end
+
+function mellow_town.Coro_Walk(chara, direction, distance, run, speed)
+  GROUND:MoveInDirection(chara, direction, distance, run, speed)
 end
 
 return mellow_town
