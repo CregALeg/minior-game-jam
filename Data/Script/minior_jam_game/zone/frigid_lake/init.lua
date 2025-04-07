@@ -29,7 +29,15 @@ end
 ---frigid_lake.ExitSegment(zone, result, rescue, segmentID, mapID)
 --Engine callback function
 function frigid_lake.ExitSegment(zone, result, rescue, segmentID, mapID)
-
+  PrintInfo("=>> ExitSegment_frigid_lake result "..tostring(result).." segment "..tostring(segmentID).."\n\n\n")
+  if result == 0 then --Actually won
+      COMMON.UnlockWithFanfare('magma_tunnel', true)
+  else
+    UI:SetSpeaker(GAME:GetPlayerPartyMember(1))
+    UI:SetSpeakerEmotion("Pain")
+    UI:WaitShowDialogue("Urk...[pause=20] This is harder than I thought...[pause=20] Let's head home for now...")
+  end
+  COMMON.EndDungeonDay(result, 'mellow_town', -1, 0, 1)
 
 end
 
@@ -41,4 +49,3 @@ function frigid_lake.Rescued(zone, name, mail)
 end
 
 return frigid_lake
-

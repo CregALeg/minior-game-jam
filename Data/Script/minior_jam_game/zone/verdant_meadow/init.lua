@@ -22,7 +22,15 @@ end
 ---verdant_meadow.EnterSegment(zone, rescuing, segmentID, mapID)
 --Engine callback function
 function verdant_meadow.EnterSegment(zone, rescuing, segmentID, mapID)
-
+  PrintInfo("=>> ExitSegment_verdant_meadow result "..tostring(result).." segment "..tostring(segmentID).."\n\n\n")
+  if result == 0 then --Actually won
+      COMMON.UnlockWithFanfare('magma_tunnel', true)
+  else -- Lose dialogue
+    UI:SetSpeaker(GAME:GetPlayerPartyMember(1))
+    UI:SetSpeakerEmotion("Pain")
+    UI:WaitShowDialogue("Urk...[pause=20] This is harder than I thought...[pause=20] Let's head home for now...")
+  end
+  COMMON.EndDungeonDay(result, 'mellow_town', -1, 0, 1)
 
 end
 
@@ -41,4 +49,3 @@ function verdant_meadow.Rescued(zone, name, mail)
 end
 
 return verdant_meadow
-
