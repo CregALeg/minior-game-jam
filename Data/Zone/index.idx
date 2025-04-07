@@ -368,6 +368,42 @@ null
 "Released": true,
 "Comment": "Third/fourth dungeon. Uses the tall grass to create obscurity.",
 "SortOrder": 0
+},
+"frigid_lake": {
+"$type": "RogueEssence.Data.ZoneEntrySummary, RogueEssence",
+"ExpPercent": 100,
+"Level": -1,
+"LevelCap": false,
+"KeepSkills": false,
+"TeamRestrict": false,
+"TeamSize": -1,
+"MoneyRestrict": false,
+"BagRestrict": -1,
+"KeepTreasure": false,
+"BagSize": -1,
+"Rescues": 0,
+"CountedFloors": 0,
+"Rogue": 0,
+"Grounds": [],
+"Maps": [
+[
+0,
+1,
+2,
+3,
+4,
+5,
+6,
+7
+]
+],
+"Name": {
+"DefaultText": "Frigid Lake",
+"LocalTexts": {}
+},
+"Released": true,
+"Comment": "Third/Fourth dungeon. Features rain & hail & snow on occasion.",
+"SortOrder": 0
 }
 }
 }

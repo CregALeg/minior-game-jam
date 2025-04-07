@@ -29,11 +29,17 @@ end
 ---windswept_trail.ExitSegment(zone, result, rescue, segmentID, mapID)
 --Engine callback function
 function windswept_trail.ExitSegment(zone, result, rescue, segmentID, mapID)
-  PrintInfo("=>> ExitSegment_windswept_trail result "..tostring(result).." segment "..tostring(segmentID))
-  if segmentID == 0 then
-    COMMON.UnlockWithFanfare('verdant_meadow', true)
-  elseif segmentID == 1 then
-    COMMON.UnlockWithFanfare('frigid_lake', true)
+  PrintInfo("=>> ExitSegment_windswept_trail result "..tostring(result).." segment "..tostring(segmentID).."\n\n\n")
+  if result == 0 then --Actually won
+    if segmentID == 0 then
+      COMMON.UnlockWithFanfare('verdant_meadow', true)
+    elseif segmentID == 1 then
+      COMMON.UnlockWithFanfare('frigid_lake', true)
+    end
+  else
+    UI:SetSpeaker(GAME:GetPlayerPartyMember(1))
+    UI:SetSpeakerEmotion("Pain")
+    UI:WaitShowDialogue("Urk...[pause=20] This is harder than I thought...[pause=20] Let's head home for now...")
   end
   COMMON.EndDungeonDay(result, 'mellow_town', -1, 0, 1)
 end

@@ -5246,10 +5246,10 @@
 "Amount": 0,
 "Price": 0
 },
-"Rate": 5,
+"Rate": 9,
 "Range": {
 "Min": 0,
-"Max": 5
+"Max": 7
 }
 },
 {
@@ -5263,7 +5263,7 @@
 "Rate": 12,
 "Range": {
 "Min": 0,
-"Max": 5
+"Max": 7
 }
 },
 {
@@ -5276,8 +5276,79 @@
 },
 "Rate": 10,
 "Range": {
-"Min": 2,
-"Max": 5
+"Min": 0,
+"Max": 7
+}
+},
+{
+"Spawn": {
+"ID": "berry_lum",
+"Cursed": false,
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0
+},
+"Rate": 6,
+"Range": {
+"Min": 0,
+"Max": 7
+}
+},
+{
+"Spawn": {
+"ID": "seed_reviver",
+"Cursed": false,
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0
+},
+"Rate": 5,
+"Range": {
+"Min": 0,
+"Max": 10
+}
+}
+],
+"SpawnRates": {
+"nodes": [
+{
+"Item": 10,
+"Range": {
+"Min": 0,
+"Max": 7
+}
+}
+]
+}
+},
+"snacks": {
+"Spawns": [
+{
+"Spawn": {
+"ID": "seed_blast",
+"Cursed": false,
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0
+},
+"Rate": 20,
+"Range": {
+"Min": 0,
+"Max": 7
+}
+},
+{
+"Spawn": {
+"ID": "seed_warp",
+"Cursed": false,
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0
+},
+"Rate": 10,
+"Range": {
+"Min": 0,
+"Max": 7
 }
 },
 {
@@ -5288,15 +5359,115 @@
 "Amount": 0,
 "Price": 0
 },
-"Rate": 8,
+"Rate": 10,
 "Range": {
-"Min": 1,
-"Max": 5
+"Min": 0,
+"Max": 7
 }
 },
 {
 "Spawn": {
-"ID": "seed_blast",
+"ID": "seed_vile",
+"Cursed": false,
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0
+},
+"Rate": 2,
+"Range": {
+"Min": 5,
+"Max": 7
+}
+}
+],
+"SpawnRates": {
+"nodes": [
+{
+"Item": 10,
+"Range": {
+"Min": 0,
+"Max": 7
+}
+}
+]
+}
+},
+"ammo": {
+"Spawns": [
+{
+"Spawn": {
+"ID": "ammo_corsola_twig",
+"Cursed": false,
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0
+},
+"Rate": 10,
+"Range": {
+"Min": 0,
+"Max": 7
+}
+},
+{
+"Spawn": {
+"ID": "ammo_gravelerock",
+"Cursed": false,
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0
+},
+"Rate": 16,
+"Range": {
+"Min": 0,
+"Max": 7
+}
+}
+],
+"SpawnRates": {
+"nodes": [
+{
+"Item": 16,
+"Range": {
+"Min": 0,
+"Max": 10
+}
+}
+]
+}
+},
+"orbs": {
+"Spawns": [
+{
+"Spawn": {
+"ID": "orb_rebound",
+"Cursed": false,
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0
+},
+"Rate": 10,
+"Range": {
+"Min": 0,
+"Max": 8
+}
+},
+{
+"Spawn": {
+"ID": "orb_all_protect",
+"Cursed": false,
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0
+},
+"Rate": 5,
+"Range": {
+"Min": 0,
+"Max": 8
+}
+},
+{
+"Spawn": {
+"ID": "orb_all_aim",
 "Cursed": false,
 "HiddenValue": "",
 "Amount": 0,
@@ -5304,21 +5475,240 @@
 },
 "Rate": 9,
 "Range": {
-"Min": 2,
-"Max": 5
+"Min": 0,
+"Max": 8
+}
+},
+{
+"Spawn": {
+"ID": "orb_trap_see",
+"Cursed": false,
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0
+},
+"Rate": 8,
+"Range": {
+"Min": 0,
+"Max": 8
+}
+},
+{
+"Spawn": {
+"ID": "orb_trapbust",
+"Cursed": false,
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0
+},
+"Rate": 8,
+"Range": {
+"Min": 0,
+"Max": 8
 }
 }
 ],
 "SpawnRates": {
 "nodes": [
 {
-"Item": 14,
+"Item": 10,
 "Range": {
 "Min": 0,
-"Max": 5
+"Max": 10
 }
 }
 ]
+}
+},
+"held": {
+"Spawns": [
+{
+"Spawn": {
+"ID": "held_power_band",
+"Cursed": false,
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0
+},
+"Rate": 1,
+"Range": {
+"Min": 5,
+"Max": 7
+}
+},
+{
+"Spawn": {
+"ID": "held_defense_scarf",
+"Cursed": false,
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0
+},
+"Rate": 1,
+"Range": {
+"Min": 5,
+"Max": 7
+}
+},
+{
+"Spawn": {
+"ID": "held_mystic_water",
+"Cursed": false,
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0
+},
+"Rate": 1,
+"Range": {
+"Min": 5,
+"Max": 7
+}
+},
+{
+"Spawn": {
+"ID": "held_never_melt_ice",
+"Cursed": false,
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0
+},
+"Rate": 1,
+"Range": {
+"Min": 5,
+"Max": 7
+}
+}
+],
+"SpawnRates": {
+"nodes": [
+{
+"Item": 6,
+"Range": {
+"Min": 5,
+"Max": 7
+}
+}
+]
+}
+},
+"special": {
+"Spawns": [
+{
+"Spawn": {
+"ID": "apricorn_brown",
+"Cursed": false,
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0
+},
+"Rate": 10,
+"Range": {
+"Min": 0,
+"Max": 7
+}
+},
+{
+"Spawn": {
+"ID": "apricorn_green",
+"Cursed": false,
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0
+},
+"Rate": 10,
+"Range": {
+"Min": 0,
+"Max": 7
+}
+},
+{
+"Spawn": {
+"ID": "apricorn_white",
+"Cursed": false,
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0
+},
+"Rate": 10,
+"Range": {
+"Min": 0,
+"Max": 7
+}
+},
+{
+"Spawn": {
+"ID": "apricorn_blue",
+"Cursed": false,
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0
+},
+"Rate": 10,
+"Range": {
+"Min": 0,
+"Max": 7
+}
+}
+],
+"SpawnRates": {
+"nodes": [
+{
+"Item": 7,
+"Range": {
+"Min": 0,
+"Max": 7
+}
+}
+]
+}
+},
+"wands": {
+"Spawns": [
+{
+"Spawn": {
+"ID": "wand_whirlwind",
+"Cursed": false,
+"HiddenValue": "",
+"Amount": 3,
+"Price": 0
+},
+"Rate": 10,
+"Range": {
+"Min": 0,
+"Max": 8
+}
+},
+{
+"Spawn": {
+"ID": "wand_fear",
+"Cursed": false,
+"HiddenValue": "",
+"Amount": 2,
+"Price": 0
+},
+"Rate": 10,
+"Range": {
+"Min": 0,
+"Max": 8
+}
+},
+{
+"Spawn": {
+"ID": "wand_pounce",
+"Cursed": false,
+"HiddenValue": "",
+"Amount": 2,
+"Price": 0
+},
+"Rate": 10,
+"Range": {
+"Min": 0,
+"Max": 8
+}
+}
+],
+"SpawnRates": {
+"nodes": []
 }
 }
 }
@@ -5557,6 +5947,14 @@
 "Min": 0,
 "Max": 8
 }
+},
+{
+"Spawn": 3,
+"Rate": 6,
+"Range": {
+"Min": 7,
+"Max": 8
+}
 }
 ],
 "SpecificSpawns": []
@@ -5570,23 +5968,6 @@
 ]
 },
 "Spawns": [
-{
-"Spawn": {
-"TileLoc": {
-"X": 0,
-"Y": 0
-},
-"ID": "trap_poison",
-"Revealed": false,
-"Owner": 0,
-"TileStates": []
-},
-"Rate": 5,
-"Range": {
-"Min": 0,
-"Max": 8
-}
-},
 {
 "Spawn": {
 "TileLoc": {
@@ -5636,6 +6017,23 @@
 "Range": {
 "Min": 0,
 "Max": 8
+}
+},
+{
+"Spawn": {
+"TileLoc": {
+"X": 0,
+"Y": 0
+},
+"ID": "trap_poison",
+"Revealed": false,
+"Owner": 0,
+"TileStates": []
+},
+"Rate": 10,
+"Range": {
+"Min": 0,
+"Max": 1
 }
 }
 ]

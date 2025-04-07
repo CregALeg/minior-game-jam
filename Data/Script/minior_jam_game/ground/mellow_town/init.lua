@@ -961,6 +961,7 @@ function mellow_town.Cutscene_Intro()
     UI:WaitShowDialogue("[speed=0.7]And one more thing...")
     UI:ResetSpeaker()
     UI:WaitShowDialogue("Gramps gave you an [color=#F8F800]Adventurer's Badge[color]!")
+    UI:SetSpeaker(gramps)
     UI:WaitShowDialogue("[speed=0.7]You can use that to rescue any of " ..player:GetDisplayName().."\'s friends you do encounter.")
 
     UI:SetSpeaker(partner)
@@ -979,7 +980,7 @@ function mellow_town.Cutscene_Intro()
     UI:WaitShowDialogue("Okay!")
     UI:SetSpeakerEmotion("determined")
     GROUND:EntTurn(partner, Direction.UpLeft)
-    UI:WaitShowDialogue(""..player:GetDisplayName()"! Let's go find your friends and get to [color=#F8A0F8]Stardust Peak[color].")
+    UI:WaitShowDialogue("Okay, " ..player:GetDisplayName().. "! Let's go find your friends and get to [color=#F8A0F8]Stardust Peak[color].")
     --End
     COMMON.UnlockWithFanfare("windswept_trail", false)
     SV.mellow_town.CutsceneIntro = true

@@ -69886,7 +69886,7 @@
 },
 "Collider": {
 "X": 276,
-"Y": 186,
+"Y": 184,
 "Width": 16,
 "Height": 16
 }
@@ -70685,20 +70685,6 @@
 "Collider": {
 "X": 689,
 "Y": 196,
-"Width": 16,
-"Height": 16
-}
-},
-{
-"EntName": "ExitNorth",
-"Direction": 0,
-"EntEnabled": true,
-"EntOrder": 0,
-"InteractOrder": 0,
-"triggerType": 0,
-"Collider": {
-"X": -10,
-"Y": 50,
 "Width": 16,
 "Height": 16
 }
