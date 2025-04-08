@@ -731,14 +731,14 @@ end
 
 -- Mission Test
 function mellow_town.MissionTest_Action(obj, activator)
-  COMMON.CreateMission("RedMiniorRescue",
+  COMMON.CreateMission("OrangeMiniorRescue",
   { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_RESCUE,
-    DestZone = "windswept_trail", DestSegment = 1, DestFloor = 2,
-    FloorUnknown = true,
+    DestZone = "magma_tunnel", DestSegment = 1, DestFloor = 0,
+    FloorUnknown = false,
     TargetSpecies = RogueEssence.Dungeon.MonsterID("minior", 0, "normal", Gender.Genderless),
     ClientSpecies = RogueEssence.Dungeon.MonsterID("minior", 0, "normal", Gender.Genderless) }
   )
-  print(SV.missions.Missions["RedMiniorRescue"])
+  print(SV.missions.Missions["OrangeMiniorRescue"])
 end
 
 function mellow_town.Cutscene_Test_Action(obj, activator)
