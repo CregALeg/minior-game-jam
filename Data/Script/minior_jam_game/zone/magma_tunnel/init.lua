@@ -29,15 +29,27 @@ end
 ---magma_tunnel.ExitSegment(zone, result, rescue, segmentID, mapID)
 --Engine callback function
 function magma_tunnel.ExitSegment(zone, result, rescue, segmentID, mapID)
-  PrintInfo("=>> ExitSegment_frigid_lake result "..tostring(result).." segment "..tostring(segmentID).."\n\n\n")
-  if result == 0 then --Actually won, ignores which exit
-      --COMMON.UnlockWithFanfare('lunar_barrow', true)
-  else
+  PrintInfo("=>> ExitSegment_magma_tunnel result "..tostring(result).." segment "..tostring(segmentID).."\n\n\n")
+
+  local exited = COMMON.ExitDungeonMissionCheck(result, rescue, zone.ID, segmentID)
+  if exited == true then
+    -- do nothing???
+  elseif result ~= RogueEssence.Data.GameProgress.ResultType.Cleared then
     UI:SetSpeaker(GAME:GetPlayerPartyMember(1))
     UI:SetSpeakerEmotion("Pain")
     UI:WaitShowDialogue("Urk...[pause=20] This is harder than I thought...[pause=20] Let's head home for now...")
+    COMMON.EndDungeonDay(result, SV.checkpoint.Zone, SV.checkpoint.Segment, SV.checkpoint.Map, SV.checkpoint.Entry)
+  else
+    -- OMMON.UnlockWithFanfare('lunar_barrow', true) #Not implemented yet
+    COMMON.EndDungeonDay(result, 'mellow_town', -1, 0, 1)
   end
-  COMMON.EndDungeonDay(result, 'mellow_town', -1, 0, 1)
+  local quest = SV.missions.Missions["OrangeMiniorRescue"]
+  if quest ~= nil then
+    if quest.Complete == COMMON.MISSION_COMPLETE then
+      UI:WaitShowDialogue("You rescued Orange Minior!") -- Test dialogue
+      COMMON.CompleteMission("OrangeMiniorRescue")
+    end
+  end
 end
 
 ---magma_tunnel.Rescued(zone, name, mail)

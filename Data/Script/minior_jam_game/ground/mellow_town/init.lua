@@ -22,6 +22,29 @@ function mellow_town.Init(map)
   local partner = CH('Teammate1')
   AI:SetCharacterAI(partner, "origin.ai.ground_partner", CH('PLAYER'), partner.Position)
   partner.CollisionDisabled = true
+
+  -- Enable Miniors
+  if SV.missions.FinishedMissions["RedMiniorRescue"] ~= nil then
+    GROUND:Unhide("RedMinior")
+  end
+  if SV.missions.FinishedMissions["OrangeMiniorRescue"] ~= nil then
+    GROUND:Unhide("OrangeMinior")
+  end
+  if SV.missions.FinishedMissions["YellowMiniorRescue"] ~= nil then
+    GROUND:Unhide("YellowMinior")
+  end
+  if SV.missions.FinishedMissions["BlueMiniorRescue"] ~= nil then
+    GROUND:Unhide("BlueMinior")
+  end
+  if SV.missions.FinishedMissions["GreenMiniorRescue"] ~= nil then
+    GROUND:Unhide("GreenMinior")
+  end
+  if SV.missions.FinishedMissions["IndigoMiniorRescue"] ~= nil then
+    GROUND:Unhide("IndigoMinior")
+  end
+  if SV.missions.FinishedMissions["VioletMiniorRescue"] ~= nil then
+    GROUND:Unhide("VioletMinior")
+  end
 end
 
 ---mellow_town.Enter(map)

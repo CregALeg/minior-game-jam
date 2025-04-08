@@ -23,14 +23,26 @@ end
 --Engine callback function
 function verdant_meadow.EnterSegment(zone, rescuing, segmentID, mapID)
   PrintInfo("=>> ExitSegment_verdant_meadow result "..tostring(result).." segment "..tostring(segmentID).."\n\n\n")
-  if result == 0 then --Actually won
-      COMMON.UnlockWithFanfare('magma_tunnel', true)
-  else -- Lose dialogue
+
+  local exited = COMMON.ExitDungeonMissionCheck(result, rescue, zone.ID, segmentID)
+  if exited == true then
+    -- do nothing???
+  elseif result ~= RogueEssence.Data.GameProgress.ResultType.Cleared then
     UI:SetSpeaker(GAME:GetPlayerPartyMember(1))
     UI:SetSpeakerEmotion("Pain")
     UI:WaitShowDialogue("Urk...[pause=20] This is harder than I thought...[pause=20] Let's head home for now...")
+    COMMON.EndDungeonDay(result, SV.checkpoint.Zone, SV.checkpoint.Segment, SV.checkpoint.Map, SV.checkpoint.Entry)
+  else
+    COMMON.UnlockWithFanfare('magma_tunnel', true)
+    COMMON.EndDungeonDay(result, 'mellow_town', -1, 0, 1)
   end
-  COMMON.EndDungeonDay(result, 'mellow_town', -1, 0, 1)
+  local quest = SV.missions.Missions["GreenMiniorRescue"]
+  if quest ~= nil then
+    if quest.Complete == COMMON.MISSION_COMPLETE then
+      UI:WaitShowDialogue("You rescued Green Minior!") -- Test dialogue
+      COMMON.CompleteMission("GreenMiniorRescue")
+    end
+  end
 
 end
 

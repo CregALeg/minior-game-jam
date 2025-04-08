@@ -30,19 +30,48 @@ end
 --Engine callback function
 function windswept_trail.ExitSegment(zone, result, rescue, segmentID, mapID)
   PrintInfo("=>> ExitSegment_windswept_trail result "..tostring(result).." segment "..tostring(segmentID).."\n\n\n")
-  if result == 0 then --Actually won
-    if segmentID == 0 then
-      COMMON.UnlockWithFanfare('verdant_meadow', true)
-    elseif segmentID == 1 then
-      COMMON.UnlockWithFanfare('frigid_lake', true)
-    end
-  else
+
+  local exited = COMMON.ExitDungeonMissionCheck(result, rescue, zone.ID, segmentID)
+  if exited == true then
+    -- do nothing???
+  elseif result ~= RogueEssence.Data.GameProgress.ResultType.Cleared then
     UI:SetSpeaker(GAME:GetPlayerPartyMember(1))
     UI:SetSpeakerEmotion("Pain")
     UI:WaitShowDialogue("Urk...[pause=20] This is harder than I thought...[pause=20] Let's head home for now...")
+    COMMON.EndDungeonDay(result, SV.checkpoint.Zone, SV.checkpoint.Segment, SV.checkpoint.Map, SV.checkpoint.Entry)
+  else
+    if segmentID == 0 then
+      COMMON.UnlockWithFanfare('verdant_meadow', true)
+      COMMON.EndDungeonDay(result, 'mellow_town', -1, 0, 1)
+    elseif segmentID == 1 then
+      COMMON.UnlockWithFanfare('frigid_lake', true)
+      COMMON.EndDungeonDay(result, 'mellow_town', -1, 0, 1)
+    else
+      PrintInfo("No exit procedure found!")
+	    COMMON.EndDungeonDay(result, SV.checkpoint.Zone, SV.checkpoint.Segment, SV.checkpoint.Map, SV.checkpoint.Entry)
+    end
   end
-  COMMON.EndDungeonDay(result, 'mellow_town', -1, 0, 1)
+  local quest = SV.missions.Missions["RedMiniorRescue"]
+  if quest ~= nil then
+    if quest.Complete == COMMON.MISSION_COMPLETE then
+      UI:WaitShowDialogue("You rescued Red Minior!") -- Test dialogue
+      COMMON.CompleteMission("RedMiniorRescue")
+    end
+  end
 end
+  -- print(tostring(result))
+  -- if result == 0 then --Actually won
+  --   if segmentID == 0 then
+  --     COMMON.UnlockWithFanfare('verdant_meadow', true)
+  --   elseif segmentID == 1 then
+  --     COMMON.UnlockWithFanfare('frigid_lake', true)
+  --   end
+  -- elseif result == 1 then
+  --   UI:SetSpeaker(GAME:GetPlayerPartyMember(1))
+  --   UI:SetSpeakerEmotion("Pain")
+  --   UI:WaitShowDialogue("Urk...[pause=20] This is harder than I thought...[pause=20] Let's head home for now...")
+  -- end
+  -- COMMON.EndDungeonDay(result, 'mellow_town', -1, 0, 1)
 
 ---windswept_trail.Rescued(zone, name, mail)
 --Engine callback function

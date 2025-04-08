@@ -492,7 +492,7 @@ null
 "DefaultText": "Magma Tunnel",
 "LocalTexts": {}
 },
-"Released": false,
+"Released": true,
 "Comment": "Fifth dungeon. Everything is on fire with fire everwhere.",
 "SortOrder": 0
 }
