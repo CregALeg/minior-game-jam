@@ -43,7 +43,6 @@ function verdant_meadow.EnterSegment(zone, rescuing, segmentID, mapID)
       COMMON.CompleteMission("GreenMiniorRescue")
     end
   end
-
 end
 
 ---verdant_meadow.ExitSegment(zone, result, rescue, segmentID, mapID)
