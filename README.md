@@ -3,6 +3,8 @@
  
 # Overview
 In this Pokémon Mystery Dungeon fangame inspired by Explorers of Sky's special episodes, you will play as a Minior who fell from the sky and guide them on a journey to return home.
+
+## Screenshots
 ![alt text](https://i.imgur.com/ovDsIYo.png "")
 
 # Installation
@@ -21,6 +23,8 @@ In this Pokémon Mystery Dungeon fangame inspired by Explorers of Sky's special 
 - **redblueyellow** - Spindas Cafe, Treasure Town, Sharpedo Bluff tile rips.
 - **Heartlessdragoon** - Treasure Town tile rips.
 - All artists of the [PMD Sprite Collab](https://sprites.pmdcollab.org/)
+- **RRen** - Sky Peak map rip.
+- **Hauntfuck** - Sky Mountain (Intro) Map Rips.
 - **Spike Chunsoft** - Original PMD Time/Darkness/Sky tilesets, portraits, sprites and more
 
 ## Audio
