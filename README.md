@@ -1,5 +1,9 @@
 # Untitled Minior Game Jam
  Game Jam entry for Insert Name Jam 2025
+ 
+# Overview
+In this Pokémon Mystery Dungeon fangame inspired by Explorers of Sky's special episodes, you will play as a Minior who fell from the sky and guide them on a journey to return home.
+![alt text](https://i.imgur.com/ovDsIYo.png "")
 
 # Installation
 1. Download and install the latest version of [PMDO](https://github.com/audinowho/PMDODump/releases)

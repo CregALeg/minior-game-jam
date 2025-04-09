@@ -38,7 +38,7 @@ function windswept_trail.ExitSegment(zone, result, rescue, segmentID, mapID)
     UI:SetSpeaker(GAME:GetPlayerPartyMember(1))
     UI:SetSpeakerEmotion("Pain")
     UI:WaitShowDialogue("Urk...[pause=20] This is harder than I thought...[pause=20] Let's head home for now...")
-    COMMON.EndDungeonDay(result, SV.checkpoint.Zone, SV.checkpoint.Segment, SV.checkpoint.Map, SV.checkpoint.Entry)
+    COMMON.EndDungeonDay(result, 'mellow_town', -1, 0, 1)
   else
     if segmentID == 0 then
       COMMON.UnlockWithFanfare('verdant_meadow', true)

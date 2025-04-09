@@ -30,11 +30,11 @@ end
 ---wishing_woods.ExitSegment(zone, result, rescue, segmentID, mapID)
 --Engine callback function
 function wishing_woods.ExitSegment(zone, result, rescue, segmentID, mapID)
-  PrintInfo("=>> ExitSegment_frigid_lake result "..tostring(result).." segment "..tostring(segmentID).."\n\n\n")
+  PrintInfo("=>> ExitSegment_wishing_woods result "..tostring(result).." segment "..tostring(segmentID).."\n\n\n")
   if result == 1 then --Actually lost
     UI:SetSpeaker(GAME:GetPlayerPartyMember(1))
     UI:SetSpeakerEmotion("Pain")
-    UI:WaitShowDialogue("Urk...[pause=20] This is harder than I thought...[pause=20] Let's head home for now...")
+    UI:WaitShowDialogue("Urk...[pause=20] This is harder than I thought...[pause=20] Let's head back for now...")
     COMMON.EndDungeonDay(result, 'crash_site', -1, 0, 1)
   else
     COMMON.EndDungeonDay(result, 'mellow_town', -1, 0, 1)

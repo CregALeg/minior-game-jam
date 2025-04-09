@@ -22,6 +22,10 @@ end
 ---verdant_meadow.EnterSegment(zone, rescuing, segmentID, mapID)
 --Engine callback function
 function verdant_meadow.EnterSegment(zone, rescuing, segmentID, mapID)
+
+---verdant_meadow.ExitSegment(zone, result, rescue, segmentID, mapID)
+--Engine callback function
+function verdant_meadow.ExitSegment(zone, result, rescue, segmentID, mapID)
   PrintInfo("=>> ExitSegment_verdant_meadow result "..tostring(result).." segment "..tostring(segmentID).."\n\n\n")
 
   local exited = COMMON.ExitDungeonMissionCheck(result, rescue, zone.ID, segmentID)
@@ -31,7 +35,7 @@ function verdant_meadow.EnterSegment(zone, rescuing, segmentID, mapID)
     UI:SetSpeaker(GAME:GetPlayerPartyMember(1))
     UI:SetSpeakerEmotion("Pain")
     UI:WaitShowDialogue("Urk...[pause=20] This is harder than I thought...[pause=20] Let's head home for now...")
-    COMMON.EndDungeonDay(result, SV.checkpoint.Zone, SV.checkpoint.Segment, SV.checkpoint.Map, SV.checkpoint.Entry)
+    COMMON.EndDungeonDay(result, 'mellow_town', -1, 0, 1)
   else
     COMMON.UnlockWithFanfare('magma_tunnel', true)
     COMMON.EndDungeonDay(result, 'mellow_town', -1, 0, 1)
@@ -44,10 +48,6 @@ function verdant_meadow.EnterSegment(zone, rescuing, segmentID, mapID)
     end
   end
 end
-
----verdant_meadow.ExitSegment(zone, result, rescue, segmentID, mapID)
---Engine callback function
-function verdant_meadow.ExitSegment(zone, result, rescue, segmentID, mapID)
 
 
 end
