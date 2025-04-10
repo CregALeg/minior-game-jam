@@ -8,8 +8,8 @@ In this Pokémon Mystery Dungeon fangame inspired by Explorers of Sky's special 
 ![alt text](https://i.imgur.com/ovDsIYo.png "")
 
 # Installation
-1. Download and install the latest version of [PMDO](https://github.com/audinowho/PMDODump/releases)
-2. Download Untitled Minior Game Jam's latest release version as a .zip file. Extract the game to its own folder.
+1. Download and install the latest version of [PMDO](https://github.com/audinowho/PMDODump/releases).
+2. Download Miniot the Fallen Star's latest release version as a .zip file. Extract the game to its own folder.
 3. Place the extracted folder in PMDO/MODS folder.
 4. Start PMDO, then select the game from the "Special Episodes" menu.
 
