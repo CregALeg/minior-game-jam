@@ -495,6 +495,35 @@ null
 "Released": true,
 "Comment": "Fifth dungeon. Everything is on fire with fire everwhere.",
 "SortOrder": 0
+},
+"primal_canyon": {
+"$type": "RogueEssence.Data.ZoneEntrySummary, RogueEssence",
+"ExpPercent": 100,
+"Level": -1,
+"LevelCap": false,
+"KeepSkills": false,
+"TeamRestrict": false,
+"TeamSize": -1,
+"MoneyRestrict": false,
+"BagRestrict": -1,
+"KeepTreasure": false,
+"BagSize": -1,
+"Rescues": 0,
+"CountedFloors": 0,
+"Rogue": 0,
+"Grounds": [],
+"Maps": [
+[
+0
+]
+],
+"Name": {
+"DefaultText": "Primal Canyon",
+"LocalTexts": {}
+},
+"Released": false,
+"Comment": "",
+"SortOrder": 0
 }
 }
 }
