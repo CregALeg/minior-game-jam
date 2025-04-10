@@ -1,4 +1,4 @@
-# Untitled Minior Game Jam
+# Pokémon Mystery Dungeon: Minior the Fallen Star
  Game Jam entry for Insert Name Jam 2025
  
 # Overview
