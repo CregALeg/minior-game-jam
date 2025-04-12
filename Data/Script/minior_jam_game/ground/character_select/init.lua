@@ -234,8 +234,6 @@ function character_select.PartnerSelect()
 	end
   -- Set Partner Data
   partner = _DATA.Save.ActiveTeam:CreatePlayer(_DATA.Save.Rand, partner_choice, 15, "", 0)
-  tbl = LTBL(partner)
-  tbl.Importance = "Partner"
   partner.IsFounder = true
   partner.IsPartner = true
   partner.Nickname = result
@@ -261,11 +259,11 @@ function character_select.MiniorSelect()
 		yesnoResult = UI:ChoiceResult()
 	end
 
-  -- Create partner, make founder, set nickname, add to (empty) party
+  -- Create player, make founder, set nickname, add to (empty) party
   player = _DATA.Save.ActiveTeam:CreatePlayer(_DATA.Save.Rand, player_minior, 15, "", form_rando)
-  tbl = LTBL(player)
-  tbl.IsFounder = true
   player.Nickname = result
+  player.IsFounder = true
+  player.IsPartner = true
   _DATA.Save.ActiveTeam.Players:Add(player)
 end
 

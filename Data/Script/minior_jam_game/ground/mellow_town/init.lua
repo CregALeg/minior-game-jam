@@ -750,6 +750,27 @@ function mellow_town.Assembly_Action(obj, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   UI:ResetSpeaker()
   COMMON.ShowTeamAssemblyMenu(obj, COMMON.RespawnAllies)
+  local partner = CH('Teammate1')
+  AI:SetCharacterAI(partner, "origin.ai.ground_partner", CH('PLAYER'), partner.Position)
+  partner.CollisionDisabled = true
+end
+
+-- Teammates
+function mellow_town.Teammate1_Action(chara, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  UI:SetSpeaker(chara)
+  UI:WaitShowDialogue("Let's go, " ..CH("PLAYER"):GetDisplayName().."!")
+end
+
+-- Teammates
+function mellow_town.Teammate2_Action(chara, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  COMMON.GroundInteract(activator, chara)
+end
+
+function mellow_town.Teammate3_Action(chara, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  COMMON.GroundInteract(activator, chara)
 end
 
 -- Mission Test

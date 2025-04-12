@@ -62177,20 +62177,7 @@
 {
 "AutoTileset": "",
 "Associates": [],
-"Layers": [
-{
-"Frames": [
-{
-"Sheet": "Mellow Town Trees",
-"TexLoc": {
-"X": 6,
-"Y": 14
-}
-}
-],
-"FrameLength": 60
-}
-],
+"Layers": [],
 "NeighborCode": -1
 },
 {
@@ -62410,20 +62397,7 @@
 {
 "AutoTileset": "",
 "Associates": [],
-"Layers": [
-{
-"Frames": [
-{
-"Sheet": "Mellow Town Trees",
-"TexLoc": {
-"X": 7,
-"Y": 13
-}
-}
-],
-"FrameLength": 60
-}
-],
+"Layers": [],
 "NeighborCode": -1
 },
 {
@@ -63653,20 +63627,7 @@
 {
 "AutoTileset": "",
 "Associates": [],
-"Layers": [
-{
-"Frames": [
-{
-"Sheet": "Mellow Town Trees",
-"TexLoc": {
-"X": 13,
-"Y": 5
-}
-}
-],
-"FrameLength": 60
-}
-],
+"Layers": [],
 "NeighborCode": -1
 },
 {
@@ -64327,20 +64288,7 @@
 {
 "AutoTileset": "",
 "Associates": [],
-"Layers": [
-{
-"Frames": [
-{
-"Sheet": "Mellow Town Trees",
-"TexLoc": {
-"X": 16,
-"Y": 0
-}
-}
-],
-"FrameLength": 60
-}
-],
+"Layers": [],
 "NeighborCode": -1
 },
 {
@@ -64662,39 +64610,13 @@
 {
 "AutoTileset": "",
 "Associates": [],
-"Layers": [
-{
-"Frames": [
-{
-"Sheet": "Mellow Town Trees",
-"TexLoc": {
-"X": 18,
-"Y": 0
-}
-}
-],
-"FrameLength": 60
-}
-],
+"Layers": [],
 "NeighborCode": -1
 },
 {
 "AutoTileset": "",
 "Associates": [],
-"Layers": [
-{
-"Frames": [
-{
-"Sheet": "Mellow Town Trees",
-"TexLoc": {
-"X": 18,
-"Y": 1
-}
-}
-],
-"FrameLength": 60
-}
-],
+"Layers": [],
 "NeighborCode": -1
 },
 {
@@ -64836,39 +64758,13 @@
 {
 "AutoTileset": "",
 "Associates": [],
-"Layers": [
-{
-"Frames": [
-{
-"Sheet": "Mellow Town Trees",
-"TexLoc": {
-"X": 19,
-"Y": 0
-}
-}
-],
-"FrameLength": 60
-}
-],
+"Layers": [],
 "NeighborCode": -1
 },
 {
 "AutoTileset": "",
 "Associates": [],
-"Layers": [
-{
-"Frames": [
-{
-"Sheet": "Mellow Town Trees",
-"TexLoc": {
-"X": 19,
-"Y": 1
-}
-}
-],
-"FrameLength": 60
-}
-],
+"Layers": [],
 "NeighborCode": -1
 },
 {
@@ -65029,20 +64925,7 @@
 {
 "AutoTileset": "",
 "Associates": [],
-"Layers": [
-{
-"Frames": [
-{
-"Sheet": "Mellow Town Trees",
-"TexLoc": {
-"X": 20,
-"Y": 1
-}
-}
-],
-"FrameLength": 60
-}
-],
+"Layers": [],
 "NeighborCode": -1
 },
 {
@@ -66415,20 +66298,7 @@
 {
 "AutoTileset": "",
 "Associates": [],
-"Layers": [
-{
-"Frames": [
-{
-"Sheet": "Mellow Town Trees",
-"TexLoc": {
-"X": 26,
-"Y": 6
-}
-}
-],
-"FrameLength": 60
-}
-],
+"Layers": [],
 "NeighborCode": -1
 },
 {
@@ -66693,20 +66563,7 @@
 {
 "AutoTileset": "",
 "Associates": [],
-"Layers": [
-{
-"Frames": [
-{
-"Sheet": "Mellow Town Trees",
-"TexLoc": {
-"X": 27,
-"Y": 6
-}
-}
-],
-"FrameLength": 60
-}
-],
+"Layers": [],
 "NeighborCode": -1
 },
 {
@@ -66984,20 +66841,7 @@
 {
 "AutoTileset": "",
 "Associates": [],
-"Layers": [
-{
-"Frames": [
-{
-"Sheet": "Mellow Town Trees",
-"TexLoc": {
-"X": 28,
-"Y": 6
-}
-}
-],
-"FrameLength": 60
-}
-],
+"Layers": [],
 "NeighborCode": -1
 },
 {
@@ -67327,20 +67171,7 @@
 {
 "AutoTileset": "",
 "Associates": [],
-"Layers": [
-{
-"Frames": [
-{
-"Sheet": "Mellow Town Trees",
-"TexLoc": {
-"X": 29,
-"Y": 6
-}
-}
-],
-"FrameLength": 60
-}
-],
+"Layers": [],
 "NeighborCode": -1
 },
 {
@@ -67584,38 +67415,6 @@
 "Layer": 0,
 "Visible": true,
 "Anims": [
-{
-"MapLoc": {
-"X": 441,
-"Y": 78
-},
-"ObjectAnim": {
-"$type": "RogueEssence.Content.ObjAnimData, RogueEssence",
-"AnimIndex": "Flowers_Town_3",
-"FrameTime": 15,
-"StartFrame": -1,
-"EndFrame": -1,
-"AnimDir": 0,
-"Alpha": 255,
-"AnimFlip": 0
-}
-},
-{
-"MapLoc": {
-"X": 440,
-"Y": 143
-},
-"ObjectAnim": {
-"$type": "RogueEssence.Content.ObjAnimData, RogueEssence",
-"AnimIndex": "Flowers_Town_3",
-"FrameTime": 15,
-"StartFrame": -1,
-"EndFrame": -1,
-"AnimDir": 0,
-"Alpha": 255,
-"AnimFlip": 0
-}
-},
 {
 "MapLoc": {
 "X": 456,
@@ -67890,8 +67689,8 @@
 },
 {
 "MapLoc": {
-"X": 450,
-"Y": 45
+"X": 449,
+"Y": 48
 },
 "ObjectAnim": {
 "$type": "RogueEssence.Content.ObjAnimData, RogueEssence",
@@ -69393,8 +69192,8 @@
 "EntOrder": 0,
 "InteractOrder": 0,
 "serializationLoc": {
-"X": 449,
-"Y": 58
+"X": 450,
+"Y": 144
 },
 "serializationHeight": 0,
 "serializationDir": 1,
@@ -69474,8 +69273,8 @@
 },
 "CollisionDisabled": false,
 "Collider": {
-"X": 449,
-"Y": 58,
+"X": 406,
+"Y": 98,
 "Width": 16,
 "Height": 16
 }
@@ -70921,7 +70720,7 @@
 "EntEnabled": true,
 "EntOrder": 0,
 "InteractOrder": 0,
-"triggerType": 0,
+"triggerType": 1,
 "ObjectAnim": {
 "$type": "RogueEssence.Content.ObjAnimData, RogueEssence",
 "AnimIndex": "",
@@ -71004,7 +70803,7 @@
 ],
 "Spawners": [
 {
-"NPCName": "Teammate4",
+"NPCName": "Teammate2",
 "NPCChar": {
 "Nickname": "",
 "OriginalUUID": "",
@@ -71085,8 +70884,8 @@
 "triggerType": 0,
 "EntityCallbacks": [],
 "Collider": {
-"X": 444,
-"Y": 35,
+"X": 460,
+"Y": 32,
 "Width": 16,
 "Height": 16
 }
@@ -71173,8 +70972,8 @@
 "triggerType": 0,
 "EntityCallbacks": [],
 "Collider": {
-"X": 446,
-"Y": 147,
+"X": 450,
+"Y": 80,
 "Width": 16,
 "Height": 16
 }
