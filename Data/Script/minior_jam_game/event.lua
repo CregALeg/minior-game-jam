@@ -1,4 +1,4 @@
-require 'origin.event_single'
+require 'minior_jam_game.event_single'
 require 'origin.event_battle'
 require 'origin.event_misc'
 require 'origin.event_mapgen'

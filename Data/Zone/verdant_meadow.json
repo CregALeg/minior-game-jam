@@ -5396,10 +5396,10 @@
 "Spawns": [
 {
 "Spawn": {
-"ID": "ammo_corsola_twig",
+"ID": "ammo_cacnea_spike",
 "Cursed": false,
 "HiddenValue": "",
-"Amount": 0,
+"Amount": 2,
 "Price": 0
 },
 "Rate": 10,
@@ -5413,7 +5413,7 @@
 "ID": "ammo_gravelerock",
 "Cursed": false,
 "HiddenValue": "",
-"Amount": 0,
+"Amount": 3,
 "Price": 0
 },
 "Rate": 16,

@@ -121,6 +121,10 @@ SV.crash_site = {
   intro_cutscene_played = false
 }
 
+SV.wishing_woods = {
+  TutorialProgress = 0
+}
+
 --
 SV.test_grounds =
 {
