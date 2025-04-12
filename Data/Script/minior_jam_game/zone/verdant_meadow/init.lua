@@ -23,6 +23,9 @@ end
 --Engine callback function
 function verdant_meadow.EnterSegment(zone, rescuing, segmentID, mapID)
 
+
+end
+
 ---verdant_meadow.ExitSegment(zone, result, rescue, segmentID, mapID)
 --Engine callback function
 function verdant_meadow.ExitSegment(zone, result, rescue, segmentID, mapID)
@@ -47,9 +50,6 @@ function verdant_meadow.ExitSegment(zone, result, rescue, segmentID, mapID)
       COMMON.CompleteMission("GreenMiniorRescue")
     end
   end
-end
-
-
 end
 
 ---verdant_meadow.Rescued(zone, name, mail)
