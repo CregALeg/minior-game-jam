@@ -40,7 +40,7 @@ function magma_tunnel.ExitSegment(zone, result, rescue, segmentID, mapID)
     UI:WaitShowDialogue("Urk...[pause=20] This is harder than I thought...[pause=20] Let's head home for now...")
     COMMON.EndDungeonDay(result, 'mellow_town', -1, 0, 1)
   else
-    -- OMMON.UnlockWithFanfare('lunar_barrow', true) #Not implemented yet
+    COMMON.UnlockWithFanfare('lunar_barrow', true)
     COMMON.EndDungeonDay(result, 'mellow_town', -1, 0, 1)
   end
   local quest = SV.missions.Missions["OrangeMiniorRescue"]

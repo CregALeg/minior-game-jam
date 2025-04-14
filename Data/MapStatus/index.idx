@@ -1,0 +1,15 @@
+﻿{
+"Version": "0.8.9.0",
+"Object": {
+"$type": "System.Collections.Generic.Dictionary`2[[System.String, System.Private.CoreLib],[RogueEssence.Data.EntrySummary, RogueEssence]], System.Private.CoreLib",
+"blood_moon": {
+"Name": {
+"DefaultText": "Blood Moon",
+"LocalTexts": {}
+},
+"Released": false,
+"Comment": "",
+"SortOrder": 0
+}
+}
+}

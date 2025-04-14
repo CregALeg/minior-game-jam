@@ -125,6 +125,11 @@ SV.wishing_woods = {
   TutorialProgress = 0
 }
 
+SV.lunar_barrow = {
+  BossDefeated = false,
+  BossCutsceneHad = false
+}
+
 --
 SV.test_grounds =
 {
