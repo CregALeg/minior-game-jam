@@ -514,15 +514,26 @@ null
 "Grounds": [],
 "Maps": [
 [
-0
+0,
+1,
+2,
+3,
+4,
+5,
+6,
+7,
+8,
+9,
+10,
+11
 ]
 ],
 "Name": {
 "DefaultText": "Primal Canyon",
 "LocalTexts": {}
 },
-"Released": false,
-"Comment": "",
+"Released": true,
+"Comment": "Ancient Pokemon themed dungeon. Fossils + Past Paradox.\r\nSwitches from water to lava half-way through",
 "SortOrder": 0
 },
 "lunar_barrow": {

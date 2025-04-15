@@ -48,10 +48,9 @@ function lunar_barrow.ExitSegment(zone, result, rescue, segmentID, mapID)
         COMMON.UnlockWithFanfare('primal_canyon', true)
         COMMON.EndDungeonDay(result, 'mellow_town', -1, 0, 1)
       end
-    elseif segmentID == 1 then -- Exiting from boss room
+    elseif segmentID == 1 then -- Exiting from boss room for the first time.
       SV.lunar_barrow.BossDefeated = true
-      COMMON.UnlockWithFanfare('primal_canyon', true)
-      COMMON.EndDungeonDay(result, 'mellow_town', -1, 0, 1)
+      GAME:EnterZone('lunar_barrow', -1, 0, 0)
     end
   end
   local quest = SV.missions.Missions["IndigoMiniorRescue"]

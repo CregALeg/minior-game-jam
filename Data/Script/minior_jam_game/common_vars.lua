@@ -11,8 +11,8 @@ function COMMON.UpdateDayEndVars()
        { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_RESCUE,
          DestZone = "windswept_trail", DestSegment = 1, DestFloor = 2,
          FloorUnknown = true,
-         TargetSpecies = RogueEssence.Dungeon.MonsterID("minior", 8, "normal", Gender.Genderless),
-         ClientSpecies = RogueEssence.Dungeon.MonsterID("minior", 8, "normal", Gender.Genderless) }
+         TargetSpecies = RogueEssence.Dungeon.MonsterID("minior", 7, "normal", Gender.Genderless),
+         ClientSpecies = RogueEssence.Dungeon.MonsterID("minior", 7, "normal", Gender.Genderless) }
        )
      end
    end
@@ -23,8 +23,8 @@ function COMMON.UpdateDayEndVars()
         { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_RESCUE,
           DestZone = "verdant_meadow", DestSegment = 0, DestFloor = 5,
           FloorUnknown = true,
-          TargetSpecies = RogueEssence.Dungeon.MonsterID("minior", 11, "normal", Gender.Genderless),
-          ClientSpecies = RogueEssence.Dungeon.MonsterID("minior", 11, "normal", Gender.Genderless) }
+          TargetSpecies = RogueEssence.Dungeon.MonsterID("minior", 10, "normal", Gender.Genderless),
+          ClientSpecies = RogueEssence.Dungeon.MonsterID("minior", 10, "normal", Gender.Genderless) }
         )
       end
     end
@@ -35,8 +35,8 @@ function COMMON.UpdateDayEndVars()
          { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_RESCUE,
            DestZone = "frigid_lake", DestSegment = 0, DestFloor = 5,
            FloorUnknown = true,
-           TargetSpecies = RogueEssence.Dungeon.MonsterID("minior", 12, "normal", Gender.Genderless),
-           ClientSpecies = RogueEssence.Dungeon.MonsterID("minior", 12, "normal", Gender.Genderless) }
+           TargetSpecies = RogueEssence.Dungeon.MonsterID("minior", 11, "normal", Gender.Genderless),
+           ClientSpecies = RogueEssence.Dungeon.MonsterID("minior", 11, "normal", Gender.Genderless) }
          )
        end
      end
@@ -52,6 +52,42 @@ function COMMON.UpdateDayEndVars()
           )
         end
       end
+
+      if _DATA.Save:GetDungeonUnlock("lunar_barrow") ~= RogueEssence.Data.GameProgress.UnlockState.None then
+         if SV.missions.Missions["IndigoMiniorRescue"] == nil and SV.missions.FinishedMissions["IndigoMiniorRescue"] == nil then
+           COMMON.CreateMission("IndigoMiniorRescue",
+           { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_RESCUE,
+             DestZone = "lunar_barrow", DestSegment = 0, DestFloor = 10,
+             FloorUnknown = true,
+             TargetSpecies = RogueEssence.Dungeon.MonsterID("minior", 12, "normal", Gender.Genderless),
+             ClientSpecies = RogueEssence.Dungeon.MonsterID("minior", 12, "normal", Gender.Genderless) }
+           )
+         end
+       end
+
+       if _DATA.Save:GetDungeonUnlock("primal_canyon") ~= RogueEssence.Data.GameProgress.UnlockState.None then
+          if SV.missions.Missions["YellowMiniorRescue"] == nil and SV.missions.FinishedMissions["YellowMiniorRescue"] == nil then
+            COMMON.CreateMission("YellowMiniorRescue",
+            { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_RESCUE,
+              DestZone = "primal_canyon", DestSegment = 0, DestFloor = 12,
+              FloorUnknown = true,
+              TargetSpecies = RogueEssence.Dungeon.MonsterID("minior", 9, "normal", Gender.Genderless),
+              ClientSpecies = RogueEssence.Dungeon.MonsterID("minior", 9, "normal", Gender.Genderless) }
+            )
+          end
+        end
+
+        if _DATA.Save:GetDungeonUnlock("stardust_peak") ~= RogueEssence.Data.GameProgress.UnlockState.None then
+           if SV.missions.Missions["VioletMiniorRescue"] == nil and SV.missions.FinishedMissions["VioletMiniorRescue"] == nil then
+             COMMON.CreateMission("VioletMiniorRescue",
+             { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_RESCUE,
+               DestZone = "stardust_peak", DestSegment = 0, DestFloor = 10,
+               FloorUnknown = true,
+               TargetSpecies = RogueEssence.Dungeon.MonsterID("minior", 13, "normal", Gender.Genderless),
+               ClientSpecies = RogueEssence.Dungeon.MonsterID("minior", 13, "normal", Gender.Genderless) }
+             )
+           end
+         end
 
   -- if SV.Experimental then
   --   if _DATA.Save:GetDungeonUnlock("faultline_ridge") ~= RogueEssence.Data.GameProgress.UnlockState.None then
