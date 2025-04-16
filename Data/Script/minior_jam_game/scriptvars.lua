@@ -112,9 +112,12 @@ SV.mellow_town = {
   TutorOpen = false,
   TutorMoves = {},
   CutsceneIntro = false,
-  CutsceneGlamourArrival = false,
-  CutsceneGlamourReturn = false,
-  CutscenePyroArrive = false
+  CanDoCutsceneGlamour1 = false,
+  CutsceneGlamour1Done = false,
+  CanDoCutsceneGlamour2 = false,
+  CutsceneGlamour2Done = false,
+  CanDoCutscenePyro1 = false,
+  CutscenePyro2Done = false
 }
 
 SV.crash_site = {

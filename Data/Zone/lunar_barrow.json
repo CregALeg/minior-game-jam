@@ -10,7 +10,7 @@
 "Comment": "Fifth dungeon. Dark-type themed with low visibility and grass.\r\nHas a boss fight against Ursaluna and 2x Lunatones at the end.\r\nAlso, secret side path Blood Moon Barrow. Boss is replaced with Blood Moon Ursaluna.",
 "NoEXP": false,
 "ExpPercent": 100,
-"Level": -1,
+"Level": 30,
 "LevelCap": false,
 "KeepSkills": false,
 "TeamRestrict": false,

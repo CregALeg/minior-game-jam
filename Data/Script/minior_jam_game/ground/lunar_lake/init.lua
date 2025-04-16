@@ -54,7 +54,7 @@ function lunar_lake.Enter(map)
       UI:SetSpeakerEmotion("surprised")
       UI:WaitShowDialogue("Wha...!")
       UI:SetSpeakerEmotion("stunned")
-      UI:WaitShowDialogue("We're just...[pause=30] Passing through on the way to [color=#F8A0F8]Stardust Peak[color].")
+      UI:WaitShowDialogue("We're just...[pause=30] Passing through on the way to [color=#F8C060]Stardust Peak[color].")
 
       UI:SetSpeaker(player)
       UI:SetSpeakerEmotion("stunned")

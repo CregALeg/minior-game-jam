@@ -20,7 +20,7 @@ local mellow_town = {}
 function mellow_town.Init(map)
   COMMON.RespawnAllies()
   local partner = CH('Teammate1')
-  AI:SetCharacterAI(partner, "origin.ai.ground_partner", CH('PLAYER'), partner.Position)
+  -- AI:SetCharacterAI(partner, "origin.ai.ground_partner", CH('PLAYER'), partner.Position)
   partner.CollisionDisabled = true
 
   -- Enable Miniors
@@ -51,7 +51,8 @@ end
 --Engine callback function
 function mellow_town.Enter(map)
   local player = CH("PLAYER")
-  mellow_town.Cutscene_Intro()
+  GROUND:TeleportTo(CH('Teammate1'), player.Bounds.Center.X, player.Bounds.Center.Y, Direction.Up)
+  mellow_town.CutsceneHandler()
   GAME:FadeIn(20)
 
 end
@@ -82,8 +83,26 @@ end
 function mellow_town.GameLoad(map)
   local player = CH("PLAYER")
   GROUND:TeleportTo(CH("Teammate1"), player.Bounds.Center.X, player.Bounds.Center.Y, Direction.Up)
+  mellow_town.CutsceneHandler()
   GAME:FadeIn(20)
 
+end
+
+function mellow_town.CutsceneHandler()
+  if SV.mellow_town.CutsceneIntro == false then --First entry
+    mellow_town.CutsceneIntro()
+  end
+  if SV.mellow_town.CanDoCutsceneGlamour1 == true then --Enabled after Windswept Trail
+    mellow_town.CutsceneGlamour1()
+  end
+  if SV.mellow_town.CanDoCutsceneGlamour2 == true then --Enabled after Magma Tunnel/Lunar Barrow? Undecided
+    mellow_town.CutsceneGlamour2()
+  end
+  if SV.mellow_town.CanDoCutscenePyro1 == true then --Enabled after Primal Canyon
+    mellow_town.CutscenePyro1()
+  end
+  local partner = CH('Teammate1')
+  AI:SetCharacterAI(partner, "origin.ai.ground_partner", CH('PLAYER'), partner.Position)
 end
 
 -------------------------------
@@ -793,12 +812,16 @@ function mellow_town.Cutscene_Test_Action(obj, activator)
   if result == 1 then
     SV.mellow_town.CutsceneIntro = false
     GAME:FadeOut(false, 20)
-    mellow_town.Cutscene_Intro()
+    mellow_town.CutsceneIntro()
+  elseif result == 2 then
+    SV.mellow_town.CutsceneGlamour1Done = false
+    GAME:FadeOut(false, 20)
+    mellow_town.CutsceneGlamour1()
   end
 end
 
 -- Cutscenes --
-function mellow_town.Cutscene_Intro()
+function mellow_town.CutsceneIntro()
   if SV.mellow_town.CutsceneIntro == false then
     local player = CH("PLAYER")
     local partner = CH("Teammate1")
@@ -941,7 +964,7 @@ function mellow_town.Cutscene_Intro()
     GAME:WaitFrames(30)
 
     UI:SetSpeakerEmotion("normal")
-    UI:WaitShowDialogue("[speed=0.7]Then maybe... [pause=30][color=#F8A0F8]Stardust Peak[color] is the best way to get your friend home.")
+    UI:WaitShowDialogue("[speed=0.7]Then maybe... [pause=30][color=#F8C060]Stardust Peak[color] is the best way to get your friend home.")
     UI:WaitShowDialogue("[speed=0.7]Legends say the mountain is the bridge between our lands and the stars above...")
     UI:WaitShowDialogue("[speed=0.7]And that it's the home of a terrible Pokémon who rules the skies!")
 
@@ -997,7 +1020,7 @@ function mellow_town.Cutscene_Intro()
     GAME:WaitFrames(30)
     UI:SetSpeakerEmotion("normal")
     UI:WaitShowDialogue("[speed=0.7]Ahem...[pause=20]I think you should probably start your journey at [color=#F8A0F8]Windswept Trail[color].")
-    UI:WaitShowDialogue("[speed=0.7]It's a Mystery Dungeon that runs down by the coast, and will get you a step closer to [color=#F8A0F8]Stardust Peak[color].")
+    UI:WaitShowDialogue("[speed=0.7]It's a Mystery Dungeon that runs down by the coast, and will get you a step closer to [color=#F8C060]Stardust Peak[color].")
     UI:WaitShowDialogue("[speed=0.7]I also have a hunch...[br]If your friend here was found near a Mystery Dungeon, then chances are their other friends will have been drawn to them as well.")
     UI:WaitShowDialogue("[speed=0.7]You may have to look out for hidden areas to find them.")
     UI:WaitShowDialogue("[speed=0.7]Once you clear a dungeon for the first time, it'll be a lot easier to get back there to continue your journey.")
@@ -1024,9 +1047,105 @@ function mellow_town.Cutscene_Intro()
     UI:WaitShowDialogue("Okay!")
     UI:SetSpeakerEmotion("determined")
     GROUND:EntTurn(partner, Direction.UpLeft)
-    UI:WaitShowDialogue("Okay, " ..player:GetDisplayName().. "! Let's go find your friends and get to [color=#F8A0F8]Stardust Peak[color].")
+    UI:WaitShowDialogue("Okay, " ..player:GetDisplayName().. "! Let's go find your friends and get to [color=#F8C060]Stardust Peak[color].")
     --End
     COMMON.UnlockWithFanfare("windswept_trail", false)
+    SV.mellow_town.CutsceneIntro = true
+    GAME:CutsceneMode(false)
+    AI:EnableCharacterAI(partner)
+  end
+end
+
+function mellow_town.CutsceneGlamour1()
+  if SV.mellow_town.CutsceneGlamour1Done == false then
+    GAME:CutsceneMode(true)
+
+
+    -- Set up characters
+    local player = CH("PLAYER")
+    local partner = CH("Teammate1")
+    AI:DisableCharacterAI(partner)
+    local sneasler = CH("NPC_Sneasler")
+    local tsareena = CH("NPC_Tsareena")
+    local granbull = CH("NPC_Granbull")
+
+    GROUND:TeleportTo(player, 384, 216, Direction.Right)
+    GROUND:TeleportTo(partner, 432, 216, Direction.Left)
+
+    GROUND:TeleportTo(tsareena, 384, 72, Direction.Down)
+    GROUND:TeleportTo(sneasler, 408, 72, Direction.Down)
+    GROUND:TeleportTo(granbull, 432, 72, Direction.Down)
+    tsareena.CollisionDisabled = true
+    GROUND:Unhide("NPC_Tsareena")
+    sneasler.CollisionDisabled = true
+    GROUND:Unhide("NPC_Sneasler")
+    granbull.CollisionDisabled = true
+    GROUND:Unhide("NPC_Granbull")
+
+    GROUND:Hide("NPC_Gramps") -- In the way again
+
+    GAME:MoveCamera(24, 0, 1, true)
+
+    GAME:FadeIn(20)
+
+    UI:SetSpeaker(partner)
+    UI:WaitShowDialogue("Okay, " ..player:GetDisplayName().. ", ready to head out?")
+
+    UI:SetSpeaker(player)
+    UI:SetSpeakerEmotion("Happy")
+    UI:WaitShowDialogue("Yep![pause=20] Let's go!")
+
+    UI:ResetSpeaker()
+    UI:WaitShowDialogue((STRINGS:Format("\\uE040: My my, what a quaint little town~")))
+
+    SOUND:PlayBGM("Team Charm's Theme.ogg", true)
+
+    GAME:WaitFrames(20)
+
+    GROUND:EntTurn(player, Direction.Up)
+    GROUND:EntTurn(partner, Direction.Up)
+
+    local coro1= TASK:BranchCoroutine(function() mellow_town.Coro_Walk(tsareena, Direction.Down, 96, false, 1) end)
+    local coro2= TASK:BranchCoroutine(function() mellow_town.Coro_Walk(sneasler, Direction.Down, 96, false, 1) end)
+    local coro3= TASK:BranchCoroutine(function() mellow_town.Coro_Walk(granbull, Direction.Down, 96, false, 1) end)
+    TASK:JoinCoroutines({coro1, coro2, coro3})
+
+
+    UI:SetSpeaker(sneasler)
+    UI:SetSpeakerEmotion("Happy")
+    UI:WaitShowDialogue("It's rather cute, don't you think, " ..tsareena:GetDisplayName().. "?")
+
+    UI:SetSpeaker(tsareena)
+    UI:SetSpeakerEmotion("Special0")
+    UI:WaitShowDialogue("I suppose...[pause=30] It doesn't look nearly up to my standards though...")
+    UI:SetSpeakerEmotion("Normal")
+    UI:WaitShowDialogue("What do you think, " ..granbull:GetDisplayName().. "?")
+
+    UI:SetSpeaker(granbull)
+    UI:WaitShowDialogue("It's fine.")
+
+    UI:SetSpeaker(sneasler)
+    UI:SetSpeakerEmotion("Special0")
+    UI:WaitShowDialogue("Now now, ladies, I'm sure this town is perfectly adequate for [color=#F8A0F8]Team Glamour[color]'s needs.")
+
+    GAME:WaitFrames(20)
+
+    UI:SetSpeaker(player)
+    UI:SetSpeakerEmotion("Worried")
+    UI:WaitShowDialogue("[color=#F8A0F8]Team Glamour[color]?")
+
+    UI:SetSpeaker(partner)
+    UI:SetSpeakerEmotion("Inspired")
+    UI:WaitShowDialogue("[color=#F8A0F8]Team Glamour[color]!")
+    UI:WaitShowDialogue("You're [color=#F8A0F8]Team Glamour[color]?!")
+
+    UI:SetSpeaker(sneasler)
+    UI:SetSpeakerEmotion("Happy")
+    UI:WaitShowDialogue("Oh?[pause=30]")
+
+    -- Cutscene begin
+    GAME:FadeIn(20)
+
     SV.mellow_town.CutsceneIntro = true
     GAME:CutsceneMode(false)
     AI:EnableCharacterAI(partner)

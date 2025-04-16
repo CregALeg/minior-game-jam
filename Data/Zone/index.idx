@@ -424,7 +424,7 @@ null
 "frigid_lake": {
 "$type": "RogueEssence.Data.ZoneEntrySummary, RogueEssence",
 "ExpPercent": 100,
-"Level": -1,
+"Level": 22,
 "LevelCap": false,
 "KeepSkills": false,
 "TeamRestrict": false,
@@ -460,7 +460,7 @@ null
 "magma_tunnel": {
 "$type": "RogueEssence.Data.ZoneEntrySummary, RogueEssence",
 "ExpPercent": 100,
-"Level": -1,
+"Level": 26,
 "LevelCap": false,
 "KeepSkills": false,
 "TeamRestrict": false,
@@ -499,7 +499,7 @@ null
 "primal_canyon": {
 "$type": "RogueEssence.Data.ZoneEntrySummary, RogueEssence",
 "ExpPercent": 100,
-"Level": -1,
+"Level": 34,
 "LevelCap": false,
 "KeepSkills": false,
 "TeamRestrict": false,
@@ -539,7 +539,7 @@ null
 "lunar_barrow": {
 "$type": "RogueEssence.Data.ZoneEntrySummary, RogueEssence",
 "ExpPercent": 100,
-"Level": -1,
+"Level": 30,
 "LevelCap": false,
 "KeepSkills": false,
 "TeamRestrict": false,
