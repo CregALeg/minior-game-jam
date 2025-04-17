@@ -42,9 +42,11 @@ function windswept_trail.ExitSegment(zone, result, rescue, segmentID, mapID)
   else
     if segmentID == 0 then
       COMMON.UnlockWithFanfare('verdant_meadow', true)
+      SV.mellow_town.CanDoCutsceneGlamour1 = true
       COMMON.EndDungeonDay(result, 'mellow_town', -1, 0, 1)
     elseif segmentID == 1 then
       COMMON.UnlockWithFanfare('frigid_lake', true)
+      SV.mellow_town.CanDoCutsceneGlamour1 = true
       COMMON.EndDungeonDay(result, 'mellow_town', -1, 0, 1)
     else
       PrintInfo("No exit procedure found!")

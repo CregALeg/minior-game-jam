@@ -43,7 +43,7 @@ COMMON.GUMMIES ={
   { Index = "gummi_green", Amount = 0, Price = 800},
   { Index = "gummi_magenta", Amount = 0, Price = 800},
   { Index = "gummi_orange", Amount = 0, Price = 800},
-  { Index = "gummi_punk", Amount = 0, Price = 800},
+  { Index = "gummi_pink", Amount = 0, Price = 800},
   { Index = "gummi_purple", Amount = 0, Price = 800},
   { Index = "gummi_red", Amount = 0, Price = 800},
   { Index = "gummi_royal", Amount = 0, Price = 800},

@@ -1082,6 +1082,12 @@ function mellow_town.CutsceneGlamour1()
     granbull.CollisionDisabled = true
     GROUND:Unhide("NPC_Granbull")
 
+    GROUND:TeleportTo(CH("NPC_Fearow"), 408, 360, Direction.Up)
+    GROUND:TeleportTo(CH("NPC_Spearow"), 432, 360, Direction.Up)
+    GROUND:TeleportTo(CH("NPC_Monferno"), 240, 200, Direction.Up)
+    GROUND:TeleportTo(CH("NPC_Lilligant"), 240, 224, Direction.Up)
+    GROUND:TeleportTo(CH("NPC_Cyclizar"), 596, 208, Direction.Up)
+
     GROUND:Hide("NPC_Gramps") -- In the way again
 
     GAME:MoveCamera(24, 0, 1, true)
@@ -1141,12 +1147,190 @@ function mellow_town.CutsceneGlamour1()
 
     UI:SetSpeaker(sneasler)
     UI:SetSpeakerEmotion("Happy")
-    UI:WaitShowDialogue("Oh?[pause=30]")
+    UI:WaitShowDialogue("Oh?[pause=30] Are you a fan, perhaps?")
 
-    -- Cutscene begin
-    GAME:FadeIn(20)
+    UI:SetSpeaker(partner)
+    UI:SetSpeakerEmotion("Inspired")
+    UI:WaitShowDialogue("Am I?[pause=20] I'm your biggest fan![pause=0] You've been my idols since I was young!")
 
-    SV.mellow_town.CutsceneIntro = true
+    local drilbur = CH("NPC_Drilbur")
+    GROUND:MoveInDirection(drilbur, Direction.Up, 12  , true, 2)
+    GROUND:CharTurnToChar(drilbur, sneasler)
+    UI:SetSpeaker(drilbur)
+    GROUND:CharSetEmote(drilbur, "glowing", 1)
+    UI:WaitShowDialogue("Wow![pause=20] [color=#F8A0F8]Team Glamour[color]! Here in Mellow Town!")
+
+    local coro1 = TASK:BranchCoroutine(function() mellow_town.Coro_Walk(CH("NPC_Fearow"), Direction.Up, 60, false, 2) end)
+    local coro2 = TASK:BranchCoroutine(function() mellow_town.Coro_Walk(CH("NPC_Spearow"), Direction.Up, 60, false, 2) end)
+    local coro3 = TASK:BranchCoroutine(function() GROUND:MoveToPosition(CH("NPC_Monferno"), 368, 192, false, 2) end)
+    local coro4 = TASK:BranchCoroutine(function() GROUND:MoveToPosition(CH("NPC_Cyclizar"), 456, 192, false, 2) end)
+    local coro5 = TASK:BranchCoroutine(function() GROUND:MoveToPosition(CH("NPC_Lilligant"), 348, 208, false, 2) end)
+
+    TASK:JoinCoroutines({coro1, coro2, coro3, coro4, coro5})
+
+    GROUND:CharTurnToChar(CH("NPC_Monferno"), tsareena)
+    GROUND:CharTurnToChar(CH("NPC_Lilligant"), tsareena)
+    GROUND:CharTurnToChar(CH("NPC_Cyclizar"), granbull)
+
+    GROUND:EntTurn(CH("MART_Kecleon_Left"), Direction.DownLeft) --turn a specific direction
+    GROUND:EntTurn(CH("MART_Kecleon_Right"), Direction.DownLeft) --turn a specific direction
+    GROUND:EntTurn(CH("STORAGE_Kangaskhan"), Direction.Right) --turn a specific direction
+    GROUND:EntTurn(CH("MOVES_Mienshao"), Direction.UpRight) --turn a specific direction
+    GROUND:EntTurn(CH("BOX_Tinkaton"), Direction.UpLeft) --turn a specific direction
+
+    UI:SetSpeaker(CH("NPC_Morgrem"))
+    UI:WaitShowDialogue("Neat.")
+
+    UI:SetSpeaker(CH("NPC_Spearow"))
+    GROUND:CharSetEmote(CH("NPC_Spearow"), "glowing", 3)
+    UI:SetSpeakerEmotion("Joyous")
+    UI:WaitShowDialogue("Woah!")
+
+    UI:SetSpeaker(CH("NPC_Monferno"))
+    GROUND:CharSetEmote(CH("NPC_Monferno"), "glowing", 3)
+    UI:SetSpeakerEmotion("Special1")
+    UI:WaitShowDialogue("It is an honour to welcome you to Mellow Town!")
+
+    UI:SetSpeaker(CH("NPC_Lilligant"))
+    UI:SetSpeakerEmotion("Joyous")
+    UI:WaitShowDialogue("What a pleasant surprise!")
+
+    UI:SetSpeaker(CH("NPC_Cyclizar"))
+    UI:SetSpeakerEmotion("Surprised")
+    UI:WaitShowDialogue("What?[pause=20] What's [color=#F8A0F8]Team Glamour[color] doing here?")
+
+    GROUND:CharSetEmote(player, "question", 1)
+    SOUND:PlaySE("Battle/EVT_Emote_Confused")
+    GAME:WaitFrames(30)
+
+    UI:SetSpeaker(player)
+    UI:SetSpeakerEmotion("Worried")
+    UI:WaitShowDialogue("Who's [color=#F8A0F8]Team Glamour[color]?")
+
+    UI:SetSpeaker(tsareena)
+    UI:SetSpeakerEmotion("Surprised")
+    UI:WaitShowDialogue("What?[pause=0] You don't know who we are?")
+
+    GROUND:CharTurnToChar(partner, player)
+    GROUND:CharTurnToChar(player, partner)
+    UI:SetSpeaker(partner)
+    UI:SetSpeakerEmotion("Joyous")
+    UI:WaitShowDialogue("They're one of top rank Adventuring Teams! One of the best in the whole world!")
+
+    GROUND:CharTurnToChar(partner, sneasler)
+    GROUND:CharTurnToChar(player, sneasler)
+
+    UI:SetSpeaker(sneasler)
+    UI:SetSpeakerEmotion("Special0")
+    UI:WaitShowDialogue("Number two in the world, actually~")
+    UI:WaitShowDialogue("And, as it happens...[pause=0] We're here to find a secret treasure and finally make it to number one!")
+
+    UI:SetSpeaker(tsareena)
+    UI:SetSpeakerEmotion("Special0")
+    UI:WaitShowDialogue("Our rightful place, of course.")
+
+    UI:SetSpeaker(sneasler)
+    UI:SetSpeakerEmotion("Special0")
+    UI:WaitShowDialogue("Our goal is [color=#F8C060]Stardust Peak[color].")
+    UI:SetSpeakerEmotion("Normal")
+    UI:WaitShowDialogue("We got a tip that there's a hidden treasure there!")
+    UI:SetSpeakerEmotion("Inspired")
+    UI:WaitShowDialogue("And when we find it, we'll be the number one adventuring team!")
+
+    UI:SetSpeaker(partner)
+    UI:SetSpeakerEmotion("Joyous")
+    GROUND:CharSetEmote(partner, "glowing", 1)
+    UI:WaitShowDialogue("No way![pause=20] We're aiming for [color=#F8C060]Stardust Peak[color] too!")
+    UI:SetSpeakerEmotion("Normal")
+    UI:WaitShowDialogue("We're trying to get to the top so " ..player:GetDisplayName().. " can go home.")
+
+    UI:SetSpeaker(tsareena)
+    UI:SetSpeakerEmotion("Inspired")
+    UI:WaitShowDialogue("Oh, how cute!")
+
+    UI:SetSpeaker(sneasler)
+    UI:SetSpeakerEmotion("Joyous")
+    UI:WaitShowDialogue("Well, good luck with that![pause=20] I'm sure you'll get there someday!")
+    UI:SetSpeakerEmotion("Normal")
+    UI:WaitShowDialogue("But, maybe better to start off with something a little more appropriate for your age, no?")
+
+    GROUND:CharSetEmote(partner, "sweatdrop", 1)
+    SOUND:PlaySE("Battle/EVT_Emote_Sweatdrop")
+    GAME:WaitFrames(30)
+
+    GROUND:CharTurnToChar(partner, player)
+    UI:SetSpeaker(partner)
+    UI:SetSpeakerEmotion("Pain")
+    UI:WaitShowDialogue("We're plenty tough enough...")
+
+    UI:SetSpeaker(sneasler)
+    UI:WaitShowDialogue("I must thank you all for your hospitality.")
+    GROUND:CharTurnToChar(sneasler, tsareena)
+    UI:WaitShowDialogue("Come on, we need to get some supplies before we leave.")
+
+    GROUND:MoveToPosition(granbull, 408, 192, false, 2)
+    GROUND:EntTurn(granbull, Direction.Right)
+    -- Move everyone back
+    SOUND:PlayBGM("Base Town.ogg", true)
+    GROUND:MoveInDirection(drilbur, Direction.Down, 12  , true, 2)
+    GROUND:EntTurn(drilbur, Direction.UpLeft)
+    --
+    local coro1 = TASK:BranchCoroutine(function() GROUND:MoveToPosition(sneasler, 496, 176, false, 2) end)
+    local coro2 = TASK:BranchCoroutine(function() GROUND:MoveToPosition(tsareena, 472, 176, false, 2) end)
+    TASK:JoinCoroutines({coro1, coro2})
+
+    GROUND:EntTurn(sneasler, Direction.Up)
+    GROUND:EntTurn(tsareena, Direction.UpRight)
+
+    local coro1 = TASK:BranchCoroutine(function() GROUND:MoveToPosition(CH("NPC_Fearow"), 408, 360, false, 2) end)
+    local coro2 = TASK:BranchCoroutine(function() GROUND:MoveToPosition(CH("NPC_Spearow"), 408, 360, false, 2) end)
+    local coro3 = TASK:BranchCoroutine(function() GROUND:MoveToPosition(CH("NPC_Cyclizar"), 408, 360, false, 2) end)
+    local coro4 = TASK:BranchCoroutine(function() GROUND:MoveToPosition(CH("NPC_Monferno"), 408, 360, false, 2) end)
+    local coro5 = TASK:BranchCoroutine(function() GROUND:MoveToPosition(CH("NPC_Lilligant"), 336, 72, false, 2) end)
+    TASK:JoinCoroutines({coro1, coro2, coro3, coro4, coro5})
+
+    GROUND:TeleportTo(CH("NPC_Fearow"), 367, 399, Direction.UpRight)
+    GROUND:TeleportTo(CH("NPC_Spearow"), 385, 417, Direction.UpRight)
+    GROUND:TeleportTo(CH("NPC_Cyclizar"), 567, 356, Direction.DownLeft)
+    GROUND:TeleportTo(CH("NPC_Monferno"), 169, 346, Direction.DownRight)
+    GROUND:TeleportTo(CH("NPC_Lilligant"), 79, 218, Direction.DownRight)
+
+    GAME:WaitFrames(20)
+
+    GROUND:CharTurnToChar(granbull, partner)
+    GROUND:CharTurnToChar(partner, granbull)
+
+    UI:SetSpeaker(granbull)
+    UI:WaitShowDialogue("Don't be put off by " ..sneasler:GetDisplayName()..".")
+    UI:WaitShowDialogue("She means well, but simply chooses the wrong words sometimes.")
+    UI:WaitShowDialogue("I believe in your ability to get your friend home.")
+    UI:WaitShowDialogue("Good luck.")
+    GROUND:MoveToPosition(granbull, 552, 192, false, 2)
+    GROUND:MoveToPosition(granbull, 552, 176, false, 2)
+    GROUND:EntTurn(granbull, Direction.UpLeft)
+
+    GROUND:EntTurn(CH("STORAGE_Kangaskhan"), Direction.Down)
+    GROUND:EntTurn(CH("MOVES_Mienshao"), Direction.Down)
+    GROUND:EntTurn(CH("BOX_Tinkaton"), Direction.Down)
+
+    GROUND:CharTurnToChar(partner, player)
+    GROUND:CharTurnToChar(player, partner)
+
+    UI:SetSpeaker(partner)
+    UI:SetSpeakerEmotion("Joyous")
+    GROUND:CharSetEmote(partner, "glowing", 1)
+    UI:WaitShowDialogue("I can't believe we just met [color=#F8A0F8]Team Glamour[color]!")
+    UI:WaitShowDialogue("Can you believe it?!")
+    GROUND:CharTurnToChar(partner, granbull)
+    UI:WaitShowDialogue("And " ..granbull:GetDisplayName().. "...[pause=0] She was so nice!")
+    GROUND:CharTurnToChar(partner, player)
+    UI:SetSpeakerEmotion("Sigh")
+    UI:WaitShowDialogue("Even if what " ..sneasler:GetDisplayName().. " said was a little upsetting...")
+    UI:SetSpeakerEmotion("Normal")
+    UI:WaitShowDialogue("Still, I shouldn't let it get to me.[pause=0] [color=#F8C060]Stardust Peak[color], here we come!")
+    UI:WaitShowDialogue("Let's go, " ..player:GetDisplayName().."!")
+
+    SV.mellow_town.CutsceneGlamour1Done = true
     GAME:CutsceneMode(false)
     AI:EnableCharacterAI(partner)
   end
