@@ -81,7 +81,7 @@ function COMMON.UpdateDayEndVars()
            if SV.missions.Missions["VioletMiniorRescue"] == nil and SV.missions.FinishedMissions["VioletMiniorRescue"] == nil then
              COMMON.CreateMission("VioletMiniorRescue",
              { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_RESCUE,
-               DestZone = "stardust_peak", DestSegment = 0, DestFloor = 10,
+               DestZone = "stardust_peak", DestSegment = 0, DestFloor = 12,
                FloorUnknown = true,
                TargetSpecies = RogueEssence.Dungeon.MonsterID("minior", 13, "normal", Gender.Genderless),
                ClientSpecies = RogueEssence.Dungeon.MonsterID("minior", 13, "normal", Gender.Genderless) }

@@ -108,6 +108,131 @@ end
 -------------------------------
 -- Entities Callbacks
 -------------------------------
+function mellow_town.NPC_Drilbur_Action(chara, activator)
+  GROUND:CharTurnToChar(chara,CH('PLAYER'))
+  UI:SetSpeaker(chara)
+  if SV.mellow_town.CutsceneGlamour1Done then
+    UI:WaitShowDialogue("That [color=#F8A0F8]Team Glamour[color] sure is something, huh?")
+  else
+    UI:WaitShowDialogue("I heard meteor or something crashed near [color=#F8C060]Wishing Woods[color].")
+  end
+end
+
+function mellow_town.NPC_Lilligant_Action(chara, activator)
+  GROUND:CharTurnToChar(chara,CH('PLAYER'))
+  UI:SetSpeaker(chara)
+  UI:WaitShowDialogue("All the flowers you see around town are my handiwork.")
+  UI:WaitShowDialogue("[emote=happy]I sure hope you like them.")
+  UI:WaitShowDialogue("[emote=determined]Do not step on them.")
+end
+
+function mellow_town.NPC_Monferno_Action(chara, activator)
+  GROUND:CharTurnToChar(chara,CH('PLAYER'))
+  UI:SetSpeaker(chara)
+  UI:WaitShowDialogue("I have trained under Master [color=#00F8F8]Mienshao[color] for many years.")
+  UI:WaitShowDialogue("There is no Pokémon with a greater grasp of moves than her.")
+end
+
+function mellow_town.NPC_Cyclizar_Action(chara, activator)
+  GROUND:CharTurnToChar(chara,CH('PLAYER'))
+  UI:SetSpeaker(chara)
+  UI:WaitShowDialogue("Have you tried [color=#00F8F8]Polteagiest[color]'s tea yet?")
+  UI:WaitShowDialogue("It's the fuel that runs my engine!")
+end
+
+function mellow_town.NPC_Morgrem_Action(chara, activator)
+  GROUND:CharTurnToChar(chara,CH('PLAYER'))
+  UI:SetSpeaker(chara)
+  UI:WaitShowDialogue("\'Sup.")
+end
+
+function mellow_town.NPC_Fearow_Action(chara, activator)
+  GROUND:CharTurnToChar(chara,CH('PLAYER'))
+  UI:SetSpeaker(chara)
+  UI:WaitShowDialogue("I was an adventurer when I was younger.")
+  UI:WaitShowDialogue("I saw the world, battled fearsome foes...")
+  UI:WaitShowDialogue("But in the end, I realised all I really wanted was a quiet life.")
+end
+
+function mellow_town.NPC_Spearow_Action(chara, activator)
+  GROUND:CharTurnToChar(chara,CH('PLAYER'))
+  UI:SetSpeaker(chara)
+  UI:WaitShowDialogue("I wanna be an adventurer when I grow up!")
+end
+
+function mellow_town.NPC_Gramps_Action(chara, activator)
+  local player = CH("PLAYER")
+  local state = 0
+  GROUND:CharTurnToChar(chara,CH('PLAYER'))
+  UI:SetSpeaker(chara)
+  -- Get unlocked dungeons
+  local dungeon_choices = { "Windswept Trail" }
+  if _DATA.Save:GetDungeonUnlock("frigid_lake") ~= RogueEssence.Data.GameProgress.UnlockState.None  then
+    table.insert(dungeon_choices, "Frigid Lake")
+  end
+  if _DATA.Save:GetDungeonUnlock("verdant_meadow") ~= RogueEssence.Data.GameProgress.UnlockState.None  then
+    table.insert(dungeon_choices, "Verdant Meadow")
+  end
+  if _DATA.Save:GetDungeonUnlock("magma_tunnel") ~= RogueEssence.Data.GameProgress.UnlockState.None  then
+    table.insert(dungeon_choices, "Magma Tunnel")
+  end
+  if _DATA.Save:GetDungeonUnlock("lunar_barrow") ~= RogueEssence.Data.GameProgress.UnlockState.None  then
+    table.insert(dungeon_choices, "Lunar Barrow")
+  end
+  if _DATA.Save:GetDungeonUnlock("primal_canyon") ~= RogueEssence.Data.GameProgress.UnlockState.None  then
+    table.insert(dungeon_choices, "Primal Canyon")
+  end
+  if _DATA.Save:GetDungeonUnlock("stardust_peak") ~= RogueEssence.Data.GameProgress.UnlockState.None  then
+    table.insert(dungeon_choices, "Stardust Peak")
+  end
+  if _DATA.Save:GetDungeonUnlock("mindscape_cavern") ~= RogueEssence.Data.GameProgress.UnlockState.None  then
+    table.insert(dungeon_choices, "Mindscape Cavern")
+  end
+  table.insert(dungeon_choices, "Cancel")
+  local choice_end = #dungeon_choices
+
+  UI:WaitShowDialogue("[speed=0.7]I can tell you about the different Mystery Dungeons you've found, if you like.")
+  while state > -1 do
+    UI:BeginChoiceMenu("[speed=0.7]What dungeon do you want to know about?", dungeon_choices, 1, choice_end)
+    UI:WaitForChoice()
+    local result = UI:ChoiceResult()
+    if result == 1 then --Windswept Trail
+      UI:WaitShowDialogue("[speed=0.7]As I said before, [color=#F8C060]Windswept Trail[color] is a Dungeon that runs down by the coast.")
+      UI:WaitShowDialogue(STRINGS:Format("[speed=0.7]It's home to many \\uE088Flying-type Pokémon.[pause=0] Sometimes, a strange wind will kick up that protects \\uE088Flying-type Pokémon, so your \\uE090Rock or \\uE084Electric-type moves will be less effective."))
+      UI:WaitShowDialogue("[speed=0.7]I've also heard of a secret side path drenched in rain, one that leads to another Mystery Dungeon.")
+    elseif result == choice_end then
+      state = -1
+    elseif result == 2 then --Frigid Lake
+      UI:WaitShowDialogue(STRINGS:Format("[speed=0.7][color=#F8C060]Frigid Lake[color], as the name suggests, is home to many \\uE091Ice and \\uE092Water-type Pokémon."))
+      UI:WaitShowDialogue(STRINGS:Format("[speed=0.7]You'll occasionally find it raining there, which will make \\uE092Water-type moves more powerful."))
+      UI:WaitShowDialogue(STRINGS:Format("[speed=0.7]Watch out for [color=#009800]Spheal[color], [color=#009800]Sealeo[color] and [color=#009800]Walrein[color] especially![pause=0] Their Brine and Ice Ball moves can be very dangerous!"))
+    elseif result == 3 then --Verdant Meadow
+      UI:WaitShowDialogue(STRINGS:Format("[speed=0.7]A beautiful meadow that is home to many \\uE08AGrass-type Pokémon."))
+      UI:WaitShowDialogue(STRINGS:Format("[speed=0.7]It has many wide open spaces, so take care not to get overwhelmed by too many enemies."))
+      UI:WaitShowDialogue(STRINGS:Format("[speed=0.7]You'll also find dark tall grass that will obscure anyone hiding inside, and limit your vision."))
+    elseif result == 4 then --Magma Tunnel
+      UI:WaitShowDialogue(STRINGS:Format("[speed=0.7][color=#F8C060]Magma Tunnel[color] was supposedly carved out ages ago by a gigantic [color=#009800]Orthworm[color]. Now, it is filled with lava and home to many \\uE087Fire-type Pokémon."))
+      UI:WaitShowDialogue(STRINGS:Format("[speed=0.7]Be careful of burns from them or the lava if you accidentally step on it!"))
+      UI:WaitShowDialogue(STRINGS:Format("[speed=0.7]As a flying type, "..player:GetDisplayName().. " will be able to fly over it, and any \\uE087Fire or \\uE083Dragon-type allies will be able to walk over it."))
+    elseif result == 5 then --Lunar Barrow
+      UI:WaitShowDialogue(STRINGS:Format("[speed=0.7]This dungeon is said to house a secret lake at its center where the shores change with the phases of the moon.[pause=0] It's also said this lake is protected by a ferocious guardian!"))
+      UI:WaitShowDialogue(STRINGS:Format("[speed=0.7]Otherwise, [color=#F8C060]Lunar Barrow[color] is home to \\uE082Dark and \\uE08DFairy-types."))
+      UI:WaitShowDialogue(STRINGS:Format("[speed=0.7]Some levels of the dungeon are drenched in darkness, making it very difficult to spot traps and enemies."))
+    elseif result == 6 then --Primal Canyon
+      UI:WaitShowDialogue(STRINGS:Format("[speed=0.7]An ancient place, [color=#F8C060]Primal Canyon[color] is home to many ancient \\uE090Rock-type Pokémon."))
+      UI:WaitShowDialogue(STRINGS:Format("[speed=0.7]It's a very deep dungeon, so make sure to take food with you!"))
+      UI:WaitShowDialogue(STRINGS:Format("[speed=0.7]Once you reach the halfway point, you'll be so deep underground that you find lava, as well as even more ancient Pokémon!"))
+    elseif result == 7 then --Stardust Peak
+      UI:WaitShowDialogue(STRINGS:Format("[speed=0.7]In my youth I never defeated [color=#F8C060]Stardust Peak[color]. It'll be the longest dungeon you've tackled yet. Make sure to bring food with you."))
+      UI:WaitShowDialogue(STRINGS:Format("[speed=0.7]Otherwise, the dungeon is supposed to be chock-full of \\uE083Dragon-type Pokémon."))
+      UI:WaitShowDialogue(STRINGS:Format("[speed=0.7]I've heard some of the levels are dark, others are peppered by hail,"))
+    elseif result == 8 then --Mindscape Cavern
+      UI:WaitShowDialogue(STRINGS:Format("[speed=0.7]This is where [color=#009800]Jirachi[color] is said to live..."))
+      UI:WaitShowDialogue(STRINGS:Format("[speed=0.7]I hadn't heard of this dungeon until recently, so I'm sorry but I don't know much about it."))
+    end
+  end
+  UI:WaitShowDialogue("[speed=0.7]Good luck.[pause=20] And be safe!")
+end
 
 function mellow_town.STORAGE_COUNTER_Action(obj, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
@@ -938,7 +1063,7 @@ function mellow_town.CutsceneIntro()
 
     UI:SetSpeaker(partner)
     UI:SetSpeakerEmotion("determined")
-    UI:WaitShowDialogue("They crashed near [color=#F8A0F8]Wishing Woods[color]!")
+    UI:WaitShowDialogue("They crashed near [color=#F8C060]Stardust Peak[color]!")
     UI:SetSpeakerEmotion("worried")
     UI:WaitShowDialogue("All their friends are missing, so I promised to get them home...")
 
@@ -958,7 +1083,7 @@ function mellow_town.CutsceneIntro()
     UI:SetSpeakerEmotion("worried")
     UI:WaitShowDialogue("[speed=0.5]........[pause=60]")
     GROUND:EntTurn(gramps, Direction.Down)
-    UI:WaitShowDialogue("You made it all the way through [color=#F8A0F8]Wishing Woods[color] and back?")
+    UI:WaitShowDialogue("You made it all the way through [color=#F8C060]Wishing Woods[color] and back?")
 
     GROUND:CharSetAnim(partner, "Nod", false)
     GAME:WaitFrames(30)
@@ -1010,7 +1135,10 @@ function mellow_town.CutsceneIntro()
       UI:SetSpeakerEmotion("determined")
       UI:WaitShowDialogue("[speed=0.7]Then I'm counting on you! If " ..partner:GetDisplayName().. " gets hurt, it's on you!")
     else
-        UI:WaitShowDialogue()
+      UI:SetSpeaker(gramps)
+      UI:SetSpeakerEmotion("determined")
+      UI:WaitShowDialogue("[speed=0.7]For your sake, I will assume that is a joke.")
+      UI:WaitShowDialogue("[speed=0.7]I'm counting on you! If " ..partner:GetDisplayName().. " gets hurt, it's on you!")
     end
     GROUND:EntTurn(gramps, Direction.Down)
     UI:SetSpeakerEmotion("normal")
@@ -1019,7 +1147,7 @@ function mellow_town.CutsceneIntro()
     UI:WaitShowDialogue("[speed=0.7]Oh...[pause=20] I suppose you had to grow up some day... sniffle...")
     GAME:WaitFrames(30)
     UI:SetSpeakerEmotion("normal")
-    UI:WaitShowDialogue("[speed=0.7]Ahem...[pause=20]I think you should probably start your journey at [color=#F8A0F8]Windswept Trail[color].")
+    UI:WaitShowDialogue("[speed=0.7]Ahem...[pause=20]I think you should probably start your journey at [color=#F8C060]Windswept Trail[color].")
     UI:WaitShowDialogue("[speed=0.7]It's a Mystery Dungeon that runs down by the coast, and will get you a step closer to [color=#F8C060]Stardust Peak[color].")
     UI:WaitShowDialogue("[speed=0.7]I also have a hunch...[br]If your friend here was found near a Mystery Dungeon, then chances are their other friends will have been drawn to them as well.")
     UI:WaitShowDialogue("[speed=0.7]You may have to look out for hidden areas to find them.")
