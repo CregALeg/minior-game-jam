@@ -2,7 +2,7 @@
     common.lua
     A collection of frequently used functions and values!
 ]]--
-require 'origin.common_gen'
+require 'minior_jam_game.common_gen'
 
 ----------------------------------------
 -- Lib Definitions
@@ -53,10 +53,10 @@ end
 ----------------------------------------
 COMMON = {}
 
-require 'origin.common_talk'
+require 'minior_jam_game.common_talk'
 require 'minior_jam_game.common_shop'
 require 'minior_jam_game.common_vars'
-require 'origin.common_tutor'
+require 'minior_jam_game.common_tutor'
 
 --Automatically load the appropriate localization for the specified package, or defaults to english!
 function COMMON.AutoLoadLocalizedStrings()
@@ -1321,21 +1321,21 @@ function COMMON.EndDayCycle()
 
   -- Standard Mart Gen
   -- 2 to 4 essentials
-  local type_count = math.random(2, 4)
+  local type_count = math.random(3, 4)
 	for ii = 1, type_count, 1 do
 		local base_data = COMMON.ESSENTIALS[math.random(1, #COMMON.ESSENTIALS)]
 		table.insert(SV.mart_shop, base_data)
 	end
 
-  --0 - 2 gummi
-  type_count = math.random(0, 2)
-	for ii = 1, type_count, 1 do
-		local base_data = COMMON.GUMMIES[math.random(1, #COMMON.GUMMIES)]
+  -- 1 to 2 apricorns, always
+  type_count = math.random(1,2)
+  for ii = 1, type_count, 1 do
+		local base_data = COMMON.APRICORNS[math.random(1, #COMMON.APRICORNS)]
 		table.insert(SV.mart_shop, base_data)
 	end
 
   --1-2 ammo, always
-  type_count = math.random(0, 2)
+  type_count = math.random(1, 2)
 	for ii = 1, type_count, 1 do
 		local base_data = COMMON.AMMO[math.random(1, #COMMON.AMMO)]
 		table.insert(SV.mart_shop, base_data)
@@ -1345,6 +1345,13 @@ function COMMON.EndDayCycle()
   type_count = math.random(1, 4)
 	for ii = 1, type_count, 1 do
 		local base_data = COMMON.UTILITIES[math.random(1, #COMMON.UTILITIES)]
+		table.insert(SV.mart_shop, base_data)
+	end
+
+  --0 - 2 gummi
+  type_count = math.random(0, 1)
+	for ii = 1, type_count, 1 do
+		local base_data = COMMON.GUMMIES[math.random(1, #COMMON.GUMMIES)]
 		table.insert(SV.mart_shop, base_data)
 	end
 

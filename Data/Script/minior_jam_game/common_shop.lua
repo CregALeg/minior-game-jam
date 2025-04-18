@@ -10,9 +10,20 @@ COMMON.ESSENTIALS = {
   { Index = "berry_oran", Amount = 0, Price = 80},
   { Index = "berry_leppa", Amount = 0, Price = 80},
   { Index = "berry_lum", Amount = 0, Price = 120},
-  { Index = "seed_reviver", Amount = 0, Price = 500},
+  { Index = "seed_reviver", Amount = 0, Price = 500}
+}
+
+COMMON.APRICORNS = {
   { Index = "apricorn_plain", Amount = 0, Price = 400},
-  { Index = "apricorn_plain", Amount = 0, Price = 400}
+  { Index = "apricorn_plain", Amount = 0, Price = 400},
+  { Index = "apricorn_black", Amount = 0, Price = 800},
+  { Index = "apricorn_blue", Amount = 0, Price = 800},
+  { Index = "apricorn_brown", Amount = 0, Price = 800},
+  { Index = "apricorn_green", Amount = 0, Price = 800},
+  { Index = "apricorn_purple", Amount = 0, Price = 800},
+  { Index = "apricorn_red", Amount = 0, Price = 800},
+  { Index = "apricorn_white", Amount = 0, Price = 800},
+  { Index = "apricorn_yellow", Amount = 0, Price = 800}
 }
 
 COMMON.UTILITIES = {

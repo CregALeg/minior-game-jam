@@ -3628,7 +3628,7 @@
 "$type": "RogueEssence.LevelGen.TeamContextSpawner`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "Amount": {
 "Min": 3,
-"Max": 5
+"Max": 6
 }
 },
 "Ally": false,
@@ -4197,7 +4197,7 @@
 "$type": "RogueEssence.LevelGen.TeamContextSpawner`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "Amount": {
 "Min": 3,
-"Max": 5
+"Max": 6
 }
 },
 "Ally": false,
@@ -4271,7 +4271,7 @@
 ]
 },
 "StartAmount": {
-"Min": 1,
+"Min": 110,
 "Max": 116
 },
 "AddAmount": {
@@ -4713,14 +4713,18 @@
 "Gender": -1
 },
 "Level": {
-"Min": 18,
-"Max": 21
+"Min": 16,
+"Max": 19
 },
 "SpecifiedSkills": [],
 "Intrinsic": "",
 "Tactic": "wander_dumb",
 "SpawnConditions": [],
-"SpawnFeatures": []
+"SpawnFeatures": [
+{
+"$type": "PMDC.LevelGen.MobSpawnWeak, PMDC"
+}
+]
 },
 "Role": 0
 },
@@ -4740,14 +4744,18 @@
 "Gender": -1
 },
 "Level": {
-"Min": 21,
-"Max": 24
+"Min": 19,
+"Max": 22
 },
 "SpecifiedSkills": [],
 "Intrinsic": "",
 "Tactic": "wander_dumb",
 "SpawnConditions": [],
-"SpawnFeatures": []
+"SpawnFeatures": [
+{
+"$type": "PMDC.LevelGen.MobSpawnWeak, PMDC"
+}
+]
 },
 "Role": 2
 },
@@ -4767,14 +4775,18 @@
 "Gender": -1
 },
 "Level": {
-"Min": 19,
-"Max": 23
+"Min": 17,
+"Max": 21
 },
 "SpecifiedSkills": [],
 "Intrinsic": "",
 "Tactic": "wander_dumb",
 "SpawnConditions": [],
-"SpawnFeatures": []
+"SpawnFeatures": [
+{
+"$type": "PMDC.LevelGen.MobSpawnWeak, PMDC"
+}
+]
 },
 "Role": 0
 },
@@ -4794,14 +4806,18 @@
 "Gender": -1
 },
 "Level": {
-"Min": 18,
-"Max": 21
+"Min": 16,
+"Max": 19
 },
 "SpecifiedSkills": [],
 "Intrinsic": "",
 "Tactic": "wander_dumb",
 "SpawnConditions": [],
-"SpawnFeatures": []
+"SpawnFeatures": [
+{
+"$type": "PMDC.LevelGen.MobSpawnWeak, PMDC"
+}
+]
 },
 "Role": 0
 },
@@ -4821,8 +4837,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 21,
-"Max": 24
+"Min": 19,
+"Max": 21
 },
 "SpecifiedSkills": [],
 "Intrinsic": "",
@@ -4849,7 +4865,7 @@
 },
 "Level": {
 "Min": 16,
-"Max": 23
+"Max": 22
 },
 "SpecifiedSkills": [],
 "Intrinsic": "",
@@ -4902,8 +4918,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 20,
-"Max": 25
+"Min": 19,
+"Max": 23
 },
 "SpecifiedSkills": [],
 "Intrinsic": "",
@@ -6896,7 +6912,7 @@
 ]
 },
 "StartAmount": {
-"Min": 1,
+"Min": 110,
 "Max": 116
 },
 "AddAmount": {
@@ -7338,7 +7354,7 @@
 "Gender": -1
 },
 "Level": {
-"Min": 18,
+"Min": 17,
 "Max": 21
 },
 "SpecifiedSkills": [],
@@ -7365,8 +7381,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 21,
-"Max": 24
+"Min": 20,
+"Max": 23
 },
 "SpecifiedSkills": [],
 "Intrinsic": "",
@@ -7392,8 +7408,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 19,
-"Max": 23
+"Min": 18,
+"Max": 22
 },
 "SpecifiedSkills": [],
 "Intrinsic": "",
@@ -7419,8 +7435,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 18,
-"Max": 21
+"Min": 17,
+"Max": 20
 },
 "SpecifiedSkills": [],
 "Intrinsic": "",
@@ -7446,8 +7462,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 21,
-"Max": 24
+"Min": 20,
+"Max": 23
 },
 "SpecifiedSkills": [],
 "Intrinsic": "",
@@ -7474,7 +7490,7 @@
 },
 "Level": {
 "Min": 16,
-"Max": 23
+"Max": 21
 },
 "SpecifiedSkills": [],
 "Intrinsic": "",
@@ -7500,8 +7516,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 20,
-"Max": 25
+"Min": 18,
+"Max": 23
 },
 "SpecifiedSkills": [],
 "Intrinsic": "",
@@ -7527,8 +7543,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 18,
-"Max": 21
+"Min": 17,
+"Max": 20
 },
 "SpecifiedSkills": [],
 "Intrinsic": "",
@@ -7550,7 +7566,7 @@
 "Spawn": 3,
 "Rate": 6,
 "Range": {
-"Min": 0,
+"Min": 1,
 "Max": 3
 }
 },
