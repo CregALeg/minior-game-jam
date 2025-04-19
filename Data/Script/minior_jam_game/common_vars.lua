@@ -57,7 +57,7 @@ function COMMON.UpdateDayEndVars()
          if SV.missions.Missions["IndigoMiniorRescue"] == nil and SV.missions.FinishedMissions["IndigoMiniorRescue"] == nil then
            COMMON.CreateMission("IndigoMiniorRescue",
            { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_RESCUE,
-             DestZone = "lunar_barrow", DestSegment = 0, DestFloor = 10,
+             DestZone = "lunar_barrow", DestSegment = 0, DestFloor = 9,
              FloorUnknown = false,
              TargetSpecies = RogueEssence.Dungeon.MonsterID("minior", 12, "normal", Gender.Genderless),
              ClientSpecies = RogueEssence.Dungeon.MonsterID("minior", 12, "normal", Gender.Genderless) }
@@ -69,7 +69,7 @@ function COMMON.UpdateDayEndVars()
           if SV.missions.Missions["YellowMiniorRescue"] == nil and SV.missions.FinishedMissions["YellowMiniorRescue"] == nil then
             COMMON.CreateMission("YellowMiniorRescue",
             { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_RESCUE,
-              DestZone = "primal_canyon", DestSegment = 0, DestFloor = 12,
+              DestZone = "primal_canyon", DestSegment = 0, DestFloor = 11,
               FloorUnknown = false,
               TargetSpecies = RogueEssence.Dungeon.MonsterID("minior", 9, "normal", Gender.Genderless),
               ClientSpecies = RogueEssence.Dungeon.MonsterID("minior", 9, "normal", Gender.Genderless) }
@@ -81,7 +81,7 @@ function COMMON.UpdateDayEndVars()
            if SV.missions.Missions["VioletMiniorRescue"] == nil and SV.missions.FinishedMissions["VioletMiniorRescue"] == nil then
              COMMON.CreateMission("VioletMiniorRescue",
              { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_RESCUE,
-               DestZone = "stardust_peak", DestSegment = 0, DestFloor = 12,
+               DestZone = "stardust_peak", DestSegment = 0, DestFloor = 11,
                FloorUnknown = false,
                TargetSpecies = RogueEssence.Dungeon.MonsterID("minior", 13, "normal", Gender.Genderless),
                ClientSpecies = RogueEssence.Dungeon.MonsterID("minior", 13, "normal", Gender.Genderless) }

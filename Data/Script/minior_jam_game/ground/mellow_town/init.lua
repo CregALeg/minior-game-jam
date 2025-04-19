@@ -61,62 +61,119 @@ end
 
 function mellow_town.RescueHandler() --Handler function for the Minior rescues.
   local quest = nil
+  local complete = ""
   -- Windswept Trail
   quest = SV.missions.Missions["RedMiniorRescue"]
   if quest ~= nil then
     if quest.Complete == COMMON.MISSION_COMPLETE then
-      UI:WaitShowDialogue("You rescued Red Minior!") -- Test dialogue
       COMMON.CompleteMission("RedMiniorRescue")
+      complete = "RedMinior"
     end
   end
   -- Verdant Meadow
   quest = SV.missions.Missions["GreenMiniorRescue"]
   if quest ~= nil then
     if quest.Complete == COMMON.MISSION_COMPLETE then
-      UI:WaitShowDialogue("You rescued Green Minior!") -- Test dialogue
       COMMON.CompleteMission("GreenMiniorRescue")
+      complete = "GreenMinior"
     end
   end
   -- Frigid Lake
   quest = SV.missions.Missions["BlueMiniorRescue"]
   if quest ~= nil then
     if quest.Complete == COMMON.MISSION_COMPLETE then
-      UI:WaitShowDialogue("You rescued Blue Minior!") -- Test dialogue
       COMMON.CompleteMission("BlueMiniorRescue")
+      complete = "BlueMinior"
     end
   end
   -- Magma Tunnel
   quest = SV.missions.Missions["OrangeMiniorRescue"]
   if quest ~= nil then
     if quest.Complete == COMMON.MISSION_COMPLETE then
-      UI:WaitShowDialogue("You rescued Orange Minior!") -- Test dialogue
       COMMON.CompleteMission("OrangeMiniorRescue")
+      complete = "OrangeMinior"
     end
   end
   --Lunar Barrow
   quest = SV.missions.Missions["IndigoMiniorRescue"]
   if quest ~= nil then
     if quest.Complete == COMMON.MISSION_COMPLETE then
-      UI:WaitShowDialogue("You rescued Indigo Minior!") -- Test dialogue
       COMMON.CompleteMission("IndigoMiniorRescue")
+      complete = "IndigoMinior"
     end
   end
   --Primal Canyon
   quest = SV.missions.Missions["YellowMiniorRescue"]
   if quest ~= nil then
     if quest.Complete == COMMON.MISSION_COMPLETE then
-      UI:WaitShowDialogue("You rescued Yellow Minior!") -- Test dialogue
       COMMON.CompleteMission("YellowMiniorRescue")
+      complete = "YellowMinior"
     end
   end
   --Stardust Peak
   quest = SV.missions.Missions["VioletMiniorRescue"]
   if quest ~= nil then
     if quest.Complete == COMMON.MISSION_COMPLETE then
-      UI:WaitShowDialogue("You rescued Violet Minior!") -- Test dialogue
       COMMON.CompleteMission("VioletMiniorRescue")
+      complete = "VioletMinior"
     end
   end
+  -- Rescue is true
+  if complete ~= "" then
+    mellow_town.RescuedCutscene(complete)
+  end
+end
+
+function mellow_town.RescuedCutscene(minior_colour)
+  GAME:CutsceneMode(true)
+
+  local rewards_table = {
+    ["RedMinior"] = "xcl_family_minior_00",
+    ["GreenMinior"] = "held_friend_bow",
+    ["BlueMinior"] = "held_x_ray_specs",
+    ["OrangeMinior"] = "xcl_family_minior_01",
+    ["IndigoMinior"] = "xcl_family_minior_02",
+    ["YellowMinior"] = "tm_acrobatics",
+    ["VioletMinior"] = "xcl_family_minior_03"
+  }
+
+  local player = CH("PLAYER")
+  local partner = CH("Teammate1")
+  local minior2 = CH(minior_colour)
+
+  miniorx = minior2.Bounds.Center.X
+  miniory = minior2.Bounds.Center.Y
+  miniorDir = minior2.Direction
+
+  GROUND:Unhide(minior_colour)
+
+  GROUND:TeleportTo(player, 400, 16, Direction.Down)
+  GROUND:TeleportTo(partner, 432, 16, Direction.Down)
+  GROUND:TeleportTo(minior2, 416, 40, Direction.Up)
+
+  GAME:FadeIn(20)
+
+  reward = rewards_table[minior_colour]
+
+  UI:SetSpeaker(minior2)
+  UI:WaitShowDialogue("Thank you for rescuing me!")
+  UI:WaitShowDialogue("Please accept this token of my appreciation.")
+
+  GAME:GivePlayerItem("seed_reviver", 1)
+  GAME:GivePlayerItem("berry_sitrus", 1)
+  GAME:GivePlayerItem(reward, 1)
+  UI:ResetSpeaker()
+  SOUND:PlayFanfare("Fanfare/Note")
+  UI:WaitShowDialogue("[sound=]You received a "..RogueEssence.Dungeon.InvItem("seed_reviver"):GetDisplayName()..".")
+  SOUND:PlayFanfare("Fanfare/Note")
+  UI:WaitShowDialogue("[sound=]You received a "..RogueEssence.Dungeon.InvItem("berry_sitrus"):GetDisplayName()..".")
+  SOUND:PlayFanfare("Fanfare/Note")
+  UI:WaitShowDialogue("[sound=]You received a "..RogueEssence.Dungeon.InvItem(reward):GetDisplayName()..".")
+
+  GAME:FadeOut(false, 20)
+  GROUND:TeleportTo(minior2, miniorx, miniory, miniorDir)
+  GAME:FadeIn(20)
+  GAME:CutsceneMode(false)
 end
 
 ---mellow_town.Enter(map)
