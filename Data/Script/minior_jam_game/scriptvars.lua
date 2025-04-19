@@ -117,7 +117,8 @@ SV.mellow_town = {
   CanDoCutsceneGlamour2 = false,
   CutsceneGlamour2Done = false,
   CanDoCutscenePyro1 = false,
-  CutscenePyro2Done = false
+  CutscenePyro2Done = false,
+  AfterCutsceneGlamour2 = false
 }
 
 SV.crash_site = {

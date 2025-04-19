@@ -45,6 +45,16 @@ function mellow_town.Init(map)
   if SV.missions.FinishedMissions["VioletMiniorRescue"] ~= nil then
     GROUND:Unhide("VioletMinior")
   end
+
+  -- Enable Team Glamour at certain story points
+  if SV.mellow_town.CutsceneGlamour2Done == true then
+    GROUND:Unhide("NPC_Sneasler")
+    GROUND:Unhide("NPC_Tsareena")
+  end
+
+  if SV.mellow_town.AfterCutsceneGlamour2 == true then
+    SV.mellow_town.AfterCutsceneGlamour2 = false
+  end
 end
 
 ---mellow_town.Enter(map)
@@ -111,7 +121,11 @@ end
 function mellow_town.NPC_Drilbur_Action(chara, activator)
   GROUND:CharTurnToChar(chara,CH('PLAYER'))
   UI:SetSpeaker(chara)
-  if SV.mellow_town.CutsceneGlamour1Done then
+  if SV.mellow_town.CutsceneGlamour2Done == true then
+    UI:SetSpeakerEmotion("Worried")
+    UI:WaitShowDialogue("[color=#F8A0F8]Team Glamour[color] said there's a monster on [color=#F8C060]Stardust Peak[color], right?")
+    UI:WaitShowDialogue("What if it comes down here?[pause=20] What if it eats everyone?!")
+  elseif SV.mellow_town.CutsceneGlamour1Done == true then
     UI:WaitShowDialogue("That [color=#F8A0F8]Team Glamour[color] sure is something, huh?")
   else
     UI:WaitShowDialogue("I heard meteor or something crashed near [color=#F8C060]Wishing Woods[color].")
@@ -121,9 +135,14 @@ end
 function mellow_town.NPC_Lilligant_Action(chara, activator)
   GROUND:CharTurnToChar(chara,CH('PLAYER'))
   UI:SetSpeaker(chara)
-  UI:WaitShowDialogue("All the flowers you see around town are my handiwork.")
-  UI:WaitShowDialogue("[emote=happy]I sure hope you like them.")
-  UI:WaitShowDialogue("[emote=determined]Do not step on them.")
+  if SV.mellow_town.AfterCutsceneGlamour2 == true then
+    UI:WaitShowDialogue(CH("NPC_Tsareena"):GetDisplayName().." should wake up soon.")
+    UI:WaitShowDialogue("I'll make certain that the both of them rest up and recover.")
+  else
+    UI:WaitShowDialogue("All the flowers you see around town are my handiwork.")
+    UI:WaitShowDialogue("[emote=happy]I sure hope you like them.")
+    UI:WaitShowDialogue("[emote=determined]Do not step on them.")
+  end
 end
 
 function mellow_town.NPC_Monferno_Action(chara, activator)
@@ -136,7 +155,7 @@ end
 function mellow_town.NPC_Cyclizar_Action(chara, activator)
   GROUND:CharTurnToChar(chara,CH('PLAYER'))
   UI:SetSpeaker(chara)
-  UI:WaitShowDialogue("Have you tried [color=#00F8F8]Polteagiest[color]'s tea yet?")
+  UI:WaitShowDialogue("Have you tried [color=#00F8F8]Polteageist[color]'s tea yet?")
   UI:WaitShowDialogue("It's the fuel that runs my engine!")
 end
 
@@ -232,6 +251,38 @@ function mellow_town.NPC_Gramps_Action(chara, activator)
     end
   end
   UI:WaitShowDialogue("[speed=0.7]Good luck.[pause=20] And be safe!")
+end
+
+function mellow_town.NPC_Sneasler_Action(chara, activator)
+  UI:SetSpeaker(chara)
+  if SV.mellow_town.CutsceneGlamour2Done == true then --After return cutscene
+    GROUND:CharTurnToChar(chara,CH('PLAYER'))
+    UI:SetSpeakerEmotion("Sad")
+    UI:WaitShowDialogue("I sure hope " ..CH("NPC_Granbull"):GetDisplayName().. " is okay...")
+    UI:WaitShowDialogue("She just needs to hold out a few more days before [color=#F8A0F8]Team Vanguard[color] arrive...")
+  else
+    UI:WaitShowDialogue("Hmm...[pause=20] The Kecleon Brothers sure do have an eclectic inventory...")
+  end
+end
+
+function mellow_town.NPC_Tsareena_Action(chara, activator)
+  UI:SetSpeaker(chara)
+  if SV.mellow_town.AfterCutsceneGlamour2 == true then
+    UI:ResetSpeaker()
+    UI:WaitShowDialogue(chara:GetDisplayName().." is out cold.")
+  elseif SV.mellow_town.CutsceneGlamour2Done == true then --After return cutscene
+    GROUND:CharTurnToChar(chara,CH('PLAYER'))
+    UI:SetSpeakerEmotion("Sad")
+    UI:WaitShowDialogue("I could've helped " ..CH("NPC_Granbull"):GetDisplayName().. "...")
+    UI:WaitShowDialogue("I should have![pause=30] But all I could think about was myself...[pause=20] Again...")
+  else
+    UI:WaitShowDialogue("Tch...[pause=20] nothing to my tastes...")
+  end
+end
+
+function mellow_town.NPC_Granbull_Action(chara, activator)
+  UI:SetSpeaker(chara)
+  UI:WaitShowDialogue("Hmmm...")
 end
 
 function mellow_town.STORAGE_COUNTER_Action(obj, activator)
@@ -931,7 +982,7 @@ end
 
 function mellow_town.Cutscene_Test_Action(obj, activator)
   choices = {"Intro", "Glamour 1", "Glamour 2", "Pyro"}
-  UI:BeginChoiceMenu("Choose Cutscene", choices, 1 ,3)
+  UI:BeginChoiceMenu("Choose Cutscene", choices, 1 ,4)
   UI:WaitForChoice()
   result = UI:ChoiceResult()
   if result == 1 then
@@ -942,6 +993,10 @@ function mellow_town.Cutscene_Test_Action(obj, activator)
     SV.mellow_town.CutsceneGlamour1Done = false
     GAME:FadeOut(false, 20)
     mellow_town.CutsceneGlamour1()
+  elseif result ==3 then
+    SV.mellow_town.CutsceneGlamour2Done = false
+    GAME:FadeOut(false, 20)
+    mellow_town.CutsceneGlamour2()
   end
 end
 
@@ -1459,6 +1514,198 @@ function mellow_town.CutsceneGlamour1()
     UI:WaitShowDialogue("Let's go, " ..player:GetDisplayName().."!")
 
     SV.mellow_town.CutsceneGlamour1Done = true
+    GAME:CutsceneMode(false)
+    AI:EnableCharacterAI(partner)
+  end
+end
+
+function mellow_town.CutsceneGlamour2()
+  if SV.mellow_town.CutsceneGlamour2Done == false then
+    GAME:CutsceneMode(true)
+    -- Setup characters
+    local player = CH("PLAYER")
+    local partner = CH("Teammate1")
+    local gramps = CH("NPC_Gramps")
+    local sneasler = CH("NPC_Sneasler")
+    local tsareena = CH("NPC_Tsareena")
+    local lilligant = CH("NPC_Lilligant")
+    AI:DisableCharacterAI(partner)
+    -- Set Locations
+    GROUND:TeleportTo(tsareena, 392, 216, Direction.Down)
+    GROUND:CharSetAnim(tsareena, "Sleep", true)
+    GROUND:Unhide("NPC_Tsareena")
+    GROUND:TeleportTo(sneasler, 416, 216, Direction.Down)
+    GROUND:CharSetAnim(sneasler, "Sleep", true)
+    GROUND:Unhide("NPC_Sneasler")
+    GROUND:TeleportTo(lilligant, 362, 184, Direction.DownRight)
+    GROUND:TeleportTo(gramps, 452, 180, Direction.DownLeft)
+
+    GROUND:TeleportTo(player, 400, 16, Direction.Down)
+    GROUND:TeleportTo(partner, 424, 16, Direction.Down)
+    -- Start
+    GAME:FadeIn(20)
+
+    local coro1 = TASK:BranchCoroutine(function() mellow_town.Coro_Walk(partner, Direction.Down, 12, false, 1) end)
+    local coro2 = TASK:BranchCoroutine(function() mellow_town.Coro_Walk(player, Direction.Down, 12, false, 1) end)
+
+    TASK:JoinCoroutines({coro1, coro2})
+    GAME:WaitFrames(30)
+
+    UI:SetSpeaker(partner)
+    UI:SetSpeakerEmotion("Worried")
+    UI:WaitShowDialogue("Hey, what's going on there?[pause=0][emote=surprised] Is that [color=#F8A0F8]Team Glamour[color]?")
+
+    coro1 = TASK:BranchCoroutine(function() mellow_town.Coro_Walk(partner, Direction.Down, 64, false, 2) end)
+    coro2 = TASK:BranchCoroutine(function() mellow_town.Coro_Walk(player, Direction.Down, 64, false, 2) end)
+    TASK:JoinCoroutines({coro1, coro2})
+    GAME:WaitFrames(40)
+
+    GROUND:EntTurn(partner, Direction.DownRight)
+    UI:WaitShowDialogue("Gramps![pause=20] What happened!")
+    GROUND:EntTurn(gramps, Direction.UpLeft)
+
+    UI:SetSpeaker(gramps)
+    UI:SetSpeakerEmotion("Worried")
+    UI:WaitShowDialogue("[speed=0.7]I'm afraid I don't know.")
+    GROUND:CharTurnToChar(gramps, sneasler)
+    UI:WaitShowDialogue("[speed=0.7]They both showed up in town a short while ago and collapsed.")
+    GROUND:EntTurn(gramps, Direction.UpLeft)
+    UI:WaitShowDialogue("[speed=0.7][color=#00F8F8]Lilligant[color] has been trying to use a herbal remedy to wake them up.")
+
+    UI:SetSpeaker(sneasler)
+    UI:SetSpeakerEmotion("Pain")
+    UI:WaitShowDialogue("Urgh...")
+
+    UI:SetSpeaker(lilligant)
+    UI:WaitShowDialogue("I think she's waking up!")
+
+    GROUND:CharEndAnim(sneasler)
+    UI:SetSpeaker(sneasler)
+    UI:SetSpeakerEmotion("Pain")
+    UI:WaitShowDialogue("Ugh...[pause=20] My head...")
+
+    GROUND:EntTurn(gramps, Direction.DownLeft)
+    GROUND:EntTurn(partner, Direction.Down)
+    UI:SetSpeaker(gramps)
+    UI:SetSpeakerEmotion("Worried")
+    UI:WaitShowDialogue("[speed=0.7]" ..sneasler:GetDisplayName()..", thank goodness you're alright.[pause=0] What happened to you two?")
+
+    GROUND:EntTurn(sneasler, Direction.UpRight)
+    GROUND:CharEndAnim(sneasler)
+    UI:SetSpeaker(sneasler)
+    UI:SetSpeakerEmotion("Sad")
+    UI:WaitShowDialogue("We...[pause=20] We were attacked.")
+    SOUND:PlayBGM("Threat.ogg", true)
+    UI:WaitShowDialogue("We got separated on the mountain...[pause=0] And before I knew it, I was attacked by this huge,[pause=10] monstrous Pokémon!")
+    UI:WaitShowDialogue("I got out,[pause=10] and found " ..tsareena:GetDisplayName().. ".[pause=0] We just about managed to get back to town before passing out...")
+    UI:WaitShowDialogue("That [pause=10]thing,[pause=10] whatever it was...[pause=20] It was completely out of control.[pause=0] We didn't stand a chance...")
+
+    GROUND:EntTurn(sneasler, Direction.Up)
+
+    UI:SetSpeaker(partner)
+    UI:SetSpeakerEmotion("Worried")
+    UI:WaitShowDialogue("But...[pause=0] Where's " ..CH("NPC_Granbull"):GetDisplayName().. "?")
+
+    GROUND:CharSetEmote(sneasler, "sweating", 1)
+    SOUND:PlaySE("Battle/EVT_Emote_Sweating")
+    GAME:WaitFrames(30)
+    GROUND:EntTurn(sneasler, Direction.Down)
+    UI:SetSpeaker(sneasler)
+    UI:SetSpeakerEmotion("Pain")
+    UI:WaitShowDialogue("I...[pause=20] I don't know. [pause=0]Like I said, we got separated. She could be fine...")
+
+    GROUND:CharSetEmote(partner, "angry", 1)
+    SOUND:PlaySE("Battle/EVT_Emote_Complain_2")
+    GAME:WaitFrames(30)
+    UI:SetSpeaker(partner)
+    UI:SetSpeakerEmotion("Angry")
+    UI:WaitShowDialogue("What do you mean you don't know?!")
+    UI:WaitShowDialogue("She's supposed to be your partner, your friend, and you just left her on that mountain?")
+    UI:WaitShowDialogue("She could be hurt,[pause=10] or worse!")
+
+    GROUND:EntTurn(sneasler, Direction.Up)
+    GROUND:CharSetEmote(sneasler, "angry", 1)
+    SOUND:PlaySE("Battle/EVT_Emote_Complain_2")
+    GAME:WaitFrames(30)
+    UI:SetSpeaker(sneasler)
+    UI:SetSpeakerEmotion("Angry")
+    UI:WaitShowDialogue("Don't you think I haven't thought of that!")
+    UI:SetSpeakerEmotion("Teary-eyed")
+    UI:WaitShowDialogue("She's missing...[pause=30] And it's all my fault!")
+    UI:WaitShowDialogue("I should've never taken us up that mountain, not with that monster up there.")
+
+    GROUND:EntTurn(partner, Direction.Left)
+    GROUND:EntTurn(player, Direction.Right)
+    UI:SetSpeaker(partner)
+    UI:SetSpeakerEmotion("Determined")
+    UI:WaitShowDialogue(player:GetDisplayName().."![pause=0] We need to go rescue " ..CH("NPC_Granbull"):GetDisplayName().."!")
+
+    GROUND:EntTurn(gramps, Direction.UpLeft)
+    UI:SetSpeaker(gramps)
+    UI:SetSpeakerEmotion("Shouting")
+    UI:WaitShowDialogue("[speed=1.1]Absolutely not![pause=0] It's far too dangerous for the two of you.")
+    GROUND:EntTurn(player, Direction.DownRight)
+    GROUND:EntTurn(partner, Direction.DownRight)
+    UI:SetSpeakerEmotion("Normal")
+    UI:WaitShowDialogue("[speed=0.7]The best course of action...[pause=20] Is to contact another Adventuring Team to rescue "..CH("NPC_Granbull"):GetDisplayName()..".")
+    UI:WaitShowDialogue("[speed=0.7]I will send word to the Adventurer's Association at once, and request them to send another high-rank team.")
+
+    UI:SetSpeaker(sneasler)
+    UI:SetSpeakerEmotion("Sad")
+    UI:WaitShowDialogue("There's only one team that can handle this.")
+    GROUND:EntTurn(player, Direction.Down)
+    GROUND:EntTurn(partner, Direction.Down)
+    GROUND:EntTurn(gramps, Direction.DownLeft)
+    UI:SetSpeakerEmotion("Worried")
+    UI:WaitShowDialogue("We need [color=#F8A0F8]Team Vanguard[color].")
+    UI:WaitShowDialogue("They're the only ones with a chance against that monster.[pause=0] The only ones with the skill to rescue "..CH("NPC_Granbull"):GetDisplayName()..".")
+
+    GROUND:CharSetEmote(player, "question", 1)
+    SOUND:PlaySE("Battle/EVT_Emote_Confused")
+    GAME:WaitFrames(30)
+    UI:SetSpeaker(player)
+    UI:WaitShowDialogue("[color=#F8A0F8]Team Vanguard[color]?")
+
+    UI:SetSpeaker(sneasler)
+    UI:WaitShowDialogue("They're the highest ranked Adventuring Team in the world. Without a doubt the strongest.")
+    UI:WaitShowDialogue("Their leader has the unique ability to change their type as well, meaning they'll have the upper hand against that monster.")
+
+    UI:SetSpeaker(gramps)
+    UI:WaitShowDialogue("[speed=0.7]I agree with you. I will send word immediately. [pause=30]In the meantime, you and " ..tsareena:GetDisplayName().. " need to stay here and rest.")
+
+    UI:SetSpeaker(sneasler)
+    UI:SetSpeakerEmotion("Sad")
+    UI:WaitShowDialogue("I suppose we don't have much of a choice...")
+
+    UI:SetSpeaker(gramps)
+    GROUND:EntTurn(gramps, Direction.UpLeft)
+    GROUND:EntTurn(partner, Direction.DownRight)
+    UI:WaitShowDialogue("[speed=0.7]" ..partner:GetDisplayName().. ", I want you and " ..player:GetDisplayName().. " to continue your journey.")
+    UI:WaitShowDialogue("[speed=0.7]You still have many Mystery Dungeons to get through before reaching [color=#F8C060]Stardust Peak[color].")
+    UI:WaitShowDialogue("[speed=0.7]Hopefully,[pause=10] this situation will have resolved itself by the time you both arrive there.")
+
+    GROUND:CharSetEmote(partner, "sweatdrop", 1)
+    SOUND:PlaySE("Battle/EVT_Emote_Sweatdrop")
+    GAME:WaitFrames(30)
+    UI:SetSpeaker(partner)
+    UI:SetSpeakerEmotion("Sad")
+    UI:WaitShowDialogue("But Gramps, maybe we can help...")
+
+    UI:SetSpeaker(gramps)
+    UI:WaitShowDialogue("[speed=0.7]I know you want to help, and that is admirable.")
+    UI:WaitShowDialogue("[speed=0.7]But part of growing up is knowing to pick your battles.")
+    UI:WaitShowDialogue("[speed=0.7]I don't want to see you or " ..player:GetDisplayName().. " end up hurt like [color=#F8A0F8]Team Glamour[color]...[pause=20] Or worse...")
+
+    UI:SetSpeaker(partner)
+    UI:SetSpeakerEmotion("Worried")
+    UI:WaitShowDialogue("Okay, Gramps.[pause=30] I understand.")
+    GROUND:EntTurn(partner, Direction.Left)
+    GROUND:EntTurn(player, Direction.Right)
+    UI:WaitShowDialogue("Come on, " ..player:GetDisplayName().. ". Let's go get prepared for our next dungeon.")
+    SOUND:PlayBGM("Base Town.ogg", true)
+    -- End[]
+    SV.mellow_town.CutsceneGlamour2Done = true
+    SV.mellow_town.AfterCutsceneGlamour2 = true
     GAME:CutsceneMode(false)
     AI:EnableCharacterAI(partner)
   end

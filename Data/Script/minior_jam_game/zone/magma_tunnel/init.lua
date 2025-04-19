@@ -41,6 +41,7 @@ function magma_tunnel.ExitSegment(zone, result, rescue, segmentID, mapID)
     COMMON.EndDungeonDay(result, 'mellow_town', -1, 0, 1)
   else
     COMMON.UnlockWithFanfare('lunar_barrow', true)
+    SV.mellow_town.CanDoCutsceneGlamour2 = true
     COMMON.EndDungeonDay(result, 'mellow_town', -1, 0, 1)
   end
   local quest = SV.missions.Missions["OrangeMiniorRescue"]
