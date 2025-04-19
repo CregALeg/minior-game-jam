@@ -10,7 +10,7 @@ function COMMON.UpdateDayEndVars()
        COMMON.CreateMission("RedMiniorRescue",
        { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_RESCUE,
          DestZone = "windswept_trail", DestSegment = 1, DestFloor = 2,
-         FloorUnknown = true,
+         FloorUnknown = false,
          TargetSpecies = RogueEssence.Dungeon.MonsterID("minior", 7, "normal", Gender.Genderless),
          ClientSpecies = RogueEssence.Dungeon.MonsterID("minior", 7, "normal", Gender.Genderless) }
        )
@@ -22,7 +22,7 @@ function COMMON.UpdateDayEndVars()
         COMMON.CreateMission("GreenMiniorRescue",
         { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_RESCUE,
           DestZone = "verdant_meadow", DestSegment = 0, DestFloor = 5,
-          FloorUnknown = true,
+          FloorUnknown = false,
           TargetSpecies = RogueEssence.Dungeon.MonsterID("minior", 10, "normal", Gender.Genderless),
           ClientSpecies = RogueEssence.Dungeon.MonsterID("minior", 10, "normal", Gender.Genderless) }
         )
@@ -34,7 +34,7 @@ function COMMON.UpdateDayEndVars()
          COMMON.CreateMission("BlueMiniorRescue",
          { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_RESCUE,
            DestZone = "frigid_lake", DestSegment = 0, DestFloor = 5,
-           FloorUnknown = true,
+           FloorUnknown = false,
            TargetSpecies = RogueEssence.Dungeon.MonsterID("minior", 11, "normal", Gender.Genderless),
            ClientSpecies = RogueEssence.Dungeon.MonsterID("minior", 11, "normal", Gender.Genderless) }
          )
@@ -46,7 +46,7 @@ function COMMON.UpdateDayEndVars()
           COMMON.CreateMission("OrangeMiniorRescue",
           { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_RESCUE,
             DestZone = "magma_tunnel", DestSegment = 1, DestFloor = 0,
-            FloorUnknown = true,
+            FloorUnknown = false,
             TargetSpecies = RogueEssence.Dungeon.MonsterID("minior", 8, "normal", Gender.Genderless),
             ClientSpecies = RogueEssence.Dungeon.MonsterID("minior", 8, "normal", Gender.Genderless) }
           )
@@ -58,7 +58,7 @@ function COMMON.UpdateDayEndVars()
            COMMON.CreateMission("IndigoMiniorRescue",
            { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_RESCUE,
              DestZone = "lunar_barrow", DestSegment = 0, DestFloor = 10,
-             FloorUnknown = true,
+             FloorUnknown = false,
              TargetSpecies = RogueEssence.Dungeon.MonsterID("minior", 12, "normal", Gender.Genderless),
              ClientSpecies = RogueEssence.Dungeon.MonsterID("minior", 12, "normal", Gender.Genderless) }
            )
@@ -70,7 +70,7 @@ function COMMON.UpdateDayEndVars()
             COMMON.CreateMission("YellowMiniorRescue",
             { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_RESCUE,
               DestZone = "primal_canyon", DestSegment = 0, DestFloor = 12,
-              FloorUnknown = true,
+              FloorUnknown = false,
               TargetSpecies = RogueEssence.Dungeon.MonsterID("minior", 9, "normal", Gender.Genderless),
               ClientSpecies = RogueEssence.Dungeon.MonsterID("minior", 9, "normal", Gender.Genderless) }
             )
@@ -82,7 +82,7 @@ function COMMON.UpdateDayEndVars()
              COMMON.CreateMission("VioletMiniorRescue",
              { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_RESCUE,
                DestZone = "stardust_peak", DestSegment = 0, DestFloor = 12,
-               FloorUnknown = true,
+               FloorUnknown = false,
                TargetSpecies = RogueEssence.Dungeon.MonsterID("minior", 13, "normal", Gender.Genderless),
                ClientSpecies = RogueEssence.Dungeon.MonsterID("minior", 13, "normal", Gender.Genderless) }
              )

@@ -31,13 +31,21 @@ end
 --Engine callback function
 function wishing_woods.ExitSegment(zone, result, rescue, segmentID, mapID)
   PrintInfo("=>> ExitSegment_wishing_woods result "..tostring(result).." segment "..tostring(segmentID).."\n\n\n")
-  if result == 1 then --Actually lost
+
+  local exited = COMMON.ExitDungeonMissionCheck(result, rescue, zone.ID, segmentID)
+  if exited == true then
+    -- do nothing???
+  elseif result == RogueEssence.Data.GameProgress.ResultType.Failed then
     UI:SetSpeaker(GAME:GetPlayerPartyMember(1))
     UI:SetSpeakerEmotion("Pain")
-    UI:WaitShowDialogue("Urk...[pause=20] This is harder than I thought...[pause=20] Let's head back for now...")
-    COMMON.EndDungeonDay(result, 'crash_site', -1, 0, 1)
+    UI:WaitShowDialogue("Urk...[pause=20] This is harder than I thought...[pause=20] Let's head home for now...")
+    if SV.mellow_town.CutsceneIntro == false then
+      COMMON.EndDungeonDay(result, 'jam_intro', -1, 0, 0)
+    else
+      COMMON.EndDungeonDay(result, 'mellow_town', -1, 0, 0)
+    end
   else
-    COMMON.EndDungeonDay(result, 'mellow_town', -1, 0, 1)
+    COMMON.EndDungeonDay(result, 'mellow_town', -1, 0, 0)
   end
   -- PrintInfo("=>> Exit_wishing_woods")
   -- if segmentID == 0 then

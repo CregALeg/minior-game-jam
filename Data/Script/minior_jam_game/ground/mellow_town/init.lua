@@ -23,6 +23,8 @@ function mellow_town.Init(map)
   -- AI:SetCharacterAI(partner, "origin.ai.ground_partner", CH('PLAYER'), partner.Position)
   partner.CollisionDisabled = true
 
+  mellow_town.RescueHandler() --Handle rescues
+
   -- Enable Miniors
   if SV.missions.FinishedMissions["RedMiniorRescue"] ~= nil then
     GROUND:Unhide("RedMinior")
@@ -54,6 +56,66 @@ function mellow_town.Init(map)
 
   if SV.mellow_town.AfterCutsceneGlamour2 == true then
     SV.mellow_town.AfterCutsceneGlamour2 = false
+  end
+end
+
+function mellow_town.RescueHandler() --Handler function for the Minior rescues.
+  local quest = nil
+  -- Windswept Trail
+  quest = SV.missions.Missions["RedMiniorRescue"]
+  if quest ~= nil then
+    if quest.Complete == COMMON.MISSION_COMPLETE then
+      UI:WaitShowDialogue("You rescued Red Minior!") -- Test dialogue
+      COMMON.CompleteMission("RedMiniorRescue")
+    end
+  end
+  -- Verdant Meadow
+  quest = SV.missions.Missions["GreenMiniorRescue"]
+  if quest ~= nil then
+    if quest.Complete == COMMON.MISSION_COMPLETE then
+      UI:WaitShowDialogue("You rescued Green Minior!") -- Test dialogue
+      COMMON.CompleteMission("GreenMiniorRescue")
+    end
+  end
+  -- Frigid Lake
+  quest = SV.missions.Missions["BlueMiniorRescue"]
+  if quest ~= nil then
+    if quest.Complete == COMMON.MISSION_COMPLETE then
+      UI:WaitShowDialogue("You rescued Blue Minior!") -- Test dialogue
+      COMMON.CompleteMission("BlueMiniorRescue")
+    end
+  end
+  -- Magma Tunnel
+  quest = SV.missions.Missions["OrangeMiniorRescue"]
+  if quest ~= nil then
+    if quest.Complete == COMMON.MISSION_COMPLETE then
+      UI:WaitShowDialogue("You rescued Orange Minior!") -- Test dialogue
+      COMMON.CompleteMission("OrangeMiniorRescue")
+    end
+  end
+  --Lunar Barrow
+  quest = SV.missions.Missions["IndigoMiniorRescue"]
+  if quest ~= nil then
+    if quest.Complete == COMMON.MISSION_COMPLETE then
+      UI:WaitShowDialogue("You rescued Indigo Minior!") -- Test dialogue
+      COMMON.CompleteMission("IndigoMiniorRescue")
+    end
+  end
+  --Primal Canyon
+  quest = SV.missions.Missions["YellowMiniorRescue"]
+  if quest ~= nil then
+    if quest.Complete == COMMON.MISSION_COMPLETE then
+      UI:WaitShowDialogue("You rescued Yellow Minior!") -- Test dialogue
+      COMMON.CompleteMission("YellowMiniorRescue")
+    end
+  end
+  --Stardust Peak
+  quest = SV.missions.Missions["VioletMiniorRescue"]
+  if quest ~= nil then
+    if quest.Complete == COMMON.MISSION_COMPLETE then
+      UI:WaitShowDialogue("You rescued Violet Minior!") -- Test dialogue
+      COMMON.CompleteMission("VioletMiniorRescue")
+    end
   end
 end
 

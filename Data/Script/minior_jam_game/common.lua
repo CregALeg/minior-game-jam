@@ -294,6 +294,12 @@ function COMMON.MakeWhoosh(center, y, tier, reversed)
 end
 
 function COMMON.BossTransition(preserveMusic)
+  -- Heal all before boss
+  local chara
+	for i = 0, GAME:GetPlayerPartyCount() - 1, 1 do
+		chara = GAME:GetPlayerPartyMember(i)
+		chara:FullRestore()
+	end
     local center = GAME:GetCameraCenter()
 	if not preserveMusic then
 		SOUND:FadeOutBGM(20)

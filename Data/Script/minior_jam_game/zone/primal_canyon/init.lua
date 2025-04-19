@@ -34,7 +34,7 @@ function primal_canyon.ExitSegment(zone, result, rescue, segmentID, mapID)
   local exited = COMMON.ExitDungeonMissionCheck(result, rescue, zone.ID, segmentID)
   if exited == true then
     -- do nothing???
-  elseif result ~= RogueEssence.Data.GameProgress.ResultType.Cleared then
+  elseif result == RogueEssence.Data.GameProgress.ResultType.Failed then
     UI:SetSpeaker(GAME:GetPlayerPartyMember(1))
     UI:SetSpeakerEmotion("Pain")
     UI:WaitShowDialogue("Urk...[pause=20] This is harder than I thought...[pause=20] Let's head home for now...")
@@ -42,13 +42,6 @@ function primal_canyon.ExitSegment(zone, result, rescue, segmentID, mapID)
   else
     --COMMON.UnlockWithFanfare('stardust_peak', true)
     COMMON.EndDungeonDay(result, 'mellow_town', -1, 0, 1)
-  end
-  local quest = SV.missions.Missions["YellowMiniorRescue"]
-  if quest ~= nil then
-    if quest.Complete == COMMON.MISSION_COMPLETE then
-      UI:WaitShowDialogue("You rescued Yellow Minior!") -- Test dialogue
-      COMMON.CompleteMission("YellowMiniorRescue")
-    end
   end
 end
 

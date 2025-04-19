@@ -34,7 +34,7 @@ function lunar_barrow.ExitSegment(zone, result, rescue, segmentID, mapID)
   local exited = COMMON.ExitDungeonMissionCheck(result, rescue, zone.ID, segmentID)
   if exited == true then
     -- do nothing???
-  elseif result ~= RogueEssence.Data.GameProgress.ResultType.Cleared then
+  elseif result == RogueEssence.Data.GameProgress.ResultType.Failed then
     UI:SetSpeaker(GAME:GetPlayerPartyMember(1))
     UI:SetSpeakerEmotion("Pain")
     UI:WaitShowDialogue("Urk...[pause=20] This is harder than I thought...[pause=20] Let's head home for now...")
@@ -53,14 +53,6 @@ function lunar_barrow.ExitSegment(zone, result, rescue, segmentID, mapID)
       GAME:EnterZone('lunar_barrow', -1, 0, 0)
     end
   end
-  local quest = SV.missions.Missions["IndigoMiniorRescue"]
-  if quest ~= nil then
-    if quest.Complete == COMMON.MISSION_COMPLETE then
-      UI:WaitShowDialogue("You rescued Indigo Minior!") -- Test dialogue
-      COMMON.CompleteMission("IndigoMiniorRescue")
-    end
-  end
-
 end
 
 ---lunar_barrow.Rescued(zone, name, mail)
