@@ -116,8 +116,8 @@ SV.mellow_town = {
   CutsceneGlamour1Done = false,
   CanDoCutsceneGlamour2 = false,
   CutsceneGlamour2Done = false,
-  CanDoCutscenePyro1 = false,
-  CutscenePyro2Done = false,
+  CanDoCutsceneVanguard1 = false,
+  CutsceneVanguard1Done = false,
   AfterCutsceneGlamour2 = false
 }
 

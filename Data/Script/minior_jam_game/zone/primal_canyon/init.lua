@@ -42,6 +42,7 @@ function primal_canyon.ExitSegment(zone, result, rescue, segmentID, mapID)
   else
     --COMMON.UnlockWithFanfare('stardust_peak', true)
     COMMON.EndDungeonDay(result, 'mellow_town', -1, 0, 1)
+    SV.mellow_town.CanDoCutsceneVanguard1 = true
   end
 end
 

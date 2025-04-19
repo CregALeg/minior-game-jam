@@ -227,8 +227,8 @@ function mellow_town.CutsceneHandler()
   if SV.mellow_town.CanDoCutsceneGlamour2 == true then --Enabled after Magma Tunnel/Lunar Barrow? Undecided
     mellow_town.CutsceneGlamour2()
   end
-  if SV.mellow_town.CanDoCutscenePyro1 == true then --Enabled after Primal Canyon
-    mellow_town.CutscenePyro1()
+  if SV.mellow_town.CanDoCutsceneVanguard1 == true then --Enabled after Primal Canyon
+    mellow_town.CutsceneVanguard1()
   end
   local partner = CH('Teammate1')
   AI:SetCharacterAI(partner, "origin.ai.ground_partner", CH('PLAYER'), partner.Position)
@@ -374,7 +374,11 @@ end
 
 function mellow_town.NPC_Sneasler_Action(chara, activator)
   UI:SetSpeaker(chara)
-  if SV.mellow_town.CutsceneGlamour2Done == true then --After return cutscene
+  if SV.mellow_town.CutsceneVanguard1Done == true then
+    UI:SetSpeakerEmotion("Sad")
+    UI:WaitShowDialogue("[color=#F8A0F8]Team Vanguard[color] is here now...")
+    UI:WaitShowDialogue("Just hold on, " ..CH("NPC_Granbull"):GetDisplayName().."...")
+  elseif SV.mellow_town.CutsceneGlamour2Done == true then --After return cutscene
     GROUND:CharTurnToChar(chara,CH('PLAYER'))
     UI:SetSpeakerEmotion("Sad")
     UI:WaitShowDialogue("I sure hope " ..CH("NPC_Granbull"):GetDisplayName().. " is okay...")
@@ -402,6 +406,25 @@ end
 function mellow_town.NPC_Granbull_Action(chara, activator)
   UI:SetSpeaker(chara)
   UI:WaitShowDialogue("Hmmm...")
+end
+
+function mellow_town.NPC_Silvally_Action(chara, activator)
+  GROUND:CharTurnToChar(chara, CH("PLAYER"))
+  UI:SetSpeaker(chara)
+  UI:WaitShowDialogue("Your spirit is commendable.[pause=0] For two so young to take on Mystery Dungeons is no ordinary feat.")
+  UI:WaitShowDialogue("You should be proud of all you have accomplished.")
+  GROUND:EntTurn(chara, Direction.UpRight)
+end
+
+function mellow_town.NPC_Ceruledge_Action(chara, activator)
+  UI:SetSpeaker(chara)
+  UI:WaitShowDialogue("Perhaps food would be in order...")
+  UI:WaitShowDialogue("The rescue target will surely be hungry...")
+end
+
+function mellow_town.NPC_Noivern_Action(chara, activator)
+  UI:SetSpeaker(chara)
+  UI:WaitShowDialogue("I wonder if they have a " ..RogueEssence.Dungeon.InvItem("berry_lum"):GetDisplayName().."?")
 end
 
 function mellow_town.STORAGE_COUNTER_Action(obj, activator)
@@ -1101,7 +1124,7 @@ end
 
 function mellow_town.Cutscene_Test_Action(obj, activator)
   choices = {"Intro", "Glamour 1", "Glamour 2", "Pyro"}
-  UI:BeginChoiceMenu("Choose Cutscene", choices, 1 ,4)
+  UI:BeginChoiceMenu("Choose Cutscene", choices, 1 ,5)
   UI:WaitForChoice()
   result = UI:ChoiceResult()
   if result == 1 then
@@ -1116,6 +1139,11 @@ function mellow_town.Cutscene_Test_Action(obj, activator)
     SV.mellow_town.CutsceneGlamour2Done = false
     GAME:FadeOut(false, 20)
     mellow_town.CutsceneGlamour2()
+  elseif result == 4 then
+    SV.mellow_town.CutsceneVanguard1Done = false
+    GAME:FadeOut(false, 20)
+    mellow_town.CutsceneVanguard1()
+  elseif result == 5 then
   end
 end
 
@@ -1828,6 +1856,211 @@ function mellow_town.CutsceneGlamour2()
     GAME:CutsceneMode(false)
     AI:EnableCharacterAI(partner)
   end
+end
+
+function mellow_town.CutsceneVanguard1()
+  GAME:CutsceneMode(true)
+  -- Seet up characters
+  local player = CH("PLAYER")
+  local partner = CH("Teammate1")
+  local gramps = CH("NPC_Gramps")
+  local sneasler = CH("NPC_Sneasler")
+  local tsareena = CH("NPC_Tsareena")
+  local silvally = CH("NPC_Silvally")
+  local ceruledge = CH("NPC_Ceruledge")
+  local noivern = CH("NPC_Noivern")
+  local granbullName = CH("NPC_Granbull"):GetDisplayName()
+  AI:DisableCharacterAI(partner)
+  -- Set Locations
+  GROUND:TeleportTo(player, 384, 182, Direction.Down)
+  GROUND:TeleportTo(partner, 408, 182, Direction.Down)
+  GROUND:TeleportTo(tsareena, 384, 214, Direction.Up)
+  GROUND:TeleportTo(sneasler, 408, 214, Direction.Up)
+  GROUND:TeleportTo(gramps, 600, 192, Direction.Left)
+  GROUND:TeleportTo(silvally, 624, 192, Direction.Left)
+  GROUND:TeleportTo(noivern, 648, 212, Direction.Left)
+  GROUND:TeleportTo(ceruledge, 648, 180, Direction.Left)
+
+  GROUND:Unhide("NPC_Silvally")
+  GROUND:Unhide("NPC_Ceruledge")
+  GROUND:Unhide("NPC_Noivern")
+  noivern.CollisionDisabled = true
+  GROUND:Hide("NPC_Morgrem")
+  GROUND:Hide("NPC_Drilbur") --Both in the way
+  -- Set Camera
+  GAME:MoveCamera(24, 0, 1, true)
+  -- Start
+  GAME:FadeIn(20)
+  GROUND:MoveToPosition(gramps, 444, 192, false, 2)
+  UI:SetSpeaker(gramps)
+  UI:WaitShowDialogue("[speed=0.7]They're here.")
+  GROUND:MoveToPosition(gramps, 444, 168, false, 2)
+  GROUND:EntTurn(gramps, Direction.DownRight)
+  GROUND:EntTurn(player, Direction.Right)
+  GROUND:EntTurn(partner, Direction.Right)
+  GROUND:EntTurn(sneasler, Direction.Right)
+  GROUND:EntTurn(tsareena, Direction.Right)
+
+  local coro1 = TASK:BranchCoroutine(function() mellow_town.Coro_Walk(silvally, Direction.Left, 132, false, 1) end)
+  local coro2 = TASK:BranchCoroutine(function() mellow_town.Coro_Walk(ceruledge, Direction.Left, 132, false, 1) end)
+  local coro3 = TASK:BranchCoroutine(function() mellow_town.Coro_Walk(noivern, Direction.Left, 132, false, 1) end)
+  TASK:JoinCoroutines({coro1, coro2, coro3})
+  GAME:WaitFrames(30)
+
+  UI:SetSpeaker(silvally)
+  UI:WaitShowDialogue("Greetings.[pause=30] I am " ..silvally:GetDisplayName()..", the leader of [color=#F8A0F8]Team Vanguard[color].")
+  UI:WaitShowDialogue("Behind me are my compatriots, " ..ceruledge:GetDisplayName().. " and " ..noivern:GetDisplayName()..".")
+  UI:WaitShowDialogue(sneasler:GetDisplayName().." of [color=#F8A0F8]Team Glamour[color][pause=20], we were requested to recover your missing companion, " ..granbullName..".")
+  UI:WaitShowDialogue("Is this correct?")
+
+  UI:SetSpeaker(sneasler)
+  UI:SetSpeakerEmotion("Worried")
+  UI:WaitShowDialogue("Yes...")
+
+  UI:SetSpeaker(silvally)
+  UI:WaitShowDialogue("Affirmative.[pause=30] You also mentioned a dangerous and powerful Pokémon.[pause=0] What details can you give us about it?")
+
+  UI:SetSpeaker(tsareena)
+  UI:WaitShowDialogue("It was a huge, serpentine monster![pause=0] It's scales were emerald green, and it had yellow markings.")
+
+  UI:SetSpeaker(player)
+  UI:SetSpeakerEmotion("Worried")
+  UI:WaitShowDialogue("[sound=](Why does that sound so familiar[speed=0.5]...?)")
+  GROUND:CharSetEmote(player, "shock", 1)
+  SOUND:PlaySE("Battle/EVT_Emote_Exclaim_Realized")
+  GAME:WaitFrames(30)
+  UI:SetSpeakerEmotion("Surprised")
+  UI:WaitShowDialogue("[sound=](Wait! I know why!)")
+  UI:WaitShowDialogue("I know that Pokémon!")
+
+  GROUND:CharTurnToChar(tsareena, player)
+  GROUND:CharTurnToChar(sneasler, player)
+  GROUND:CharTurnToChar(gramps, player)
+  GROUND:CharTurnToChar(partner, player)
+  GROUND:CharSetEmote(partner, "shock", 1)
+  SOUND:PlaySE("Battle/EVT_Emote_Exclaim_2")
+  GAME:WaitFrames(20)
+
+  UI:WaitShowDialogue("The Pokémon that attacked me and my friends...[pause=30] And sent us crashing out of the sky...")
+  UI:WaitShowDialogue("Looked exactly like that!")
+  UI:SetSpeakerEmotion("Pain")
+  UI:WaitShowDialogue("It's called [color=#009800]Rayquaza[color].[pause=0] Normally, it lives on the edge of space.")
+  UI:WaitShowDialogue("But then one day it suddenly went on a rampage, attacking us for no reason!")
+
+  UI:SetSpeaker(partner)
+  UI:SetSpeakerEmotion("Worried")
+  UI:WaitShowDialogue("What?[pause=30] That sounds terrible...")
+
+  UI:SetSpeaker(silvally)
+  UI:WaitShowDialogue("I am familiar with [color=#009800]Rayquaza[color]. It is a legendary Pokémon, said to be master of the skies.")
+  UI:WaitShowDialogue("[emote=worried]However, for a legendary Pokémon to go on an unprompted rampage as you have described...")
+  UI:WaitShowDialogue("I fear there is something worse at play here...")
+
+  GROUND:CharSetEmote(sneasler, "angry", 1)
+  SOUND:PlaySE("Battle/EVT_Emote_Complain_2")
+  GAME:WaitFrames(30)
+
+  UI:SetSpeaker(sneasler)
+  UI:SetSpeakerEmotion("Angry")
+  UI:WaitShowDialogue("Argh, who cares about any of that!")
+  GROUND:CharTurnToChar(tsareena, sneasler)
+  GROUND:CharTurnToChar(player, sneasler)
+  GROUND:CharTurnToChar(gramps, sneasler)
+  GROUND:CharTurnToChar(partner, sneasler)
+  UI:WaitShowDialogue("What about " ..granbullName.. "?")
+
+  UI:SetSpeaker(silvally)
+  UI:WaitShowDialogue("If we must contend with [color=#009800]Rayquaza[color] to rescue " ..granbullName.. " then we must figure out a plan.")
+  GROUND:CharTurnToChar(tsareena, silvally)
+  GROUND:CharTurnToChar(player, silvally)
+  GROUND:CharTurnToChar(gramps, silvally)
+  GROUND:CharTurnToChar(partner, silvally)
+  GROUND:CharTurnToChar(sneasler, silvally)
+  UI:WaitShowDialogue(STRINGS:Format("I am certain [color=#009800]Rayquaza[color] is a \\uE083Dragon-type Pokémon."))
+  UI:WaitShowDialogue("Thus...")
+  GROUND:CharSetAnim(silvally, "Charge", true)
+  GAME:WaitFrames(16)
+  local emitter = RogueEssence.Content.SingleEmitter(RogueEssence.Content.AnimData("Copycat_Front", 3))
+  emitter.LocHeight = 8
+  GROUND:PlayVFX(emitter, silvally.Bounds.Center.X, silvally.Bounds.Center.Y)
+  SOUND:PlaySE("Battle/DUN_Copycat_2")
+  local form = silvally.CurrentForm
+  local newForm = RogueEssence.Dungeon.MonsterID(form.Species, 17, form.Skin, form.Gender)
+  silvally.Data.BaseForm = newForm
+  GAME:WaitFrames(16)
+  GROUND:CharEndAnim(silvally)
+  UI:WaitShowDialogue(STRINGS:Format("By transforming into the \\uE08EFairy type, we shall surely have the upper hand."))
+
+  UI:SetSpeaker(gramps)
+  UI:WaitShowDialogue("[speed=0.7]The facilities of Mellow Town are available for you to prepare yourselves.")
+  GROUND:CharTurnToChar(gramps, partner)
+  UI:WaitShowDialogue("[speed=0.7]" ..partner:GetDisplayName().. ", perhaps it would be best to wait until after [color=#F8A0F8]Team Vanguard[color] have dealt with [color=#009800]Rayquaza[color] before climbing [color=#F8C060]Stardust Peak[color] yourselves.")
+  UI:WaitShowDialogue("[speed=0.7]It would be far safer that way.")
+
+  UI:SetSpeaker(partner)
+  UI:WaitShowDialogue("Actually, "  ..gramps:GetDisplayName().. ", I had my own plan for that.")
+  UI:WaitShowDialogue("We don't know if [color=#009800]Rayquaza[color] will come back after " ..silvally:GetDisplayName().. " defeats it or not.")
+  UI:WaitShowDialogue("And if it does come back, it'll be just as dangerous.")
+  UI:WaitShowDialogue("So why don't we go to [color=#F8C060]Stardust Peak[color] at the same time as them?")
+  UI:WaitShowDialogue("That way, [color=#009800]Rayquaza[color] will be busy dealing with them, and we can get " ..player:GetDisplayName().. " to the top of the mountain to get home!")
+
+  GROUND:CharSetEmote(gramps, "sweatdrop", 1)
+  SOUND:PlaySE("Battle/EVT_Emote_Sweatdrop")
+  GAME:WaitFrames(30)
+  UI:SetSpeaker(gramps)
+  UI:SetSpeakerEmotion("worried")
+  UI:WaitShowDialogue("[speed=0.7]I don't know...[pause=0] It still seems so dangerous...")
+
+  UI:SetSpeaker(partner)
+  UI:WaitShowDialogue("We'll be safe, I promise.")
+  UI:WaitShowDialogue("Please, " ..gramps:GetDisplayName().. ". We can't wait around forever to get " ..player:GetDisplayName().. " home.")
+
+  UI:SetSpeaker(gramps)
+  UI:SetSpeakerEmotion("worried")
+  UI:WaitShowDialogue("[speed=0.7]Maybe...[pause=30] maybe it is a good plan.")
+  UI:SetSpeakerEmotion("normal")
+  UI:WaitShowDialogue("[speed=0.7]Okay. But be safe. Take this with you.")
+
+  UI:ResetSpeaker()
+  SOUND:PlayFanfare("Fanfare/Note")
+  UI:WaitShowDialogue("[sound=]You received a "..RogueEssence.Dungeon.InvItem("seed_reviver"):GetDisplayName()..".")
+  GAME:GivePlayerItem("seed_reviver", 1)
+
+  UI:SetSpeaker(partner)
+  UI:WaitShowDialogue("Thank you, " ..gramps:GetDisplayName().. ". I'll be safe, I promise.")
+  UI:WaitShowDialogue(silvally:GetDisplayName().. ", we'll try to stay out of your way. The last thing you need is to rescue us too.")
+
+
+  UI:SetSpeaker(silvally)
+  UI:WaitShowDialogue("Affirmative. I commend your courage.")
+  GROUND:EntTurn(silvally, Direction.Right)
+  UI:WaitShowDialogue("Come comrades, we must prepare for our expedition.")
+
+  UI:SetSpeaker(ceruledge)
+  UI:WaitShowDialogue("Right.")
+
+  UI:SetSpeaker(noivern)
+  UI:WaitShowDialogue("Sure.")
+
+  coro1 =  TASK:BranchCoroutine(function() GROUND:MoveToPosition(silvally, 480, 176, false, 2) end)
+  coro2 =  TASK:BranchCoroutine(function() GROUND:MoveToPosition(noivern, 552, 176, false, 2) end)
+  coro3 =  TASK:BranchCoroutine(function() GROUND:MoveToPosition(ceruledge, 492, 176, false, 2) end)
+
+  TASK:JoinCoroutines({coro1, coro2, coro3})
+
+  GROUND:EntTurn(silvally, Direction.UpRight)
+  GROUND:EntTurn(ceruledge, Direction.Up)
+  GROUND:EntTurn(noivern, Direction.Up)
+  noivern.CollisionDisabled = false
+
+  GROUND:EntTurn(partner, Direction.Left)
+  UI:SetSpeaker(partner)
+  UI:WaitShowDialogue("Come on, " ..player:GetDisplayName().. ", let's do the same.")
+  UI:WaitShowDialogue("It's finally time to take on [color=#F8C060]Stardust Peak[color]!")
+  -- End
+  SV.mellow_town.CutsceneVanguard1Done = true
+  GAME:CutsceneMode(false)
+  AI:EnableCharacterAI(partner)
 end
 
 function mellow_town.Coro_Walk(chara, direction, distance, run, speed)
