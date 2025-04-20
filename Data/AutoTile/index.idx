@@ -37,6 +37,33 @@
 "Released": true,
 "Comment": "",
 "SortOrder": 0
+},
+"high_stardust_peak_floor": {
+"Name": {
+"DefaultText": "High Stardust Peak Floor",
+"LocalTexts": {}
+},
+"Released": true,
+"Comment": "",
+"SortOrder": 0
+},
+"high_stardust_peak_secondary": {
+"Name": {
+"DefaultText": "High Stardust Peak Secondary",
+"LocalTexts": {}
+},
+"Released": true,
+"Comment": "",
+"SortOrder": 0
+},
+"high_stardust_peak_wall": {
+"Name": {
+"DefaultText": "High Stardust Peak Wall",
+"LocalTexts": {}
+},
+"Released": true,
+"Comment": "",
+"SortOrder": 0
 }
 }
 }

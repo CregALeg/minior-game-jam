@@ -96,7 +96,7 @@ function stardust_peak_rest_stop.EntranceNorth_Touch(obj, activator)
   UI:WaitForChoice()
   ch = UI:ChoiceResult()
   if ch then
-    GAME:ContinueDungeon("stardust_peak", 0, 1, 0)
+    GAME:ContinueDungeon("stardust_peak", 1, 0, 0)
   else
     UI:WaitShowDialogue(STRINGS:Format("Take your time. We can continue when you're ready."))
   end

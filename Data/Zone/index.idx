@@ -599,15 +599,35 @@ null
 ],
 "Maps": [
 [
-0
+0,
+1,
+2,
+3,
+4,
+5,
+6,
+7,
+8,
+9,
+10,
+11,
+12,
+13,
+14
 ],
-[]
+[
+0,
+1,
+2,
+3,
+4
+]
 ],
 "Name": {
 "DefaultText": "Stardust Peak",
 "LocalTexts": {}
 },
-"Released": false,
+"Released": true,
 "Comment": "\"Final\" dungeon. 20 floors, with a rest stop after 15 floors, before transitioning\r\nto High Stardust Peak.",
 "SortOrder": 0
 }
