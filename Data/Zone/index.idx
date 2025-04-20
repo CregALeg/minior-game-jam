@@ -578,6 +578,38 @@ null
 "Released": true,
 "Comment": "Fifth dungeon. Dark-type themed with low visibility and grass.\r\nHas a boss fight against Ursaluna and 2x Lunatones at the end.\r\nAlso, secret side path Blood Moon Barrow. Boss is replaced with Blood Moon Ursaluna.",
 "SortOrder": 0
+},
+"stardust_peak": {
+"$type": "RogueEssence.Data.ZoneEntrySummary, RogueEssence",
+"ExpPercent": 100,
+"Level": 40,
+"LevelCap": false,
+"KeepSkills": false,
+"TeamRestrict": false,
+"TeamSize": -1,
+"MoneyRestrict": false,
+"BagRestrict": -1,
+"KeepTreasure": false,
+"BagSize": -1,
+"Rescues": 0,
+"CountedFloors": 0,
+"Rogue": 0,
+"Grounds": [
+"stardust_peak_rest_stop"
+],
+"Maps": [
+[
+0
+],
+[]
+],
+"Name": {
+"DefaultText": "Stardust Peak",
+"LocalTexts": {}
+},
+"Released": false,
+"Comment": "\"Final\" dungeon. 20 floors, with a rest stop after 15 floors, before transitioning\r\nto High Stardust Peak.",
+"SortOrder": 0
 }
 }
 }

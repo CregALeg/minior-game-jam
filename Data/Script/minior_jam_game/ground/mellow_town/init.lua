@@ -1089,7 +1089,6 @@ function mellow_town.Assembly_Action(obj, activator)
   COMMON.ShowTeamAssemblyMenu(obj, COMMON.RespawnAllies)
   local partner = CH('Teammate1')
   AI:SetCharacterAI(partner, "origin.ai.ground_partner", CH('PLAYER'), partner.Position)
-  partner.CollisionDisabled = true
 end
 
 -- Teammates

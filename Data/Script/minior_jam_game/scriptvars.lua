@@ -134,6 +134,12 @@ SV.lunar_barrow = {
   BossCutsceneHad = false
 }
 
+SV.stardust_peak = {
+  BossDefeated = false,
+  BossCutsceneHad = false,
+  BossPhase1Beat = false
+}
+
 --
 SV.test_grounds =
 {
