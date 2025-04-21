@@ -23,9 +23,12 @@ In this Pokémon Mystery Dungeon fangame inspired by Explorers of Sky's special 
 - **redblueyellow** - Spindas Cafe, Treasure Town, Sharpedo Bluff tile rips.
 - **Heartlessdragoon** - Treasure Town tile rips.
 - All artists of the [PMD Sprite Collab](https://sprites.pmdcollab.org/)
-- **RRen** - Sky Peak map rip.
-- **Hauntfuck** - Sky Mountain (Intro) Map Rips.
+- **RRen** - Sky Peak map rip, Sky Moon Rip
+- **Hauntfuck** - Sky Mountain (Intro) Map Rips, Sky Moon Rip
+-  **[MegaMinerd](https://projectpokemon.org/home/profile/73557-megaminerd/)** - Mystery Dungeon Sky Map Background Rip
 - **Spike Chunsoft** - Original PMD Time/Darkness/Sky tilesets, portraits, sprites and more
+- **FluffyBunny (Spriters Resource)** - Northern Range Boss Arena Rip
+-  
 - **House Industries** - [House of Terror](https://housefonts.com/hi/monster) font used for the title.
 
 ## Audio
