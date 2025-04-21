@@ -82,7 +82,8 @@ function lunar_lake.Enter(map)
       UI:SetSpeaker(ursa)
       UI:WaitShowDialogue("Then prove it!")
       SOUND:PlayBattleSE("EVT_Roar")
-      GROUND:CharWaitAnim(ursa, "RearUp")
+      -- GROUND:CharWaitAnim(ursa, "RearUp")
+      GROUND:CharSetAction(ursa, RogueEssence.Ground.PoseGroundAction(ursa.Position, ursa.Direction, RogueEssence.Content.GraphicsManager.GetAnimIndex("RearUp")))
       UI:WaitShowDialogue("I, " ..ursa:GetDisplayName().. ", shall test your mettle!")
 
       SV.lunar_barrow.BossCutsceneHad = true
@@ -105,7 +106,8 @@ function lunar_lake.Enter(map)
       UI:SetSpeaker(ursa)
       UI:WaitShowDialogue("Then prove it!")
       SOUND:PlayBattleSE("EVT_Roar")
-      GROUND:CharWaitAnim(ursa, "RearUp")
+      --GROUND:CharWaitAnim(ursa, "RearUp")
+      GROUND:CharSetAction(ursa, RogueEssence.Ground.PoseGroundAction(ursa.Position, ursa.Direction, RogueEssence.Content.GraphicsManager.GetAnimIndex("RearUp")))
       UI:WaitShowDialogue("I, " ..ursa:GetDisplayName().. ", shall test your mettle!")
     end
     -- End of initial cutscene

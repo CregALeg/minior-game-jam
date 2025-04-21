@@ -1,0 +1,245 @@
+﻿{
+"Version": "0.8.9.0",
+"Object": {
+"$type": "RogueEssence.Data.SkillData, RogueEssence",
+"Name": {
+"DefaultText": "Dragon Ascent",
+"LocalTexts": {
+"fr": "Draco Ascension",
+"de": "Zenitstürmer",
+"es": "Ascenso Draco",
+"it": "Ascesa del Drago",
+"ko": "화룡점정",
+"ja": "ガリョウテンセイ",
+"ja-jp": "ガリョウテンセイ",
+"zh-hans": "画龙点睛",
+"zh-hant": "畫龍點睛"
+}
+},
+"Desc": {
+"DefaultText": "After soaring upward, the user attacks its target by dropping out of the sky at high speeds, although it lowers its own Defense and Sp. Def in the process.",
+"LocalTexts": {
+"fr": "Le Pokémon s’abat à toute vitesse sur la cible depuis les hautes couches de l’atmosphère. Baisse la Défense et la Défense Spéciale du lanceur.",
+"de": "Der Anwender greift das Ziel aus atemberaubender Höhe im Sturzflug an. Senkt Verteidigung und Spezial-Verteidigung des Anwenders.",
+"es": "El usuario se precipita desde el cielo a una velocidad de vértigo para atacar al objetivo, pero hace que bajen la Defensa y la Defensa Especial del usuario.",
+"it": "Permette di proiettarsi in aria e fiondarsi sul bersaglio attaccando ad altissima velocità. Riduce la Difesa e la Difesa Speciale di chi la usa.",
+"ko": "넓은 하늘에서 급속으로 강하하여 상대를 공격한다. 자신의 방어와 특수방어가 떨어진다.",
+"ja": "おおぞらから　きゅうそくらっか　して あいてを　こうげきする。 じぶんの　ぼうぎょと　とくぼうが　さがる。",
+"ja-jp": "大空から　急速落下　して 相手を　攻撃する。 自分の　防御と　特防が　さがる。",
+"zh-hans": "从天空中急速下降攻击对手。自己的防御和特防会降低。",
+"zh-hant": "從天空中急速下降攻擊對手。 自己的防禦和特防會降低。"
+}
+},
+"Released": false,
+"Comment": "",
+"IndexNum": 620,
+"BaseCharges": 5,
+"Strikes": 1,
+"HitboxAction": {
+"$type": "RogueEssence.Dungeon.DashAction, RogueEssence",
+"Anim": {
+"AnimIndex": "",
+"FrameTime": 1,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"AnimOffset": 0,
+"Emitter": {
+"$type": "RogueEssence.Content.EmptyAttachEmitter, RogueEssence"
+},
+"WideAngle": 1,
+"SnapBack": false,
+"CharAnim": 5,
+"AppearanceMod": 1,
+"HitTiles": false,
+"Range": 3,
+"StopAtHit": true,
+"StopAtWall": true,
+"TargetAlignments": 4,
+"TileEmitter": {
+"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
+"LocHeight": 0
+},
+"PreActions": [],
+"ActionFX": {
+"Delay": 0,
+"AbsoluteDelay": false,
+"Sound": "DUN_Dragon_Rush",
+"Emitter": {
+"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
+"LocHeight": 0
+},
+"ScreenMovement": {
+"MinShake": 4,
+"MaxShake": 5,
+"MaxShakeTime": 12
+}
+},
+"LagBehindTime": 0
+},
+"Explosion": {
+"TargetAlignments": 4,
+"HitTiles": false,
+"Range": 1,
+"Speed": 0,
+"TileEmitter": {
+"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
+"LocHeight": 0
+},
+"Emitter": {
+"$type": "RogueEssence.Content.CircleSquareAreaEmitter, RogueEssence",
+"LocHeight": 20,
+"Anims": [
+{
+"$type": "RogueEssence.Content.StaticAnim, RogueEssence",
+"Anim": {
+"AnimIndex": "Draco_Meteor_Explosion",
+"FrameTime": 2,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"TotalTime": 0,
+"Cycles": 1,
+"FrameOffset": 0
+}
+],
+"ParticlesPerTile": 1.0,
+"RangeDiff": -6,
+"Layer": 2
+},
+"IntroFX": [],
+"ExplodeFX": {
+"Delay": 5,
+"AbsoluteDelay": false,
+"Sound": "EVT_Tower_Quake",
+"Emitter": {
+"$type": "RogueEssence.Content.SingleEmitter, RogueEssence",
+"LocHeight": 0,
+"finished": false,
+"Offset": 0,
+"Anim": {
+"$type": "RogueEssence.Content.StaticAnim, RogueEssence",
+"Anim": {
+"AnimIndex": "Earthquake_Ranger",
+"FrameTime": 2,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"TotalTime": 0,
+"Cycles": 1,
+"FrameOffset": 0
+},
+"Layer": 2,
+"UseDest": true
+},
+"ScreenMovement": {
+"MinShake": 0,
+"MaxShake": 0,
+"MaxShakeTime": 0
+}
+}
+},
+"Data": {
+"Element": "flying",
+"Category": 1,
+"HitRate": 100,
+"SkillStates": [
+{
+"$type": "PMDC.Dungeon.ContactState, PMDC"
+},
+{
+"$type": "RogueEssence.Dungeon.BasePowerState, RogueEssence",
+"Power": 80
+}
+],
+"BeforeTryActions": [],
+"BeforeActions": [],
+"OnActions": [],
+"BeforeExplosions": [],
+"BeforeHits": [],
+"OnHits": [
+{
+"Key": {
+"str": [
+-1
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.DamageFormulaEvent, PMDC"
+}
+}
+],
+"OnHitTiles": [],
+"AfterActions": [
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.StatusStackBattleEvent, PMDC",
+"Stack": -1,
+"StatusID": "mod_defense",
+"AffectTarget": false,
+"SilentCheck": true,
+"Anonymous": false,
+"TriggerMsg": {
+"Key": null
+},
+"Anims": []
+}
+},
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.StatusStackBattleEvent, PMDC",
+"Stack": -1,
+"StatusID": "mod_special_defense",
+"AffectTarget": false,
+"SilentCheck": true,
+"Anonymous": false,
+"TriggerMsg": {
+"Key": null
+},
+"Anims": []
+}
+}
+],
+"ElementEffects": [],
+"IntroFX": [],
+"HitFX": {
+"Delay": 0,
+"AbsoluteDelay": false,
+"Sound": "",
+"Emitter": {
+"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
+"LocHeight": 0
+},
+"ScreenMovement": {
+"MinShake": 0,
+"MaxShake": 0,
+"MaxShakeTime": 0
+}
+},
+"HitCharAction": {
+"$type": "RogueEssence.Dungeon.CharAnimProcess, RogueEssence",
+"Process": 0,
+"AnimOverride": 0
+}
+}
+}
+}

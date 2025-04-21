@@ -41,3 +41,15 @@ function SINGLE_CHAR_SCRIPT.WishingWoodsGameTutorial(owner, ownerChar, context, 
     end
   end
 end
+
+
+function SINGLE_CHAR_SCRIPT.WeakenBossRayquaza(owner, ownerChar, context, args)
+  local percent = 0.5
+  local map = _ZONE.CurrentMap
+  for i = 0, map.MapTeams.Count - 1, 1 do
+    local team = map.MapTeams[i].Players
+    if team[0].CurrentForm.Species == "rayquaza" then
+      team[0].HP = 700
+    end
+  end
+end
