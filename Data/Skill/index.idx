@@ -6,7 +6,7 @@
 "$type": "RogueEssence.Data.SkillDataSummary, RogueEssence",
 "Element": "flying",
 "Category": 1,
-"BasePower": 80,
+"BasePower": 120,
 "BaseCharges": 5,
 "HitRate": 100,
 "RangeDescription": "Foe in 3-Tile Dash",
