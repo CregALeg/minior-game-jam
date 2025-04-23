@@ -36,7 +36,7 @@
 },
 "CurrentForm": {
 "Species": "rayquaza",
-"Form": 0,
+"Form": 1,
 "Skin": "normal",
 "Gender": 0
 },
@@ -86,7 +86,7 @@
 "Intrinsics": [
 {
 "Element": {
-"ID": "air_lock"
+"ID": "delta_stream"
 },
 "BackRef": 0
 }
@@ -100,7 +100,7 @@
 },
 "Absentee": false,
 "ChargeBoost": 0,
-"HP": 1400,
+"HP": 600,
 "HPRemainder": 0,
 "Fullness": 100,
 "FullnessRemainder": 0,
@@ -192,13 +192,13 @@
 "OriginalTeam": "",
 "BaseForm": {
 "Species": "rayquaza",
-"Form": 0,
+"Form": 1,
 "Skin": "normal",
 "Gender": 0
 },
 "Level": 40,
 "EXP": 0,
-"MaxHPBonus": 2514,
+"MaxHPBonus": 1259,
 "AtkBonus": 0,
 "DefBonus": 0,
 "MAtkBonus": 0,
@@ -227,7 +227,7 @@
 }
 ],
 "BaseIntrinsics": [
-"air_lock"
+"delta_stream"
 ],
 "FormIntrinsicSlot": 0,
 "Relearnables": {},
@@ -277,7 +277,7 @@
 17909611376780542444
 ]
 },
-"AssetName": "stardust_pinnacle_boss_1",
+"AssetName": "stardust_pinnacle_boss_2",
 "ScriptEvents": {},
 "Music": "Boss Battle 2.ogg",
 "TileSight": 0,
@@ -352,18 +352,6 @@
 "Value": {
 "$type": "PMDC.Dungeon.BeginBattleEvent, PMDC",
 "CheckClearStatus": "map_clear_check"
-}
-},
-{
-"Key": {
-"str": [
-0
-]
-},
-"Value": {
-"$type": "RogueEssence.Dungeon.SingleCharScriptEvent, RogueEssence",
-"Script": "WeakenBossRayquaza",
-"ArgTable": "{}"
 }
 }
 ],

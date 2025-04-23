@@ -16,12 +16,23 @@ local stardust_pinnacle = {}
 --Engine callback function
 function stardust_pinnacle.Init(map)
   COMMON.RespawnAllies()
-  local silvally = CH("NPC_Silvally")
-  local ceruledge = CH("NPC_Ceruledge")
-  local noivern = CH("NPC_Noivern")
-  GROUND:CharSetAction(silvally, RogueEssence.Ground.PoseGroundAction(silvally.Position, silvally.Direction, RogueEssence.Content.GraphicsManager.GetAnimIndex("Pain")))
-  GROUND:CharSetAction(ceruledge, RogueEssence.Ground.PoseGroundAction(ceruledge.Position, ceruledge.Direction, RogueEssence.Content.GraphicsManager.GetAnimIndex("Sleep")))
-  GROUND:CharSetAction(noivern, RogueEssence.Ground.PoseGroundAction(noivern.Position, noivern.Direction, RogueEssence.Content.GraphicsManager.GetAnimIndex("Sleep")))
+  stardust_pinnacle.Cutscene_Handler()
+end
+
+function stardust_pinnacle.Cutscene_Handler()
+  GAME:CutsceneMode(true)
+
+  if SV.stardust_peak.BossDefeated ~= true then
+    if SV.stardust_peak.Phase1Defeated == true then
+      stardust_pinnacle.Cutscene_Phase_Transition()
+    elseif SV.stardust_peak.PhaseTransitionCutsceneHad == true then --Beaten first phase, skip straight to second phase.
+      GAME:ContinueDungeon('stardust_peak', 3, 0, 0)
+    elseif SV.stardust_peak.PreRayquazaCutsceneHad == true then --Seen first cutscene, somehow left, play new cutscene for return.
+      stardust_pinnacle.Cutscene_First_Phase_Return()
+    else
+      stardust_pinnacle.Cutscene_Pre_Rayquaza()
+    end
+  end
 end
 
 ---stardust_pinnacle.Enter(map)
@@ -59,6 +70,254 @@ function stardust_pinnacle.GameLoad(map)
 
   GAME:FadeIn(20)
 
+end
+
+function stardust_pinnacle.Cutscene_Pre_Rayquaza()
+  if SV.PreRayquazaCutsceneHad ~= true then
+    local player = CH("PLAYER")
+    local partner = CH("TEAMMATE1")
+    local rayquaza = CH("BOSS_Rayquaza")
+    local silvally = CH("NPC_Silvally")
+    local ceruledge = CH("NPC_Ceruledge")
+    local noivern = CH("NPC_Noivern")
+    GROUND:CharSetAction(silvally, RogueEssence.Ground.PoseGroundAction(silvally.Position, silvally.Direction, RogueEssence.Content.GraphicsManager.GetAnimIndex("Pain")))
+    GROUND:CharSetAction(ceruledge, RogueEssence.Ground.PoseGroundAction(ceruledge.Position, ceruledge.Direction, RogueEssence.Content.GraphicsManager.GetAnimIndex("Sleep")))
+    GROUND:CharSetAction(noivern, RogueEssence.Ground.PoseGroundAction(noivern.Position, noivern.Direction, RogueEssence.Content.GraphicsManager.GetAnimIndex("Sleep")))
+    --Set Locations
+    GROUND:TeleportTo(player, 192, 672, Direction.Up)
+    GROUND:TeleportTo(partner, 216, 672, Direction.Up)
+    if CH("TEAMMATE2") ~= nil then
+      GROUND:TeleportTo(CH("TEAMMATE2"), 168, 672, Direction.Up)
+    end
+    if CH("TEAMMATE3") ~= nil then
+      GROUND:TeleportTo(CH("TEAMMATE3"), 240, 672, Direction.Up)
+    end
+    GROUND:TeleportTo(rayquaza, 192, 360, Direction.Down)
+    GROUND:Unhide("BOSS_Rayquaza")
+    rayquaza.CollisionDisabled = true
+    -- Start Cutscene
+    GAME:FadeIn(20)
+    local coro1 = TASK:BranchCoroutine(function() GROUND:MoveInDirection(player, Direction.Up, 12, false, 1) end)
+    local coro2 = TASK:BranchCoroutine(function() GROUND:MoveInDirection(partner, Direction.Up, 12, false, 1) end)
+    TASK:JoinCoroutines({coro1, coro2})
+    SOUND:PlayBGM("Threat.ogg", true)
+    GAME:WaitFrames(30)
+
+    UI:SetSpeaker(partner)
+    UI:SetSpeakerEmotion("Surprised")
+    UI:WaitShowDialogue("Huh?![pause=30] [color=#F8A0F8]Team Vanguard[color]?[pause=30] What happened?")
+
+    UI:SetSpeaker(silvally)
+    UI:SetSpeakerEmotion("Pain")
+    UI:WaitShowDialogue("[speed=0.6]We...[pause=20] We tried to take on [color=#009800]Rayquaza[color]...")
+    UI:WaitShowDialogue("[speed=0.6]We injured it...[pause=30] But we were defeated...")
+
+    shake = RogueEssence.Content.ScreenMover(0, 20, 24)
+    GROUND:MoveScreen(shake)
+    SOUND:PlayBattleSE("EVT_Roar")
+
+    GAME:WaitFrames(30)
+
+    UI:WaitShowDialogue("[speed=0.6]Be on your guard...[pause=30] The beast still lurks here.")
+
+    shake = RogueEssence.Content.ScreenMover(0, 20, 24)
+    GROUND:MoveScreen(shake)
+    SOUND:PlayBattleSE("EVT_Roar")
+
+    local animId = RogueEssence.Content.GraphicsManager.GetAnimIndex("Hop")
+    local frameAction = RogueEssence.Ground.IdleAnimGroundAction(rayquaza.Position, 0, Direction.Down, animId, false)
+    GROUND:ActionToPosition(rayquaza, frameAction, 192, 552, 1, 1, 1)
+
+    shake = RogueEssence.Content.ScreenMover(0, 20, 24)
+    GROUND:MoveScreen(shake)
+    SOUND:PlayBattleSE("EVT_Roar")
+    UI:SetSpeaker(rayquaza)
+    UI:SetSpeakerEmotion("Angry")
+    UI:WaitShowDialogue("[speed=0.8]GRROOOOAAAAAARRGGHHH!!")
+
+    UI:SetSpeaker(partner)
+    UI:SetSpeakerEmotion("Surprised")
+    UI:WaitShowDialogue("Wah![pause=0] T-that's [color=#009800]Rayquaza[color]?")
+
+    shake = RogueEssence.Content.ScreenMover(0, 20, 24)
+    GROUND:MoveScreen(shake)
+    SOUND:PlayBattleSE("EVT_Roar")
+    UI:SetSpeaker(rayquaza)
+    UI:SetSpeakerEmotion("Angry")
+    UI:WaitShowDialogue("[speed=0.8]GRROOOOOOOOAAAAAAAAAAARRGGHHH!!")
+
+    UI:SetSpeaker(partner)
+    UI:SetSpeakerEmotion("Surprised")
+    UI:WaitShowDialogue("I don't think we can talk our way out of this one!")
+    UI:SetSpeaker("Determined")
+    UI:WaitShowDialogue("Get ready, "  ..player:GetDisplayName().. "! Here it comes!")
+
+    GAME:CutsceneMode(false)
+
+    COMMON.BossTransition()
+
+    GAME:ContinueDungeon('stardust_peak', 2, 0, 0)
+
+    --End
+    SV.stardust_peak.PreRayquazaCutsceneHad = true
+  end
+end
+
+function stardust_pinnacle.Cutscene_First_Phase_Return()
+end
+
+function stardust_pinnacle.Cutscene_Phase_Transition()
+  local player = CH("PLAYER")
+  local partner = CH("TEAMMATE1")
+  local rayquaza = CH("BOSS_Rayquaza")
+  GROUND:Hide("NPC_Silvally")
+  GROUND:Hide("NPC_Noivern")
+  GROUND:Hide("NPC_Ceruledge")
+  GROUND:Unhide("BOSS_Rayquaza")
+  --Set Locations
+  GROUND:TeleportTo(player, 192, 648, Direction.Up)
+  GROUND:TeleportTo(partner, 216, 648, Direction.Up)
+  if CH("TEAMMATE2") ~= nil then
+    GROUND:TeleportTo(CH("TEAMMATE2"), 168, 672, Direction.Up)
+  end
+  if CH("TEAMMATE3") ~= nil then
+    GROUND:TeleportTo(CH("TEAMMATE3"), 240, 672, Direction.Up)
+  end
+  GROUND:TeleportTo(rayquaza, 192, 552, Direction.Down)
+  GROUND:CharSetAnim(rayquaza, "Charge", true)
+  --Begin
+  GAME:FadeIn(20)
+
+  UI:SetSpeaker(rayquaza)
+  UI:SetSpeakerEmotion("Pain")
+  UI:WaitShowDialogue("[speed=0.8]GRRRR...")
+
+  UI:SetSpeaker(partner)
+  UI:SetSpeakerEmotion("Surprised")
+  UI:WaitShowDialogue("Did... [pause=20]did we do it?")
+
+  shake = RogueEssence.Content.ScreenMover(0, 20, 24)
+  GROUND:MoveScreen(shake)
+  SOUND:PlayBattleSE("EVT_Roar")
+
+  GAME:WaitFrames(30)
+
+  stardust_pinnacle.mega_evolution_anim(rayquaza)
+  GAME:WaitFrames(188)
+
+  GROUND:CharEndAnim(rayquaza)
+
+  GROUND:CharSetAnim(rayquaza, "Shoot", false)
+
+  shake = RogueEssence.Content.ScreenMover(16, 20, 24)
+  GROUND:MoveScreen(shake)
+  SOUND:PlayBattleSE("EVT_Roar")
+  UI:SetSpeaker(rayquaza)
+  UI:SetSpeakerEmotion("Angry")
+  UI:WaitShowDialogue("[speed=0.8]GRROOOOOOOOAAAAAAAAAAARRGGHHH!!")
+
+  UI:SetSpeaker(partner)
+
+  GAME:CutsceneMode(false)
+  UI:SetSpeakerEmotion("Surprised")
+  UI:WaitShowDialogue("What...[pause=20] What is this?[pause=0] It's like we didn't hurt it at all!")
+
+  GROUND:MoveInDirection(rayquaza, Direction.Down, 24, false, 1)
+
+  UI:SetSpeakerEmotion("Pain")
+  UI:WaitShowDialogue("We're done for...")
+
+  GROUND:MoveInDirection(rayquaza, Direction.Down, 24, false, 1)
+
+  --GAME:FadeOut(false, 10)
+
+  GROUND:CharSetAnim(rayquaza, "Shoot", false)
+  shake = RogueEssence.Content.ScreenMover(16, 20, 24)
+  GROUND:MoveScreen(shake)
+  SOUND:PlayBattleSE("EVT_Roar")
+  UI:SetSpeaker(rayquaza)
+  UI:SetSpeakerEmotion("Angry")
+
+  local sneaslerChara = _DATA.Save.ActiveTeam:CreatePlayer(_DATA.Save.Rand, RogueEssence.Dungeon.MonsterID("sneasler", 0, "normal", Gender.Female), 50, "poison_touch", 0)
+  sneaslerChara.Level = 50
+  sneaslerChara.Tactic = _DATA:GetAITactic("go_after_foes")
+  GAME:SetCharacterSkill(sneaslerChara, "poison_jab", 0)
+  GAME:SetCharacterSkill(sneaslerChara, "brick_break", 1)
+  GAME:SetCharacterSkill(sneaslerChara, "night_slash", 2)
+  GAME:SetCharacterSkill(sneaslerChara, "taunt", 3)
+
+  local tsareenaChara = _DATA.Save.ActiveTeam:CreatePlayer(_DATA.Save.Rand, RogueEssence.Dungeon.MonsterID("tsareena", 0, "normal", Gender.Female), 50, "queenly_majesty", 0)
+  tsareenaChara.Level = 50
+  tsareenaChara.Tactic = _DATA:GetAITactic("go_after_foes")
+  GAME:SetCharacterSkill(tsareenaChara, "trop_kick", 0)
+  GAME:SetCharacterSkill(tsareenaChara, "stomp", 1)
+  GAME:SetCharacterSkill(tsareenaChara, "triple_axel", 2)
+  GAME:SetCharacterSkill(tsareenaChara, "sweet_scent", 3)
+
+  GAME:AddPlayerGuest(sneaslerChara)
+  GAME:AddPlayerGuest(tsareenaChara)
+
+  COMMON.BossTransition()
+
+  GAME:ContinueDungeon('stardust_peak', 3, 0, 0)
+
+  --End
+  SV.stardust_peak.PhaseTransitionCutsceneHad = true
+end
+
+function stardust_pinnacle.mega_evolution_anim(chara)
+  local emitter1 = RogueEssence.Content.SingleEmitter(RogueEssence.Content.AnimData("Circle_Small_Green_In", 4))
+  emitter1.LocHeight=24
+  GROUND:PlayVFX(emitter1, chara.Bounds.Center.X, chara.Bounds.Center.Y)
+  SOUND:PlayBattleSE("DUN_Zen_Headbutt")
+  GAME:WaitFrames(20)
+
+  --emitter1 = RogueEssence.Content.SingleEmitter(RogueEssence.Content.AnimData("Circle_Small_Green_In", 3))
+  --emitter1 = RogueEssence.Content.StaticAnim(RogueEssence.Content.AnimData("Circle_Small_Green_In", 3))
+  --emitter1.LocHeight=8
+  --emitter1.Cycles = 6
+
+  local ringsAnim = RogueEssence.Content.StaticAnim(RogueEssence.Content.AnimData("Circle_Small_Green_In", 3), 6)
+  ringsAnim:SetupEmitted(RogueElements.Loc(chara.Bounds.Center.X, chara.Bounds.Center.Y+8), 32, RogueElements.Dir8.Down)
+
+  local ballAnim = RogueEssence.Content.StaticAnim(RogueEssence.Content.AnimData("Light_Ball_Green", 21), 1)
+  ballAnim:SetupEmitted(RogueElements.Loc(chara.Bounds.Center.X, chara.Bounds.Center.Y+8), 32, RogueElements.Dir8.Down)
+
+  local center = GAME:GetCameraCenter()
+  GROUND:PlayVFXAnim(ringsAnim, RogueEssence.Content.DrawLayer.Front)
+  GROUND:PlayVFXAnim(ballAnim, RogueEssence.Content.DrawLayer.Front)
+  SOUND:PlayBattleSE("Mega_Evolution")
+  GAME:WaitFrames(188)
+  local emitter = RogueEssence.Content.FlashEmitter()
+  emitter.FadeInTime = 40
+  emitter.HoldTime = 60
+  emitter.FadeOutTime = 60
+  emitter.StartColor = Color(0, 0, 0, 0)
+  emitter.Layer = DrawLayer.Top
+  emitter.Anim = RogueEssence.Content.BGAnimData("White", 0)
+  GROUND:PlayVFX(emitter, center.X, center.Y)
+  -- Form Change
+  local form = chara.CurrentForm
+  local newForm = RogueEssence.Dungeon.MonsterID(form.Species, 1, form.Skin, form.Gender)
+  chara.Data.BaseForm = newForm
+end
+
+-- function looped_anim(emitter, chara, loops)
+--   for i = 0, loops do
+--     GROUND:PlayVFX(emitter, chara.Bounds.Center.X, chara.Bounds.Center.Y-12)
+--   end
+-- end
+
+function stardust_pinnacle.Cutscene_Post_Rayquaza()
+end
+
+function stardust_pinnacle.Cutscene_Ending_One()
+end
+
+function stardust_pinnacle.Cutscene_Ending_Two()
+end
+
+function stardust_pinnacle.Cutscene_Ending_True()
 end
 
 -------------------------------

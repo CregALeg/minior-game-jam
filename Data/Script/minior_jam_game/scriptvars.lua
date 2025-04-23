@@ -136,8 +136,13 @@ SV.lunar_barrow = {
 
 SV.stardust_peak = {
   BossDefeated = false,
-  BossCutsceneHad = false,
-  BossPhase1Beat = false
+  Phase1Defeated = false,
+  PreRayquazaCutsceneHad = false,
+  PhaseTransitionCutsceneHad = false,
+  PostRayquazaCutsceneHad = false,
+  CanDoEndingOne = false,
+  CanDoEndingTwo = false,
+  CanDoEndingTrue = false
 }
 
 --

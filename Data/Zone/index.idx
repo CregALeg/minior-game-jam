@@ -595,7 +595,9 @@ null
 "CountedFloors": 0,
 "Rogue": 0,
 "Grounds": [
-"stardust_peak_rest_stop"
+"stardust_peak_rest_stop",
+"stardust_pinnacle",
+"base_camp_2"
 ],
 "Maps": [
 [
@@ -621,6 +623,12 @@ null
 2,
 3,
 4
+],
+[
+0
+],
+[
+0
 ]
 ],
 "Name": {

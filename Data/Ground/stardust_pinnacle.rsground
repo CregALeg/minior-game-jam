@@ -52897,7 +52897,7 @@
 }
 ],
 "AssetName": "stardust_pinnacle",
-"Music": "Sky Peak Final Pass.ogg",
+"Music": "",
 "EdgeView": 1,
 "NoSwitching": false,
 "ViewCenter": null,
@@ -53024,8 +53024,8 @@
 "EntOrder": 0,
 "InteractOrder": 0,
 "serializationLoc": {
-"X": 196,
-"Y": 556
+"X": 197,
+"Y": 604
 },
 "serializationHeight": 0,
 "serializationDir": 4,
@@ -53105,7 +53105,7 @@
 },
 "CollisionDisabled": false,
 "Collider": {
-"X": 195,
+"X": 172,
 "Y": 556,
 "Width": 16,
 "Height": 16

@@ -23312,10 +23312,84 @@
 ],
 "IsRelevant": false,
 "Comment": ""
+},
+{
+"$type": "RogueEssence.LevelGen.LayeredSegment, RogueEssence",
+"Floors": [
+{
+"$type": "RogueEssence.LevelGen.LoadGen, RogueEssence",
+"GenSteps": [
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "RogueEssence.LevelGen.MappedRoomStep`1[[RogueEssence.LevelGen.MapLoadContext, RogueEssence]], RogueEssence",
+"MapID": "stardust_pinnacle_boss_1"
+}
+},
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.LevelGen.MapTimeLimitStep`1[[RogueEssence.LevelGen.MapLoadContext, RogueEssence]], PMDC",
+"TimeLimit": 1000
+}
+}
+],
+"Comment": ""
+}
+],
+"ZoneSteps": [],
+"IsRelevant": false,
+"Comment": ""
+},
+{
+"$type": "RogueEssence.LevelGen.LayeredSegment, RogueEssence",
+"Floors": [
+{
+"$type": "RogueEssence.LevelGen.LoadGen, RogueEssence",
+"GenSteps": [
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "RogueEssence.LevelGen.MappedRoomStep`1[[RogueEssence.LevelGen.MapLoadContext, RogueEssence]], RogueEssence",
+"MapID": "stardust_pinnacle_boss_2"
+}
+},
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.LevelGen.MapTimeLimitStep`1[[RogueEssence.LevelGen.MapLoadContext, RogueEssence]], PMDC",
+"TimeLimit": 1000
+}
+}
+],
+"Comment": ""
+}
+],
+"ZoneSteps": [],
+"IsRelevant": false,
+"Comment": ""
 }
 ],
 "GroundMaps": [
-"stardust_peak_rest_stop"
+"stardust_peak_rest_stop",
+"stardust_pinnacle",
+"base_camp_2"
 ]
 }
 }
