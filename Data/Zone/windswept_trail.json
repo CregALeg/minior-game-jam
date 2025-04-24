@@ -4714,7 +4714,7 @@
 },
 "Level": {
 "Min": 16,
-"Max": 19
+"Max": 18
 },
 "SpecifiedSkills": [],
 "Intrinsic": "",
@@ -4744,8 +4744,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 19,
-"Max": 22
+"Min": 17,
+"Max": 19
 },
 "SpecifiedSkills": [],
 "Intrinsic": "",
@@ -4775,8 +4775,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 17,
-"Max": 21
+"Min": 16,
+"Max": 18
 },
 "SpecifiedSkills": [],
 "Intrinsic": "",
@@ -4807,7 +4807,7 @@
 },
 "Level": {
 "Min": 16,
-"Max": 19
+"Max": 18
 },
 "SpecifiedSkills": [],
 "Intrinsic": "",
@@ -4837,8 +4837,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 19,
-"Max": 21
+"Min": 17,
+"Max": 19
 },
 "SpecifiedSkills": [],
 "Intrinsic": "",
@@ -4865,7 +4865,7 @@
 },
 "Level": {
 "Min": 16,
-"Max": 22
+"Max": 18
 },
 "SpecifiedSkills": [],
 "Intrinsic": "",
@@ -4892,7 +4892,7 @@
 },
 "Level": {
 "Min": 16,
-"Max": 22
+"Max": 18
 },
 "SpecifiedSkills": [],
 "Intrinsic": "",
@@ -4918,8 +4918,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 19,
-"Max": 23
+"Min": 18,
+"Max": 19
 },
 "SpecifiedSkills": [],
 "Intrinsic": "",
@@ -4945,8 +4945,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 18,
-"Max": 21
+"Min": 16,
+"Max": 18
 },
 "SpecifiedSkills": [],
 "Intrinsic": "",

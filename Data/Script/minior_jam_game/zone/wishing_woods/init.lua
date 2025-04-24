@@ -38,9 +38,9 @@ function wishing_woods.ExitSegment(zone, result, rescue, segmentID, mapID)
   elseif result == RogueEssence.Data.GameProgress.ResultType.Failed then
     UI:SetSpeaker(GAME:GetPlayerPartyMember(1))
     UI:SetSpeakerEmotion("Pain")
-    UI:WaitShowDialogue("Urk...[pause=20] This is harder than I thought...[pause=20] Let's head home for now...")
+    UI:WaitShowDialogue("Urk...[pause=20] This is harder than I thought...[pause=20] Let's head back for now...")
     if SV.mellow_town.CutsceneIntro == false then
-      COMMON.EndDungeonDay(result, 'jam_intro', -1, 0, 0)
+      COMMON.EndDungeonDay(result, 'jam_intro', -1, 1, 0)
     else
       COMMON.EndDungeonDay(result, 'mellow_town', -1, 0, 0)
     end

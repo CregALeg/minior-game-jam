@@ -1382,6 +1382,7 @@ function mellow_town.CutsceneIntro()
     SV.mellow_town.CutsceneIntro = true
     GAME:CutsceneMode(false)
     AI:EnableCharacterAI(partner)
+    COMMON.UpdateDayEndVars()
   end
 end
 

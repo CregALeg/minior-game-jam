@@ -79,7 +79,7 @@ function stardust_peak_rest_stop.EntranceSouth_Touch(obj, activator)
   UI:WaitForChoice()
   ch = UI:ChoiceResult()
   if ch then
-    local result = RogueEssence.Data.GameProgress.ResultType.Escaped
+    local result = RogueEssence.Data.GameProgress.ResultType.Cleared
     COMMON.EndDungeonDay(result, 'mellow_town', -1, 0, 1)
   else
     UI:WaitShowDialogue(STRINGS:Format("Okay, let's do this then!"))

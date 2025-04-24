@@ -29,6 +29,7 @@ function crash_site.Enter(map)
     COMMON:RespawnAllies() --Setup partner to spawn
     chara = CH("PARTNER")
     GROUND:TeleportTo(chara, 184, 275, Direction.Up)
+    GAME:FadeIn(20)
   end
 end
 

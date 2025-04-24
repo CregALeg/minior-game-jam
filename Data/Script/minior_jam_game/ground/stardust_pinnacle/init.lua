@@ -22,7 +22,7 @@ end
 function stardust_pinnacle.Cutscene_Handler()
   GAME:CutsceneMode(true)
 
-  if SV.stardust_peak.BossDefeated ~= true then
+  if SV.stardust_peak.BossDefeated == false then
     if SV.stardust_peak.Phase2Defeated == true then
       stardust_pinnacle.Cutscene_Post_Rayquaza()
     elseif SV.stardust_peak.Phase1Defeated == true then

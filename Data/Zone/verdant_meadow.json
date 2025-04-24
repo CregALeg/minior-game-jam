@@ -319,7 +319,7 @@
 },
 "Respawn": {
 "$type": "PMDC.Dungeon.RespawnFromEligibleEvent, PMDC",
-"MaxFoes": 15,
+"MaxFoes": 8,
 "RespawnTime": 110
 },
 "MaxFoes": 0,
@@ -650,8 +650,8 @@
 "Spawn": {
 "$type": "RogueEssence.LevelGen.TeamContextSpawner`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "Amount": {
-"Min": 9,
-"Max": 12
+"Min": 4,
+"Max": 6
 }
 },
 "Ally": false,
@@ -964,7 +964,7 @@
 },
 "Respawn": {
 "$type": "PMDC.Dungeon.RespawnFromEligibleEvent, PMDC",
-"MaxFoes": 15,
+"MaxFoes": 8,
 "RespawnTime": 110
 },
 "MaxFoes": 0,
@@ -1295,8 +1295,8 @@
 "Spawn": {
 "$type": "RogueEssence.LevelGen.TeamContextSpawner`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "Amount": {
-"Min": 9,
-"Max": 12
+"Min": 4,
+"Max": 6
 }
 },
 "Ally": false,
@@ -1609,7 +1609,7 @@
 },
 "Respawn": {
 "$type": "PMDC.Dungeon.RespawnFromEligibleEvent, PMDC",
-"MaxFoes": 15,
+"MaxFoes": 8,
 "RespawnTime": 110
 },
 "MaxFoes": 0,
@@ -1940,8 +1940,8 @@
 "Spawn": {
 "$type": "RogueEssence.LevelGen.TeamContextSpawner`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "Amount": {
-"Min": 9,
-"Max": 12
+"Min": 4,
+"Max": 6
 }
 },
 "Ally": false,
@@ -2254,7 +2254,7 @@
 },
 "Respawn": {
 "$type": "PMDC.Dungeon.RespawnFromEligibleEvent, PMDC",
-"MaxFoes": 15,
+"MaxFoes": 8,
 "RespawnTime": 110
 },
 "MaxFoes": 0,
@@ -2585,8 +2585,8 @@
 "Spawn": {
 "$type": "RogueEssence.LevelGen.TeamContextSpawner`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "Amount": {
-"Min": 9,
-"Max": 12
+"Min": 4,
+"Max": 6
 }
 },
 "Ally": false,
@@ -2899,7 +2899,7 @@
 },
 "Respawn": {
 "$type": "PMDC.Dungeon.RespawnFromEligibleEvent, PMDC",
-"MaxFoes": 15,
+"MaxFoes": 8,
 "RespawnTime": 110
 },
 "MaxFoes": 0,
@@ -3230,8 +3230,8 @@
 "Spawn": {
 "$type": "RogueEssence.LevelGen.TeamContextSpawner`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "Amount": {
-"Min": 9,
-"Max": 12
+"Min": 4,
+"Max": 6
 }
 },
 "Ally": false,
@@ -3544,7 +3544,7 @@
 },
 "Respawn": {
 "$type": "PMDC.Dungeon.RespawnFromEligibleEvent, PMDC",
-"MaxFoes": 15,
+"MaxFoes": 8,
 "RespawnTime": 110
 },
 "MaxFoes": 0,
@@ -3875,8 +3875,8 @@
 "Spawn": {
 "$type": "RogueEssence.LevelGen.TeamContextSpawner`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "Amount": {
-"Min": 9,
-"Max": 12
+"Min": 5,
+"Max": 7
 }
 },
 "Ally": false,
@@ -4189,7 +4189,7 @@
 },
 "Respawn": {
 "$type": "PMDC.Dungeon.RespawnFromEligibleEvent, PMDC",
-"MaxFoes": 15,
+"MaxFoes": 8,
 "RespawnTime": 110
 },
 "MaxFoes": 0,
@@ -4520,8 +4520,8 @@
 "Spawn": {
 "$type": "RogueEssence.LevelGen.TeamContextSpawner`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "Amount": {
-"Min": 9,
-"Max": 12
+"Min": 5,
+"Max": 7
 }
 },
 "Ally": false,
@@ -4834,7 +4834,7 @@
 },
 "Respawn": {
 "$type": "PMDC.Dungeon.RespawnFromEligibleEvent, PMDC",
-"MaxFoes": 15,
+"MaxFoes": 8,
 "RespawnTime": 110
 },
 "MaxFoes": 0,
@@ -5165,8 +5165,8 @@
 "Spawn": {
 "$type": "RogueEssence.LevelGen.TeamContextSpawner`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "Amount": {
-"Min": 9,
-"Max": 12
+"Min": 5,
+"Max": 7
 }
 },
 "Ally": false,
@@ -5733,7 +5733,7 @@
 },
 "Level": {
 "Min": 18,
-"Max": 24
+"Max": 22
 },
 "SpecifiedSkills": [],
 "Intrinsic": "",
@@ -5764,7 +5764,7 @@
 },
 "Level": {
 "Min": 20,
-"Max": 24
+"Max": 22
 },
 "SpecifiedSkills": [],
 "Intrinsic": "",
@@ -5795,7 +5795,7 @@
 },
 "Level": {
 "Min": 18,
-"Max": 23
+"Max": 22
 },
 "SpecifiedSkills": [],
 "Intrinsic": "",
@@ -5880,7 +5880,7 @@
 },
 "Level": {
 "Min": 20,
-"Max": 25
+"Max": 22
 },
 "SpecifiedSkills": [],
 "Intrinsic": "",
@@ -5906,8 +5906,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 24,
-"Max": 27
+"Min": 22,
+"Max": 24
 },
 "SpecifiedSkills": [],
 "Intrinsic": "",
@@ -5934,7 +5934,7 @@
 },
 "Level": {
 "Min": 18,
-"Max": 23
+"Max": 21
 },
 "SpecifiedSkills": [],
 "Intrinsic": "",
