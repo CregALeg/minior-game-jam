@@ -30,7 +30,8 @@ end
 --Engine callback function
 function stardust_peak.ExitSegment(zone, result, rescue, segmentID, mapID)
   PrintInfo("=>> ExitSegment_stardust_peak result "..tostring(result).." segment "..tostring(segmentID).."\n\n\n")
-
+  GAME:RemovePlayerGuest(1) --Always remove guests when leaving stardust peak, regardless of how
+  GAME:RemovePlayerGuest(0)
   local exited = COMMON.ExitDungeonMissionCheck(result, rescue, zone.ID, segmentID)
   if exited == true then
     -- do nothing
@@ -45,14 +46,16 @@ function stardust_peak.ExitSegment(zone, result, rescue, segmentID, mapID)
     elseif segmentID == 1 then --Exiting from second half of dungeon
       if SV.stardust_peak.BossDefeated == true then
         -- Handling needs to be added here.
-      elseif segmentID == 2 then --Exiting from phase one
-        SV.stardust_peak.Phase1Defeated = true
-        GAME:EnterZone("stardust_peak", -1, 1, 0) -- Send to ground map for cutscene
       else --Boss not defeated
         GAME:EnterZone("stardust_peak", -1, 1, 0) -- Send to ground map for cutscene
       end
-    elseif segmentID == 2 then --Exiting from Boss Battle
-      --Add stuff
+    elseif segmentID == 2 then --Exiting from Phase 1
+      PrintInfo("Phase 1 Defeated")
+      SV.stardust_peak.Phase1Defeated = true
+      GAME:EnterZone("stardust_peak", -1, 1, 0) -- Send to ground map for cutscene
+    elseif segmentID == 3 then --Exiting from phase  two
+      SV.stardust_peak.Phase2Defeated = true
+      GAME:EnterZone("stardust_peak", -1, 1, 0) -- Send to ground map for cutscene
     end
   end
 end

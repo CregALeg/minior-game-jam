@@ -57,8 +57,8 @@
 },
 {
 "Element": {
-"SkillNum": "dragon_claw",
-"Charges": 18,
+"SkillNum": "dragon_rush",
+"Charges": 14,
 "Enabled": true,
 "Sealed": false
 },
@@ -66,8 +66,8 @@
 },
 {
 "Element": {
-"SkillNum": "twister",
-"Charges": 15,
+"SkillNum": "crunch",
+"Charges": 16,
 "Enabled": true,
 "Sealed": false
 },
@@ -75,8 +75,8 @@
 },
 {
 "Element": {
-"SkillNum": "scary_face",
-"Charges": 16,
+"SkillNum": "dragon_dance",
+"Charges": 17,
 "Enabled": true,
 "Sealed": false
 },
@@ -100,7 +100,7 @@
 },
 "Absentee": false,
 "ChargeBoost": 0,
-"HP": 600,
+"HP": 750,
 "HPRemainder": 0,
 "Fullness": 100,
 "FullnessRemainder": 0,
@@ -196,13 +196,13 @@
 "Skin": "normal",
 "Gender": 0
 },
-"Level": 40,
+"Level": 32,
 "EXP": 0,
-"MaxHPBonus": 1259,
+"MaxHPBonus": 1688,
 "AtkBonus": 0,
-"DefBonus": 0,
+"DefBonus": 32,
 "MAtkBonus": 0,
-"MDefBonus": 0,
+"MDefBonus": 32,
 "SpeedBonus": 0,
 "BaseSkills": [
 {
@@ -211,18 +211,18 @@
 "CanForget": true
 },
 {
-"SkillNum": "dragon_claw",
-"Charges": 18,
+"SkillNum": "dragon_rush",
+"Charges": 14,
 "CanForget": true
 },
 {
-"SkillNum": "twister",
-"Charges": 15,
-"CanForget": true
-},
-{
-"SkillNum": "scary_face",
+"SkillNum": "crunch",
 "Charges": 16,
+"CanForget": true
+},
+{
+"SkillNum": "dragon_dance",
+"Charges": 17,
 "CanForget": true
 }
 ],
@@ -313,29 +313,29 @@
 "StartLocs": [
 {
 "Loc": {
-"X": 8,
-"Y": 27
+"X": 0,
+"Y": 0
 },
 "Dir": 4
 },
 {
 "Loc": {
-"X": 9,
-"Y": 27
+"X": 1,
+"Y": 0
 },
 "Dir": 4
 },
 {
 "Loc": {
-"X": 7,
-"Y": 28
+"X": -1,
+"Y": 1
 },
 "Dir": 4
 },
 {
 "Loc": {
-"X": 9,
-"Y": 28
+"X": 2,
+"Y": 1
 },
 "Dir": 4
 }
@@ -22683,7 +22683,15 @@
 ]
 ],
 "EdgeView": 1,
-"EntryPoints": [],
+"EntryPoints": [
+{
+"Loc": {
+"X": 8,
+"Y": 27
+},
+"Dir": 0
+}
+],
 "Items": []
 }
 }

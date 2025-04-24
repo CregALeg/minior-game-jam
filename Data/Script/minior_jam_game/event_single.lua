@@ -49,7 +49,7 @@ function SINGLE_CHAR_SCRIPT.WeakenBossRayquaza(owner, ownerChar, context, args)
   for i = 0, map.MapTeams.Count - 1, 1 do
     local team = map.MapTeams[i].Players
     if team[0].CurrentForm.Species == "rayquaza" then
-      team[0].HP = 700
+      team[0].HP = 650
     end
   end
 end

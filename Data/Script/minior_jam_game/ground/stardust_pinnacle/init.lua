@@ -23,15 +23,19 @@ function stardust_pinnacle.Cutscene_Handler()
   GAME:CutsceneMode(true)
 
   if SV.stardust_peak.BossDefeated ~= true then
-    if SV.stardust_peak.Phase1Defeated == true then
+    if SV.stardust_peak.Phase2Defeated == true then
+      stardust_pinnacle.Cutscene_Post_Rayquaza()
+    elseif SV.stardust_peak.Phase1Defeated == true then
       stardust_pinnacle.Cutscene_Phase_Transition()
     elseif SV.stardust_peak.PhaseTransitionCutsceneHad == true then --Beaten first phase, skip straight to second phase.
-      GAME:ContinueDungeon('stardust_peak', 3, 0, 0)
+      stardust_pinnacle.Phase_Two_Return()
     elseif SV.stardust_peak.PreRayquazaCutsceneHad == true then --Seen first cutscene, somehow left, play new cutscene for return.
       stardust_pinnacle.Cutscene_First_Phase_Return()
     else
       stardust_pinnacle.Cutscene_Pre_Rayquaza()
     end
+  else --boss is defeated
+    stardust_pinnacle.EndingHandler()
   end
 end
 
@@ -149,17 +153,14 @@ function stardust_pinnacle.Cutscene_Pre_Rayquaza()
     UI:SetSpeaker(partner)
     UI:SetSpeakerEmotion("Surprised")
     UI:WaitShowDialogue("I don't think we can talk our way out of this one!")
-    UI:SetSpeaker("Determined")
+    UI:SetSpeakerEmotion("Determined")
     UI:WaitShowDialogue("Get ready, "  ..player:GetDisplayName().. "! Here it comes!")
-
+    --End
     GAME:CutsceneMode(false)
+    SV.stardust_peak.PreRayquazaCutsceneHad = true
 
     COMMON.BossTransition()
-
     GAME:ContinueDungeon('stardust_peak', 2, 0, 0)
-
-    --End
-    SV.stardust_peak.PreRayquazaCutsceneHad = true
   end
 end
 
@@ -170,6 +171,8 @@ function stardust_pinnacle.Cutscene_Phase_Transition()
   local player = CH("PLAYER")
   local partner = CH("TEAMMATE1")
   local rayquaza = CH("BOSS_Rayquaza")
+  local sneasler = CH("NPC_Sneasler")
+  local tsareena = CH("NPC_Tsareena")
   GROUND:Hide("NPC_Silvally")
   GROUND:Hide("NPC_Noivern")
   GROUND:Hide("NPC_Ceruledge")
@@ -177,6 +180,8 @@ function stardust_pinnacle.Cutscene_Phase_Transition()
   --Set Locations
   GROUND:TeleportTo(player, 192, 648, Direction.Up)
   GROUND:TeleportTo(partner, 216, 648, Direction.Up)
+  GROUND:TeleportTo(sneasler, 144, 720, Direction.Up)
+  GROUND:TeleportTo(tsareena, 240, 720, Direction.Up)
   if CH("TEAMMATE2") ~= nil then
     GROUND:TeleportTo(CH("TEAMMATE2"), 168, 672, Direction.Up)
   end
@@ -196,11 +201,15 @@ function stardust_pinnacle.Cutscene_Phase_Transition()
   UI:SetSpeakerEmotion("Surprised")
   UI:WaitShowDialogue("Did... [pause=20]did we do it?")
 
-  shake = RogueEssence.Content.ScreenMover(0, 20, 24)
+  GROUND:CharSetAnim(rayquaza, "Shoot", false)
+  shake = RogueEssence.Content.ScreenMover(16, 20, 24)
   GROUND:MoveScreen(shake)
   SOUND:PlayBattleSE("EVT_Roar")
-
   GAME:WaitFrames(30)
+
+  -- Really long screen shake
+  shake = RogueEssence.Content.ScreenMover(0, 20, 392)
+  GROUND:MoveScreen(shake)
 
   stardust_pinnacle.mega_evolution_anim(rayquaza)
   GAME:WaitFrames(188)
@@ -220,14 +229,51 @@ function stardust_pinnacle.Cutscene_Phase_Transition()
 
   GAME:CutsceneMode(false)
   UI:SetSpeakerEmotion("Surprised")
-  UI:WaitShowDialogue("What...[pause=20] What is this?[pause=0] It's like we didn't hurt it at all!")
+  UI:WaitShowDialogue("What?![pause=20] What just happened?[pause=20] It's like we didn't hurt it at all!")
 
   GROUND:MoveInDirection(rayquaza, Direction.Down, 24, false, 1)
 
   UI:SetSpeakerEmotion("Pain")
-  UI:WaitShowDialogue("We're done for...")
+  UI:WaitShowDialogue("We're done for... [pause=0]If [color=#F8A0F8]Team Vanguard[color] couldn't beat it...")
 
   GROUND:MoveInDirection(rayquaza, Direction.Down, 24, false, 1)
+
+  GROUND:CharSetAnim(rayquaza, "Shoot", false)
+
+  shake = RogueEssence.Content.ScreenMover(16, 20, 24)
+  GROUND:MoveScreen(shake)
+  SOUND:PlayBattleSE("EVT_Roar")
+  UI:SetSpeaker(rayquaza)
+  UI:SetSpeakerEmotion("Angry")
+
+  GAME:WaitFrames(30)
+
+  UI:ResetSpeaker()
+  UI:WaitShowDialogue((STRINGS:Format("\\uE040: Come on, [pause=10]you can't be giving up that easily?")))
+
+  SOUND:PlayBGM("Team Charm's Theme.ogg", true)
+
+  GROUND:Unhide("NPC_Sneasler")
+  GROUND:Unhide("NPC_Tsareena")
+  sneasler.CollisionDisabled = true
+  tsareena.CollisionDisabled = true
+
+  GROUND:AnimateInDirection(sneasler, "Hop", Direction.Up, Direction.Up, 16, 2, 3)
+  GROUND:AnimateInDirection(tsareena, "Hop", Direction.Up, Direction.Up, 16, 2, 3)
+
+  UI:SetSpeaker(sneasler)
+  UI:SetSpeakerEmotion("Angry")
+  UI:WaitShowDialogue("Come on, " ..partner:GetDisplayName().. "![pause=30] You aren't about to let this thing beat you, are ya?")
+
+  UI:SetSpeaker(tsareena)
+  UI:SetSpeakerEmotion("Angry")
+  UI:WaitShowDialogue("Let's kick it back where it came from!")
+
+  UI:SetSpeaker(partner)
+  UI:SetSpeakerEmotion("teary-eyed")
+  UI:WaitShowDialogue(sneasler:GetDisplayName().."! And " ..tsareena:GetDisplayName().. " too!")
+  UI:SetSpeakerEmotion("determined")
+  UI:WaitShowDialogue("Okay![pause=20] Let's do this! Together!")
 
   --GAME:FadeOut(false, 10)
 
@@ -237,7 +283,7 @@ function stardust_pinnacle.Cutscene_Phase_Transition()
   SOUND:PlayBattleSE("EVT_Roar")
   UI:SetSpeaker(rayquaza)
   UI:SetSpeakerEmotion("Angry")
-
+  -- Add charas to team as guests
   local sneaslerChara = _DATA.Save.ActiveTeam:CreatePlayer(_DATA.Save.Rand, RogueEssence.Dungeon.MonsterID("sneasler", 0, "normal", Gender.Female), 50, "poison_touch", 0)
   sneaslerChara.Level = 50
   sneaslerChara.Tactic = _DATA:GetAITactic("go_after_foes")
@@ -257,12 +303,13 @@ function stardust_pinnacle.Cutscene_Phase_Transition()
   GAME:AddPlayerGuest(sneaslerChara)
   GAME:AddPlayerGuest(tsareenaChara)
 
+  GAME:CutsceneMode(false)
+  SV.stardust_peak.PhaseTransitionCutsceneHad = true
   COMMON.BossTransition()
 
   GAME:ContinueDungeon('stardust_peak', 3, 0, 0)
 
   --End
-  SV.stardust_peak.PhaseTransitionCutsceneHad = true
 end
 
 function stardust_pinnacle.mega_evolution_anim(chara)
@@ -302,19 +349,400 @@ function stardust_pinnacle.mega_evolution_anim(chara)
   chara.Data.BaseForm = newForm
 end
 
--- function looped_anim(emitter, chara, loops)
---   for i = 0, loops do
---     GROUND:PlayVFX(emitter, chara.Bounds.Center.X, chara.Bounds.Center.Y-12)
---   end
--- end
+function stardust_pinnacle.Phase_Two_Return()
+  local player = CH("PLAYER")
+  local partner = CH("TEAMMATE1")
+  local rayquaza = CH("BOSS_Rayquaza")
+  local sneasler = CH("NPC_Sneasler")
+  local tsareena = CH("NPC_Tsareena")
+  GROUND:Hide("NPC_Silvally")
+  GROUND:Hide("NPC_Noivern")
+  GROUND:Hide("NPC_Ceruledge")
+  GROUND:Unhide("BOSS_Rayquaza")
+  -- Form Change
+  local form = rayquaza.CurrentForm
+  local newForm = RogueEssence.Dungeon.MonsterID(form.Species, 1, form.Skin, form.Gender)
+  rayquaza.Data.BaseForm = newForm
+  --Set Locations
+  GROUND:TeleportTo(player, 192, 648, Direction.Up)
+  GROUND:TeleportTo(partner, 216, 648, Direction.Up)
+  GROUND:TeleportTo(sneasler, 144, 660, Direction.Up)
+  GROUND:TeleportTo(tsareena, 240, 660, Direction.Up)
+  if CH("TEAMMATE2") ~= nil then
+    GROUND:TeleportTo(CH("TEAMMATE2"), 168, 672, Direction.Up)
+  end
+  if CH("TEAMMATE3") ~= nil then
+    GROUND:TeleportTo(CH("TEAMMATE3"), 240, 672, Direction.Up)
+  end
+  GROUND:TeleportTo(rayquaza, 192, 552, Direction.Down)
+  --Begin
+  GAME:FadeIn(20)
+
+  UI:SetSpeaker(sneasler)
+  UI:SetSpeaerEmotion("determined")
+  UI:WaitShowDialogue("Ready to do this again?[pause=30] We can't let this thing beat us again!")
+
+  UI:SetSpeaker(partner)
+  UI:SetSpeaerEmotion("determined")
+  UI:WaitShowDialogue("Right![pause=20] Let's do this! Together!")
+
+  -- Add charas to team as guests
+  local sneaslerChara = _DATA.Save.ActiveTeam:CreatePlayer(_DATA.Save.Rand, RogueEssence.Dungeon.MonsterID("sneasler", 0, "normal", Gender.Female), 50, "poison_touch", 0)
+  sneaslerChara.Level = 50
+  sneaslerChara.Tactic = _DATA:GetAITactic("go_after_foes")
+  GAME:SetCharacterSkill(sneaslerChara, "poison_jab", 0)
+  GAME:SetCharacterSkill(sneaslerChara, "brick_break", 1)
+  GAME:SetCharacterSkill(sneaslerChara, "night_slash", 2)
+  GAME:SetCharacterSkill(sneaslerChara, "taunt", 3)
+
+  local tsareenaChara = _DATA.Save.ActiveTeam:CreatePlayer(_DATA.Save.Rand, RogueEssence.Dungeon.MonsterID("tsareena", 0, "normal", Gender.Female), 50, "queenly_majesty", 0)
+  tsareenaChara.Level = 50
+  tsareenaChara.Tactic = _DATA:GetAITactic("go_after_foes")
+  GAME:SetCharacterSkill(tsareenaChara, "trop_kick", 0)
+  GAME:SetCharacterSkill(tsareenaChara, "stomp", 1)
+  GAME:SetCharacterSkill(tsareenaChara, "triple_axel", 2)
+  GAME:SetCharacterSkill(tsareenaChara, "sweet_scent", 3)
+
+  GAME:AddPlayerGuest(sneaslerChara)
+  GAME:AddPlayerGuest(tsareenaChara)
+
+  GAME:CutsceneMode(false)
+
+  COMMON.BossTransition()
+  GAME:ContinueDungeon('stardust_peak', 3, 0, 0)
+end
 
 function stardust_pinnacle.Cutscene_Post_Rayquaza()
+  -- Setup characters
+  local player = CH("PLAYER")
+  local partner = CH("TEAMMATE1")
+  local rayquaza = CH("BOSS_Rayquaza")
+  local sneasler = CH("NPC_Sneasler")
+  local tsareena = CH("NPC_Tsareena")
+  GROUND:Hide("NPC_Silvally")
+  GROUND:Hide("NPC_Noivern")
+  GROUND:Hide("NPC_Ceruledge")
+  GROUND:Unhide("BOSS_Rayquaza")
+  GROUND:Unhide("NPC_Sneasler")
+  GROUND:Unhide("NPC_Tsareena")
+  -- Form Change
+  local form = rayquaza.CurrentForm
+  local newForm = RogueEssence.Dungeon.MonsterID(form.Species, 1, form.Skin, form.Gender)
+  rayquaza.Data.BaseForm = newForm
+  -- Set Locations
+  GROUND:TeleportTo(player, 192, 648, Direction.Up)
+  GROUND:TeleportTo(partner, 216, 648, Direction.Up)
+  GROUND:TeleportTo(sneasler, 144, 660, Direction.Up)
+  GROUND:TeleportTo(tsareena, 240, 660, Direction.Up)
+  if CH("TEAMMATE2") ~= nil then
+    GROUND:TeleportTo(CH("TEAMMATE2"), 168, 672, Direction.Up)
+  end
+  if CH("TEAMMATE3") ~= nil then
+    GROUND:TeleportTo(CH("TEAMMATE3"), 240, 672, Direction.Up)
+  end
+  GROUND:TeleportTo(rayquaza, 192, 552, Direction.Down)
+  -- Begin
+  GAME:FadeIn(20)
+  rayquaza.CollisionDisabled = true
+  GROUND:MoveInDirection(rayquaza, Direction.Up, 48, false, 3)
+
+  UI:SetSpeaker(sneasler)
+  UI:SetSpeakerEmotion("Angry")
+  UI:WaitShowDialogue("And don't come back!")
+
+  UI:SetSpeaker(partner)
+  UI:SetSpeakerEmotion("Joyous")
+  UI:WaitShowDialogue("We did it![pause=30] We beat [color=#009800]Rayquaza[color]!")
+  UI:WaitShowDialogue("Which means...")
+
+  UI:SetSpeaker(player)
+  UI:SetSpeakerEmotion("Sad")
+  UI:WaitShowDialogue("It's time for me and my friends to go home...")
+
+  UI:SetSpeaker(sneasler)
+  UI:SetSpeakerEmotion("Sad")
+  UI:WaitShowDialogue("We'll...[pause=30] go make sure [color=#F8A0F8]Team Vanguard[color] are okay...")
+  sneasler.CollisionDisabled = true
+  tsareena.CollisionDisabled = true
+
+  GROUND:AnimateInDirection(sneasler, "Hop", Direction.Down, Direction.Down, 32, 2, 3)
+  GROUND:AnimateInDirection(tsareena, "Hop", Direction.Down, Direction.Down, 32, 2, 3)
+  GROUND:Hide("NPC_Sneasler")
+  GROUND:Hide("NPC_Tsareena")
+  --End
+  SV.stardust_peak.BossDefeated = true
+  -- Handle ending cutscene here
+  stardust_pinnacle.EndingHandler()
+end
+
+function stardust_pinnacle.EndingHandler()
+  if SV.stardust_peak.CanDoEndingTrue == true then
+    stardust_pinnacle.Cutscene_Ending_True()
+  elseif stardust_pinnacle.GetMiniorRescued() == 7 then
+    stardust_pinnacle.Cutscene_Ending_Two()
+  else
+    stardust_pinnacle.Cutscene_Ending_One()
+  end
 end
 
 function stardust_pinnacle.Cutscene_Ending_One()
+  local player = CH("PLAYER")
+  local partner = CH("TEAMMATE1")
+  GROUND:Hide("NPC_Silvally")
+  GROUND:Hide("NPC_Noivern")
+  GROUND:Hide("NPC_Ceruledge")
+  --Start
+  GROUND:MoveToPosition(player, 192, 600, false, 1)
+  GROUND:MoveToPosition(partner, 216, 600, false, 1)
+  SOUND:PlayBGM("Don't Ever Forget....ogg", true)
+  GROUND:CharTurnToChar(partner, player)
+  GROUND:CharTurnToChar(player, partner)
+
+  UI:SetSpeaker(player)
+  UI:SetSpeakerEmotion("Sad")
+  UI:WaitShowDialogue(partner:GetDisplayName().. "...[pause=30] Thank you, for rescuing me and my friends.")
+  UI:WaitShowDialogue("I couldn't have gotten here without you.")
+
+  UI:SetSpeaker(partner)
+  UI:SetSpeakerEmotion("teary-eyed")
+  UI:WaitShowDialogue("Me neither![pause=0] If it wasn't for you, " ..player:GetDisplayName().. ", I would've never left Mellow Town![pause=0] I would've never gone on this adventure!")
+
+  UI:SetSpeaker(player)
+  UI:SetSpeakerEmotion("Sad")
+  UI:WaitShowDialogue("I'll go get my friends...")
+  GAME:FadeOut(false, 20)
+  rescued = stardust_pinnacle.GetMiniorRescued()
+  GAME:FadeIn(20)
+  UI:WaitShowDialogue("It looks like...[pause=20] our adventure isn't over yet!")
+  missing  = 7 - rescued
+  UI:WaitShowDialogue(partner:GetDisplayName().."! We still need to find " ..missing.. " of my friends.")
+  UI:WaitShowDialogue("Will you help me?[pause=20] Just for a little bit longer?")
+
+  UI:SetSpeaker(partner)
+  UI:SetSpeakerEmotion("determined")
+  UI:WaitShowDialogue("Of course![pause=0] We'll find them all! And when we have, we'll come back to [color=#F8C060]Stardust Peak[color] so you can all go home!")
+
+  UI:SetSpeaker(player)
+  UI:SetSpeakerEmotion("Inspired")
+  UI:WaitShowDialogue("Thank you, " ..partner:GetDisplayName().. "![pause=0] Let's go, then!")
+  --End
+  GAME:FadeOut(false,20)
+  GAME:CutsceneMode(false)
+  COMMON.EndDungeonDay(RogueEssence.Data.GameProgress.ResultType.Cleared, 'mellow_town', -1, 0, 1)
+end
+
+function stardust_pinnacle.GetMiniorRescued()
+  local rescued = 0
+  if SV.missions.FinishedMissions["RedMiniorRescue"] ~= nil then
+    rescued = rescued + 1
+    GROUND:Unhide("RedMinior")
+  end
+  if SV.missions.FinishedMissions["OrangeMiniorRescue"] ~= nil then
+    rescued = rescued + 1
+    GROUND:Unhide("OrangeMinior")
+  end
+  if SV.missions.FinishedMissions["YellowMiniorRescue"] ~= nil then
+    rescued = rescued + 1
+    GROUND:Unhide("YellowMinior")
+  end
+  if SV.missions.FinishedMissions["BlueMiniorRescue"] ~= nil then
+    rescued = rescued + 1
+    GROUND:Unhide("BlueMinior")
+  end
+  if SV.missions.FinishedMissions["GreenMiniorRescue"] ~= nil then
+    rescued = rescued + 1
+    GROUND:Unhide("GreenMinior")
+  end
+  if SV.missions.FinishedMissions["IndigoMiniorRescue"] ~= nil then
+    rescued = rescued + 1
+    GROUND:Unhide("IndigoMinior")
+  end
+  if SV.missions.FinishedMissions["VioletMiniorRescue"] ~= nil then
+    rescued = rescued + 1
+    GROUND:Unhide("VioletMinior")
+  end
+  return rescued
 end
 
 function stardust_pinnacle.Cutscene_Ending_Two()
+  local player = CH("PLAYER")
+  local partner = CH("TEAMMATE1")
+  local rayquaza = CH("BOSS_Rayquaza")
+  GROUND:Hide("NPC_Silvally")
+  GROUND:Hide("NPC_Noivern")
+  GROUND:Hide("NPC_Ceruledge")
+  --Start
+  GROUND:MoveToPosition(player, 192, 600, false, 1)
+  GROUND:MoveToPosition(partner, 216, 600, false, 1)
+  SOUND:PlayBGM("Don't Ever Forget....ogg", true)
+  GROUND:CharTurnToChar(partner, player)
+  GROUND:CharTurnToChar(player, partner)
+
+  UI:SetSpeaker(player)
+  UI:SetSpeakerEmotion("Sad")
+  UI:WaitShowDialogue(partner:GetDisplayName().. "...[pause=30] Thank you, for rescuing me and my friends.")
+  UI:WaitShowDialogue("I couldn't have gotten here without you.")
+
+  UI:SetSpeaker(partner)
+  UI:SetSpeakerEmotion("teary-eyed")
+  UI:WaitShowDialogue("Me neither![pause=0] If it wasn't for you, " ..player:GetDisplayName().. ", I would've never left Mellow Town!")
+
+  UI:SetSpeaker(player)
+  UI:SetSpeakerEmotion("Sad")
+  UI:WaitShowDialogue("I'll go get my friends...")
+  GAME:FadeOut(false, 20)
+  rescued = stardust_pinnacle.GetMiniorRescued()
+  GAME:FadeIn(20)
+
+  UI:SetSpeaker(partner)
+  UI:SetSpeakerEmotion("teary-eyed")
+  UI:WaitShowDialogue("I knew our adventure would have to end someday...")
+  UI:WaitShowDialogue(player:GetDisplayName().."...[pause=30] Before I met you, I didn't really have anyone I could call a friend.")
+  UI:WaitShowDialogue("I made a wish on a shooting star...[pause=0] I could've wished for anything...[pause=0] Fame, fortune, power...")
+  UI:WaitShowDialogue("But instead...[pause=0] I wished for a friend.")
+  UI:SetSpeakerEmotion("joyous")
+  UI:WaitShowDialogue("And then I met you!")
+  UI:SetSpeakerEmotion("teary-eyed")
+  UI:WaitShowDialogue(player:GetDisplayName().."...[pause=0] I'm so glad my wish came true.")
+  UI:WaitShowDialogue("And even though you're leaving...[pause=0] I'll never forget you.")
+
+  UI:SetSpeaker(player)
+  UI:SetSpeakerEmotion("teary-eyed")
+  UI:WaitShowDialogue("I won't forget you either!")
+
+  GAME:WaitFrames(30)
+  shake = RogueEssence.Content.ScreenMover(0, 20, 24)
+  GROUND:MoveScreen(shake)
+  SOUND:PlayBattleSE("EVT_Roar")
+  SOUND:PlayBGM("Threat.ogg", true)
+  -- Rayquaza descends
+  GROUND:TeleportTo(rayquaza, 192, 360, Direction.Down)
+  GROUND:Unhide("BOSS_Rayquaza")
+  rayquaza.CollisionDisabled = true
+  local animId = RogueEssence.Content.GraphicsManager.GetAnimIndex("Hop")
+  local frameAction = RogueEssence.Ground.IdleAnimGroundAction(rayquaza.Position, 0, Direction.Down, animId, false)
+  GROUND:ActionToPosition(rayquaza, frameAction, 192, 552, 1, 1, 1)
+
+  GROUND:CharTurnToChar(player, rayquaza)
+  GROUND:CharTurnToChar(partner, rayquaza)
+
+  UI:SetSpeaker(player)
+  UI:SetSpeakerEmotion("pain")
+  UI:WaitShowDialogue("What?![pause=30] It's back?!")
+
+  GROUND:CharSetAnim(rayquaza, "Shoot", false)
+  shake = RogueEssence.Content.ScreenMover(0, 20, 24)
+  GROUND:MoveScreen(shake)
+  SOUND:PlayBattleSE("EVT_Roar")
+
+  UI:SetSpeaker(rayquaza)
+  UI:WaitShowDialogue("[speed=0.7]DO NOT BE ALARMED.[PAUSE=0] I AM NOT HERE TO FIGHT.")
+
+  UI:SetSpeaker(partner)
+  UI:SetSpeakerEmotion("determined")
+  UI:WaitShowDialogue("What?![pause=30] Then how come you attacked us before! And everyone else before that!")
+
+  UI:SetSpeaker(rayquaza)
+  UI:SetSpeaerEmotion("pain")
+  UI:WaitShowDialogue("[speed=0.7]I...[pause=30] I SINCERELY APOLOGISE.[PAUSE=0] MY MIND WAS NOT MY OWN.")
+  UI:SetSpeaerEmotion("normal")
+  UI:WaitShowDialogue("[speed=0.7]PLEASE BELIEVE ME WHEN I SAY I HAD NO CONTROL OVER MY ACTIONS.")
+  UI:WaitShowDialogue("[speed=0.7]I CANNOT EXPRESS MY REGRET ENOUGH. I HAVE CAUSED YOU AND YOURS MUCH HARM. AND FOR THAT I APOLOGISE.")
+
+  UI:SetSpeaker(partner)
+  UI:SetSpeakerEmotion("determined")
+  UI:WaitShowDialogue("You expect us to believe that?[pause=0] Because of you, loads of Pokémon got hurt!")
+
+  UI:SetSpeaker(rayquaza)
+  UI:WaitShowDialogue("[speed=0.7]I DO NOT EXPECT FORGIVENESS. I ONLY WISH TO MAKE THINGS RIGHT. AND TO THANK YOU FOR RELEASING ME FROM MY STUPOR.")
+
+  UI:SetSpeaker(partner)
+  UI:SetSpeakerEmotion("worried")
+  UI:WaitShowDialogue("What do you mean?")
+
+  UI:SetSpeaker(rayquaza)
+  UI:WaitShowDialogue("[speed=0.7]AS I SAID, MY MIND WAS NOT MY OWN. SHORTLY BEFORE ATTACKING THE [color=#009800]MINIOR[color], I FELT A PSYCHIC POWER OVERWHELM MY MIND.")
+  UI:WaitShowDialogue("[speed=0.7]IT DROVE ME INTO A FRENZY, FROM WHICH THE ONLY RELEASE WAS TO BE DEFEATED.")
+  UI:WaitShowDialogue("[speed=0.7]MY MIND NOW FREE, I COULD NOT HELP BUT OVERHEAR YOU STATING YOUR WISH CAME TRUE...")
+
+  UI:SetSpeaker(partner)
+  UI:SetSpeakerEmotion("worried")
+  UI:WaitShowDialogue("But what does that have to do with this?")
+
+  UI:SetSpeaker(rayquaza)
+  UI:WaitShowDialogue("[speed=0.7]THERE EXISTS A POKEMON OF GREAT PSYCHIC POWER CAPABLE OF GRANTING WISHES.")
+  UI:WaitShowDialogue("[speed=0.7]UNFORTUNATELY, IT IS A VAIN AND SELFISH CREATURE, TWISTING INNOCENT POKéMON'S WISHES FOR ITS OWN GAIN.")
+  UI:WaitShowDialogue("[speed=0.7]IT IS CALLED,[PAUSE=30] [color=#009800]JIRACHI[color].")
+  UI:WaitShowDialogue("[speed=0.7]I BELIEVE [color=#009800]JIRACHI[color] USED YOUR WISH TO TURN ME AGAINST MY OWN SENSES.[pause=0]FOR WHAT PURPOSE, I DO NOT KNOW.")
+
+  UI:SetSpeaker(partner)
+  UI:SetSpeakerEmotion("worried")
+  UI:WaitShowDialogue("[color=#009800]Jirachi[color] used my wish to make you go crazy?[pause=0] But... that would mean...")
+
+  UI:SetSpeaker(rayquaza)
+  UI:WaitShowDialogue("[speed=0.7]I IMPLORE YOU, YOUNG ADVENTURERS. SEEK OUT [color=#009800]JIRACHI[color] AND ASCERTAIN THE TRUTH.")
+  UI:WaitShowDialogue("[speed=0.7]IF [color=#009800]JIRACHI[color] HAS TRULY COMMITTED THIS GRIEVOUS CRIME...[PAUSE=0] THEN THEY MUST BE BROUGHTO TO JUSTICE!")
+
+  GROUND:CharTurnToChar(partner, player)
+  GROUND:CharTurnToChar(player, partner)
+
+  UI:SetSpeaker(player)
+  UI:SetSpeakerEmotion("worried")
+  UI:WaitShowDialogue("I don't know...[pause=30] It seems a little far-fetched.")
+
+  UI:SetSpeaker(partner)
+  UI:SetSpeakerEmotion("determined")
+  UI:WaitShowDialogue("We have to find [color=#009800]Jirachi[color].")
+
+  UI:SetSpeaker(player)
+  UI:SetSpeakerEmotion("surprised")
+  UI:WaitShowDialogue("What?")
+
+  UI:SetSpeaker(partner)
+  UI:SetSpeakerEmotion("sad")
+  UI:WaitShowDialogue("If [color=#009800]Jirachi[color] used my wish...[pause=0] Then that means this is all my fault!")
+  UI:WaitShowDialogue("[color=#F8A0F8]Team Vanguard[color]...[pause=0] [color=#F8A0F8]Team Glamour[color]...[pause=0] Even you and your friends!")
+  UI:WaitShowDialogue("You all got hurt because of my wish!")
+  UI:SetSpeakerEmotion("pain")
+  UI:WaitShowDialogue("My selfish wish...")
+
+  UI:SetSpeaker(player)
+  UI:SetSpeakerEmotion("surprised")
+  UI:WaitShowDialogue(partner:GetDisplayName().."...[pause=0] I don't believe that...")
+
+  UI:SetSpeaker(partner)
+  UI:SetSpeakerEmotion("determined")
+  UI:WaitShowDialogue("The only way to know for sure is to find [color=#009800]Jirachi[color]!")
+  UI:WaitShowDialogue("Please...[pause=0] Will you help me?")
+
+  UI:SetSpeaker(player)
+  UI:SetSpeakerEmotion("determined")
+  UI:WaitShowDialogue("Of course.")
+
+  GROUND:CharTurnToChar(player, rayquaza)
+  GROUND:CharTurnToChar(partner, rayquaza)
+
+  UI:WaitShowDialogue("Where do we find [color=#009800]Jirachi[color]?")
+
+  UI:SetSpeaker(rayquaza)
+  UI:WaitShowDialogue("[speed=0.7]TO THE EAST, BENEATH THE [color=#F8C060]WISHING WOODS[color], LIES [color=#009800]JIRACHI[color]'S DOMAIN.")
+  UI:WaitShowDialogue("[speed=0.7][color=#F8C060]MINDSCAPE CAVERN[color].")
+  UI:WaitShowDialogue("[speed=0.7]I WILL REVEAL TO YOU THE WAY.")
+
+  GROUND:CharTurnToChar(partner, player)
+  GROUND:CharTurnToChar(player, partner)
+  UI:SetSpeaker(partner)
+  UI:SetSpeakerEmotion("determined")
+  UI:WaitShowDialogue("Let's do this, " ..player:GetDisplayName().. "![pause=0] One last adventure!")
+
+  UI:SetSpeaker(player)
+  UI:SetSpeakerEmotion("determined")
+  UI:WaitShowDialogue("Right!")
+
+  GAME:FadeOut(false, 20)
+  COMMON.UnlockWithFanfare("mindscape_cavern", false)
+  GAME:CutsceneMode(false)
+  COMMON.EndDungeonDay(RogueEssence.Data.GameProgress.ResultType.Cleared, 'mellow_town', -1, 0, 1)
 end
 
 function stardust_pinnacle.Cutscene_Ending_True()
