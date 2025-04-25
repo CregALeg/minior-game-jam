@@ -104,7 +104,7 @@ function character_select.StartGame()
   UI:SetSpeakerEmotion("Sigh")
   UI:WaitShowDialogue("Sigh...it's not fair...")
   UI:SetSpeakerEmotion("Sad")
-  UI:WaitShowDialogue("Everyone else gets to go out on adventures...[pause=30]Everyone except me.")
+  UI:WaitShowDialogue("Everyone else gets to go out on adventures...[pause=30] Everyone except me.")
   UI:WaitShowDialogue("Gramps says I have to have a partner, but...")
   GROUND:CharSetEmote(partner, "angry", 1)
   SOUND:PlaySE("Battle/EVT_Emote_Complain_2")
@@ -198,14 +198,21 @@ end
 
 -- Function for choosing partner
 function character_select.PartnerSelect()
-  local msg = "Choose a Pokémon."
+  local msg = "Your partner?"
   local choices = {RogueEssence.Dungeon.MonsterID("eevee", 0, "normal", Gender.Female),
-                  RogueEssence.Dungeon.MonsterID("treecko", 0, "normal", Gender.Male),
-                  RogueEssence.Dungeon.MonsterID("litten", 0, "normal", Gender.Male),
+                  RogueEssence.Dungeon.MonsterID("vulpix", 0, "normal", Gender.Female),
+                  RogueEssence.Dungeon.MonsterID("vulpix", 1, "normal", Gender.Female),
                   RogueEssence.Dungeon.MonsterID("totodile", 0, "normal", Gender.Male),
+                  RogueEssence.Dungeon.MonsterID("phanpy", 0, "normal", Gender.Male),
+                  RogueEssence.Dungeon.MonsterID("treecko", 0, "normal", Gender.Male),
+                  RogueEssence.Dungeon.MonsterID("skitty", 0, "normal", Gender.Female),
+                  RogueEssence.Dungeon.MonsterID("riolu", 0, "normal", Gender.Male),
                   RogueEssence.Dungeon.MonsterID("zorua", 0, "normal", Gender.Female),
                   RogueEssence.Dungeon.MonsterID("zorua", 1, "normal", Gender.Female),
-                  RogueEssence.Dungeon.MonsterID("rockruff", 0, "normal", Gender.Male)}
+                  RogueEssence.Dungeon.MonsterID("yamper", 0, "normal", Gender.Male),
+                  RogueEssence.Dungeon.MonsterID("litten", 0, "normal", Gender.Male),
+                  RogueEssence.Dungeon.MonsterID("rockruff", 0, "normal", Gender.Male),
+                  RogueEssence.Dungeon.MonsterID("fidough", 0, "normal", Gender.Male)}
 
   local continue = false
 	local partner_choice = -1

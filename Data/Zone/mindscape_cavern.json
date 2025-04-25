@@ -6533,37 +6533,6 @@
 "Spawn": {
 "Spawn": {
 "BaseForm": {
-"Species": "inkay",
-"Form": 0,
-"Skin": "",
-"Gender": -1
-},
-"Level": {
-"Min": 40,
-"Max": 45
-},
-"SpecifiedSkills": [],
-"Intrinsic": "",
-"Tactic": "wander_dumb",
-"SpawnConditions": [],
-"SpawnFeatures": [
-{
-"$type": "PMDC.LevelGen.MobSpawnWeak, PMDC"
-}
-]
-},
-"Role": 0
-},
-"Rate": 10,
-"Range": {
-"Min": 0,
-"Max": 15
-}
-},
-{
-"Spawn": {
-"Spawn": {
-"BaseForm": {
 "Species": "malamar",
 "Form": 0,
 "Skin": "",
@@ -12088,37 +12057,6 @@
 "Rate": 4,
 "Range": {
 "Min": 4,
-"Max": 15
-}
-},
-{
-"Spawn": {
-"Spawn": {
-"BaseForm": {
-"Species": "inkay",
-"Form": 0,
-"Skin": "",
-"Gender": -1
-},
-"Level": {
-"Min": 40,
-"Max": 45
-},
-"SpecifiedSkills": [],
-"Intrinsic": "",
-"Tactic": "wander_dumb",
-"SpawnConditions": [],
-"SpawnFeatures": [
-{
-"$type": "PMDC.LevelGen.MobSpawnWeak, PMDC"
-}
-]
-},
-"Role": 0
-},
-"Rate": 10,
-"Range": {
-"Min": 0,
 "Max": 15
 }
 },
