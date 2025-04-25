@@ -101,8 +101,8 @@ function stardust_pinnacle.Cutscene_Pre_Rayquaza()
     rayquaza.CollisionDisabled = true
     -- Start Cutscene
     GAME:FadeIn(20)
-    local coro1 = TASK:BranchCoroutine(function() GROUND:MoveInDirection(player, Direction.Up, 12, false, 1) end)
-    local coro2 = TASK:BranchCoroutine(function() GROUND:MoveInDirection(partner, Direction.Up, 12, false, 1) end)
+    local coro1 = TASK:BranchCoroutine(function() GROUND:MoveInDirection(player, Direction.Up, 12, false, 2) end)
+    local coro2 = TASK:BranchCoroutine(function() GROUND:MoveInDirection(partner, Direction.Up, 12, false, 2) end)
     TASK:JoinCoroutines({coro1, coro2})
     SOUND:PlayBGM("Threat.ogg", true)
     GAME:WaitFrames(30)
@@ -193,7 +193,7 @@ function stardust_pinnacle.Cutscene_First_Phase_Return()
   GAME:CutsceneMode(false)
   COMMON.BossTransition()
 
-  GAME:ContinueDungeon('stardust_peak', 3, 0, 0)
+  GAME:ContinueDungeon('stardust_peak', 2, 0, 0)
 end
 
 function stardust_pinnacle.Cutscene_Phase_Transition()
@@ -507,7 +507,7 @@ end
 function stardust_pinnacle.EndingHandler()
   if SV.stardust_peak.CanDoEndingTrue == true then
     stardust_pinnacle.Cutscene_Ending_True()
-  elseif SV.stardust_peak.SeenEndingTwo == true then
+  elseif SV.stardust_peak.SeenEndingTwo == true then --Seen ending two already, just end day
     COMMON.EndDungeonDay(RogueEssence.Data.GameProgress.ResultType.Cleared, 'mellow_town', -1, 0, 1)
   elseif stardust_pinnacle.GetMiniorRescued() == 7 then
     stardust_pinnacle.Cutscene_Ending_Two()
@@ -593,24 +593,31 @@ end
 function stardust_pinnacle.UnhideMinior()
   if SV.missions.FinishedMissions["RedMiniorRescue"] ~= nil then
     GROUND:Unhide("RedMinior")
+    GROUND:CharSetAnim(CH("RedMinior"), "Idle", false)
   end
   if SV.missions.FinishedMissions["OrangeMiniorRescue"] ~= nil then
     GROUND:Unhide("OrangeMinior")
+    GROUND:CharSetAnim(CH("OrangeMinior"), "Idle", false)
   end
   if SV.missions.FinishedMissions["YellowMiniorRescue"] ~= nil then
     GROUND:Unhide("YellowMinior")
+    GROUND:CharSetAnim(CH("YellowMinior"), "Idle", false)
   end
   if SV.missions.FinishedMissions["BlueMiniorRescue"] ~= nil then
     GROUND:Unhide("BlueMinior")
+    GROUND:CharSetAnim(CH("BlueMinior"), "Idle", false)
   end
   if SV.missions.FinishedMissions["GreenMiniorRescue"] ~= nil then
     GROUND:Unhide("GreenMinior")
+    GROUND:CharSetAnim(CH("GreenMinior"), "Idle", false)
   end
   if SV.missions.FinishedMissions["IndigoMiniorRescue"] ~= nil then
     GROUND:Unhide("IndigoMinior")
+    GROUND:CharSetAnim(CH("IndigoMinior"), "Idle", false)
   end
   if SV.missions.FinishedMissions["VioletMiniorRescue"] ~= nil then
     GROUND:Unhide("VioletMinior")
+    GROUND:CharSetAnim(CH("VioletMinior"), "Idle", false)
   end
 end
 
@@ -701,7 +708,7 @@ function stardust_pinnacle.Cutscene_Ending_Two()
   UI:WaitShowDialogue("[speed=0.7]I...[pause=30] I SINCERELY APOLOGISE.[PAUSE=0] MY MIND WAS NOT MY OWN.")
   UI:SetSpeakerEmotion("normal")
   UI:WaitShowDialogue("[speed=0.7]PLEASE BELIEVE ME WHEN I SAY I HAD NO CONTROL OVER MY ACTIONS.")
-  UI:WaitShowDialogue("[speed=0.7]I CANNOT EXPRESS MY REGRET ENOUGH. I HAVE CAUSED YOU AND YOURS MUCH HARM. AND FOR THAT I APOLOGISE.")
+  UI:WaitShowDialogue("[speed=0.7]I CANNOT EXPRESS MY REGRET ENOUGH. I HAVE CAUSED YOU AND YOURS MUCH HARM.")
 
   UI:SetSpeaker(partner)
   UI:SetSpeakerEmotion("determined")
@@ -735,7 +742,7 @@ function stardust_pinnacle.Cutscene_Ending_Two()
 
   UI:SetSpeaker(rayquaza)
   UI:WaitShowDialogue("[speed=0.7]I IMPLORE YOU, YOUNG ADVENTURERS. SEEK OUT [color=#009800]JIRACHI[color] AND ASCERTAIN THE TRUTH.")
-  UI:WaitShowDialogue("[speed=0.7]IF [color=#009800]JIRACHI[color] HAS TRULY COMMITTED THIS GRIEVOUS CRIME...[PAUSE=0] THEN THEY MUST BE BROUGH TO TO JUSTICE!")
+  UI:WaitShowDialogue("[speed=0.7]IF [color=#009800]JIRACHI[color] HAS TRULY COMMITTED THIS GRIEVOUS CRIME...[PAUSE=0] THEN THEY MUST BE BROUGHT TO TO JUSTICE!")
 
   GROUND:CharTurnToChar(partner, player)
   GROUND:CharTurnToChar(player, partner)
@@ -801,6 +808,129 @@ function stardust_pinnacle.Cutscene_Ending_Two()
 end
 
 function stardust_pinnacle.Cutscene_Ending_True()
+  local player = CH("PLAYER")
+  local partner = CH("TEAMMATE1")
+  GROUND:Hide("NPC_Silvally")
+  GROUND:Hide("NPC_Noivern")
+  GROUND:Hide("NPC_Ceruledge")
+  stardust_pinnacle.UnhideMinior()
+  GROUND:TeleportTo(player, 192, 600, Direction.Right)
+  GROUND:TeleportTo(partner, 216, 600, Direction.Left)
+  --Start
+  SOUND:PlayBGM("Don't Ever Forget....ogg", true)
+  GAME:FadeIn(20)
+  UI:SetSpeaker(partner)
+  UI:SetSpeakerEmotion("Teary-eyed")
+  UI:WaitShowDialogue("Well...[pause=30] I guess this is it...")
+  UI:WaitShowDialogue("We've been through so much.[pause=0] [color=#00F8F8]Ursaluna[color]...[pause=30] [color=#00F8F8]Rayquaza[color]...[pause=30] [color=#00F8F8]Jirachi[color]...")
+  UI:WaitShowDialogue("Climbing [color=#F8C060]Stardust Peak[color]...")
+  UI:WaitShowDialogue("Even meeting [color=#F8A0F8]Team Glamour[color]!")
+  UI:WaitShowDialogue(player:GetDisplayName().."... I'm going to miss you.")
+
+  UI:SetSpeaker(player)
+  UI:SetSpeakerEmotion("Teary-eyed")
+  UI:WaitShowDialogue("I'm going to miss you too!")
+  UI:WaitShowDialogue(partner:GetDisplayName().."...[pause=0] When you asked [color=#00F8F8]Jirachi[color] to undo your wish...[pause=0] It made me so sad...")
+  UI:WaitShowDialogue("If you hadn't have made that wish, we would have never met!")
+  UI:WaitShowDialogue("And I wouldn't change that for anything in the whole world!")
+  UI:WaitShowDialogue("I suppose,[pause=20] in a way,[pause=20] [color=#00F8F8]Jirachi[color] was right.[pause=0] Everything did work out eventually.")
+  UI:WaitShowDialogue("And now...[pause=30] Me and my friends need to go home...")
+
+  GROUND:MoveInDirection(player, Direction.Up, 48, false, 1)
+  GROUND:EntTurn(player, Direction.Down)
+
+  GAME:WaitFrames(16)
+
+  GROUND:MoveToPosition(partner, 192, 582, false, 1)
+  GROUND:EntTurn(partner, Direction.Up)
+
+  UI:WaitShowDialogue("I'll never forget you, " ..partner:GetDisplayName().."!")
+
+  local minior = CH("IndigoMinior")
+  TASK:BranchCoroutine(function() stardust_pinnacle.MiniorRise(minior, "IndigoMinior") end)
+
+  GAME:WaitFrames(16)
+
+  minior = CH("BlueMinior")
+  TASK:BranchCoroutine(function() stardust_pinnacle.MiniorRise(minior, "BlueMinior") end)
+
+  GAME:WaitFrames(16)
+
+  UI:SetSpeaker(partner)
+  UI:SetSpeakerEmotion("teary-eyed")
+  UI:WaitShowDialogue("But " ..player:GetDisplayName().."![pause=0] What if I can't do this without you?!")
+  UI:WaitShowDialogue("I only got this far because of you![pause=0] I...[pause=30] I don't know if I can do this on my own.")
+
+  minior = CH("RedMinior")
+  TASK:BranchCoroutine(function() stardust_pinnacle.MiniorRise(minior, "RedMinior") end)
+
+  GAME:WaitFrames(16)
+
+  minior = CH("GreenMinior")
+  TASK:BranchCoroutine(function() stardust_pinnacle.MiniorRise(minior, "GreenMinior") end)
+
+  GAME:WaitFrames(16)
+
+  UI:SetSpeaker(player)
+  UI:SetSpeakerEmotion("teary-eyed")
+  UI:WaitShowDialogue(partner:GetDisplayName().."...")
+  UI:WaitShowDialogue("You're so strong, " ..partner:GetDisplayName()..".[pause=0] Not just tough...[pause=30] But strong enough to handle anything!")
+
+  minior = CH("VioletMinior")
+  TASK:BranchCoroutine(function() stardust_pinnacle.MiniorRise(minior, "VioletMinior") end)
+
+  GAME:WaitFrames(16)
+
+  minior = CH("YellowMinior")
+  TASK:BranchCoroutine(function() stardust_pinnacle.MiniorRise(minior, "YellowMinior") end)
+
+  GAME:WaitFrames(16)
+
+  minior = CH("OrangeMinior")
+  TASK:BranchCoroutine(function() stardust_pinnacle.MiniorRise(minior, "OrangeMinior") end)
+
+  UI:WaitShowDialogue("If you ever need a reminder that you are loved,[pause=10] that you are good enough...")
+  UI:WaitShowDialogue("Just look into the night sky,[pause=10] and know,[pause=10] that I'm looking back.")
+  UI:WaitShowDialogue("And that you will always be loved.[pause=20] You will always be enough.")
+
+  UI:SetSpeaker(partner)
+  UI:SetSpeakerEmotion("teary-eyed")
+  UI:WaitShowDialogue(player:GetDisplayName().."...")
+
+  UI:SetSpeaker(player)
+  UI:SetSpeakerEmotion("teary-eyed")
+  UI:WaitShowDialogue("Goodbye, " ..partner:GetDisplayName().. ". The best friend I could have wished for.")
+
+  stardust_pinnacle.MiniorRise(player, "PLAYER")
+
+  GAME:WaitFrames(30)
+
+  UI:SetSpeaker(partner)
+  UI:SetSpeakerEmotion("teary-eyed")
+  UI:WaitShowDialogue(player:GetDisplayName().."...")
+
+  GROUND:EntTurn(partner, Direction.Down)
+  UI:WaitShowDialogue("I guess I should get back...[pause=30] Before [color=#00F8F8]Gramps[color] gets mad at me again...")
+  local coro1 = TASK:BranchCoroutine(function() GROUND:MoveInDirection(partner, Direction.Down, 48, false, 1) end)
+  local coro2 = TASK:BranchCoroutine(function() GAME:MoveCamera(200, 0, 480, false) end)
+  TASK:JoinCoroutines({coro1, coro2})
+  --GAME:FadeOut(false, 40)
+  --End
+  GAME:WaitFrames(30)
+  GAME:FadeOut(false, 20)
+  GAME:EnterGroundMap("ending_epilogue", "Entrance")
+end
+
+function stardust_pinnacle.MiniorRise(minior, string)
+  minior.CollisionDisabled = true
+  local animId = RogueEssence.Content.GraphicsManager.GetAnimIndex("walk")
+  local frameAction = RogueEssence.Ground.IdleAnimGroundAction(minior.Position, 1, Direction.Up, animId, true)
+
+  local head_pos = GROUND:CharGetAnimPoint(minior, RogueEssence.Content.ActionPointType.Head)
+  local shadow_pos = GROUND:CharGetAnimPoint(minior, RogueEssence.Content.ActionPointType.Shadow)
+  GROUND:ActionToPosition(minior, frameAction, minior.MapLoc.X, minior.MapLoc.Y, 1, 0.5, shadow_pos.Y - head_pos.Y + 176)
+  GAME:WaitFrames(30)
+  GROUND:Hide(string)
 end
 
 -------------------------------

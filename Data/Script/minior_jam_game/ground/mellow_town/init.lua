@@ -301,6 +301,16 @@ end
 function mellow_town.NPC_Gramps_Action(chara, activator)
   local player = CH("PLAYER")
   local state = 0
+  local strings = {}
+  strings["Windswept Trail"] = "[speed=0.7]As I said before, [color=#F8C060]Windswept Trail[color] is a Dungeon that runs down by the coast.[br][speed=0.7]It's home to many \\uE088Flying-type Pokémon.[pause=0] Sometimes, a strange wind will kick up that protects \\uE088Flying-type Pokémon, so your \\uE090Rock or \\uE084Electric-type moves will be less effective.[br][speed=0.7]I've also heard of a secret side path drenched in rain, one that leads to another Mystery Dungeon."
+  strings["Frigid Lake"] = "[speed=0.7][color=#F8C060]Frigid Lake[color], as the name suggests, is home to many \\uE091Ice and \\uE092Water-type Pokémon.[br][speed=0.7]You'll occasionally find it raining there, which will make \\uE092Water-type moves more powerful.[br][speed=0.7]Watch out for [color=#009800]Spheal[color], [color=#009800]Sealeo[color] and [color=#009800]Walrein[color] especially![pause=0] Their Brine and Ice Ball moves can be very dangerous!"
+  strings["Verdant Meadow"] = "[speed=0.7]A beautiful meadow that is home to many \\uE08AGrass-type Pokémon.[br][speed=0.7]It has many wide open spaces, so take care not to get overwhelmed by too many enemies.[br][speed=0.7]You'll also find dark tall grass that will obscure anyone hiding inside, and limit your vision."
+  strings["Magma Tunnel"] = "[speed=0.7][color=#F8C060]Magma Tunnel[color] was supposedly carved out ages ago by a gigantic [color=#009800]Orthworm[color]. Now, it is filled with lava and home to many \\uE087Fire-type Pokémon.[br][speed=0.7]Be careful of burns from them or the lava if you accidentally step on it![br][speed=0.7]As airborne Pokémon will be able to fly over it, and any \\uE087Fire or \\uE083Dragon-type allies will be able to walk over it."
+  strings["Lunar Barrow"] = "[speed=0.7]This dungeon is said to house a secret lake at its center where the shores change with the phases of the moon.[pause=0] It's also said this lake is protected by a ferocious guardian![br][speed=0.7]Otherwise, [color=#F8C060]Lunar Barrow[color] is home to \\uE082Dark and \\uE08DFairy-types.[br][speed=0.7]Some levels of the dungeon are drenched in darkness, making it very difficult to spot traps and enemies."
+  strings["Primal Canyon"] = "[speed=0.7]An ancient place, [color=#F8C060]Primal Canyon[color] is home to many ancient \\uE090Rock-type Pokémon.[br][speed=0.7]It's a very deep dungeon, so make sure to take food with you![br][speed=0.7]Once you reach the halfway point, you'll be so deep underground that you find lava, as well as more powerful Pokémon!"
+  strings["Stardust Peak"] = "[speed=0.7]In my youth I never defeated [color=#F8C060]Stardust Peak[color]. It'll be the longest dungeon you've tackled yet. Make sure to bring food with you.[br][speed=0.7]Otherwise, the dungeon is supposed to be chock-full of \\uE083Dragon-type Pokémon.[br][speed=0.7]I've heard some of the levels are dark, others swirl with mist."
+  strings["Mindscape Cavern"] = "[speed=0.7]This is where [color=#009800]Jirachi[color] is said to live...[br][speed=0.7]I hadn't heard of this dungeon until recently, so I'm sorry but I don't know much about it."
+
   GROUND:CharTurnToChar(chara,CH('PLAYER'))
   UI:SetSpeaker(chara)
   -- Get unlocked dungeons
@@ -334,39 +344,11 @@ function mellow_town.NPC_Gramps_Action(chara, activator)
     UI:BeginChoiceMenu("[speed=0.7]What dungeon do you want to know about?", dungeon_choices, 1, choice_end)
     UI:WaitForChoice()
     local result = UI:ChoiceResult()
-    if result == 1 then --Windswept Trail
-      UI:WaitShowDialogue("[speed=0.7]As I said before, [color=#F8C060]Windswept Trail[color] is a Dungeon that runs down by the coast.")
-      UI:WaitShowDialogue(STRINGS:Format("[speed=0.7]It's home to many \\uE088Flying-type Pokémon.[pause=0] Sometimes, a strange wind will kick up that protects \\uE088Flying-type Pokémon, so your \\uE090Rock or \\uE084Electric-type moves will be less effective."))
-      UI:WaitShowDialogue("[speed=0.7]I've also heard of a secret side path drenched in rain, one that leads to another Mystery Dungeon.")
-    elseif result == choice_end then
+    if result == choice_end then
       state = -1
-    elseif result == 2 then --Frigid Lake
-      UI:WaitShowDialogue(STRINGS:Format("[speed=0.7][color=#F8C060]Frigid Lake[color], as the name suggests, is home to many \\uE091Ice and \\uE092Water-type Pokémon."))
-      UI:WaitShowDialogue(STRINGS:Format("[speed=0.7]You'll occasionally find it raining there, which will make \\uE092Water-type moves more powerful."))
-      UI:WaitShowDialogue(STRINGS:Format("[speed=0.7]Watch out for [color=#009800]Spheal[color], [color=#009800]Sealeo[color] and [color=#009800]Walrein[color] especially![pause=0] Their Brine and Ice Ball moves can be very dangerous!"))
-    elseif result == 3 then --Verdant Meadow
-      UI:WaitShowDialogue(STRINGS:Format("[speed=0.7]A beautiful meadow that is home to many \\uE08AGrass-type Pokémon."))
-      UI:WaitShowDialogue(STRINGS:Format("[speed=0.7]It has many wide open spaces, so take care not to get overwhelmed by too many enemies."))
-      UI:WaitShowDialogue(STRINGS:Format("[speed=0.7]You'll also find dark tall grass that will obscure anyone hiding inside, and limit your vision."))
-    elseif result == 4 then --Magma Tunnel
-      UI:WaitShowDialogue(STRINGS:Format("[speed=0.7][color=#F8C060]Magma Tunnel[color] was supposedly carved out ages ago by a gigantic [color=#009800]Orthworm[color]. Now, it is filled with lava and home to many \\uE087Fire-type Pokémon."))
-      UI:WaitShowDialogue(STRINGS:Format("[speed=0.7]Be careful of burns from them or the lava if you accidentally step on it!"))
-      UI:WaitShowDialogue(STRINGS:Format("[speed=0.7]As a flying type, "..player:GetDisplayName().. " will be able to fly over it, and any \\uE087Fire or \\uE083Dragon-type allies will be able to walk over it."))
-    elseif result == 5 then --Lunar Barrow
-      UI:WaitShowDialogue(STRINGS:Format("[speed=0.7]This dungeon is said to house a secret lake at its center where the shores change with the phases of the moon.[pause=0] It's also said this lake is protected by a ferocious guardian!"))
-      UI:WaitShowDialogue(STRINGS:Format("[speed=0.7]Otherwise, [color=#F8C060]Lunar Barrow[color] is home to \\uE082Dark and \\uE08DFairy-types."))
-      UI:WaitShowDialogue(STRINGS:Format("[speed=0.7]Some levels of the dungeon are drenched in darkness, making it very difficult to spot traps and enemies."))
-    elseif result == 6 then --Primal Canyon
-      UI:WaitShowDialogue(STRINGS:Format("[speed=0.7]An ancient place, [color=#F8C060]Primal Canyon[color] is home to many ancient \\uE090Rock-type Pokémon."))
-      UI:WaitShowDialogue(STRINGS:Format("[speed=0.7]It's a very deep dungeon, so make sure to take food with you!"))
-      UI:WaitShowDialogue(STRINGS:Format("[speed=0.7]Once you reach the halfway point, you'll be so deep underground that you find lava, as well as even more ancient Pokémon!"))
-    elseif result == 7 then --Stardust Peak
-      UI:WaitShowDialogue(STRINGS:Format("[speed=0.7]In my youth I never defeated [color=#F8C060]Stardust Peak[color]. It'll be the longest dungeon you've tackled yet. Make sure to bring food with you."))
-      UI:WaitShowDialogue(STRINGS:Format("[speed=0.7]Otherwise, the dungeon is supposed to be chock-full of \\uE083Dragon-type Pokémon."))
-      UI:WaitShowDialogue(STRINGS:Format("[speed=0.7]I've heard some of the levels are dark, others are peppered by hail,"))
-    elseif result == 8 then --Mindscape Cavern
-      UI:WaitShowDialogue(STRINGS:Format("[speed=0.7]This is where [color=#009800]Jirachi[color] is said to live..."))
-      UI:WaitShowDialogue(STRINGS:Format("[speed=0.7]I hadn't heard of this dungeon until recently, so I'm sorry but I don't know much about it."))
+    else
+      local string = strings[dungeon_choices[result]]
+      UI:WaitShowDialogue(STRINGS:Format(string))
     end
   end
   UI:WaitShowDialogue("[speed=0.7]Good luck.[pause=20] And be safe!")
@@ -1109,6 +1091,13 @@ end
 function mellow_town.Teammate3_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   COMMON.GroundInteract(activator, chara)
+end
+
+function mellow_town.Sign_Action(chara, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  UI:ResetSpeaker()
+  UI:SetAutoFinish(true)
+UI:WaitShowDialogue("[sound=]West: [color=#F8C060]Wishing Woods[color]")
 end
 
 -- Mission Test

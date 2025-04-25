@@ -279,7 +279,7 @@
 },
 "AssetName": "stardust_pinnacle_boss_1",
 "ScriptEvents": {},
-"Music": "Boss Battle 2.ogg",
+"Music": "Boss Battle.ogg",
 "TileSight": 0,
 "CharSight": 0,
 "Status": {},
@@ -313,29 +313,29 @@
 "StartLocs": [
 {
 "Loc": {
-"X": 8,
-"Y": 26
+"X": 0,
+"Y": 0
 },
 "Dir": 4
 },
 {
 "Loc": {
-"X": 9,
-"Y": 26
+"X": 1,
+"Y": 0
 },
 "Dir": 4
 },
 {
 "Loc": {
-"X": 7,
-"Y": 27
+"X": -1,
+"Y": 1
 },
 "Dir": 4
 },
 {
 "Loc": {
-"X": 9,
-"Y": 27
+"X": 2,
+"Y": 1
 },
 "Dir": 4
 }
@@ -22695,7 +22695,15 @@
 ]
 ],
 "EdgeView": 1,
-"EntryPoints": [],
+"EntryPoints": [
+{
+"Loc": {
+"X": 8,
+"Y": 27
+},
+"Dir": 0
+}
+],
 "Items": []
 }
 }
