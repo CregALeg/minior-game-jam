@@ -4,7 +4,7 @@
   <Description>Jam game for Insert Name Jam, with the theme of: Surprise.</Description>
   <Namespace>minior_jam_game</Namespace>
   <UUID>2780D3E2-E48D-4F77-8CE9-AFDAD62E91B1</UUID>
-  <Version>0.1</Version>
+  <Version>1.0.0</Version>
   <GameVersion>0.0</GameVersion>
   <ModType>Quest</ModType>
   <Relationships />

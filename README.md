@@ -18,6 +18,7 @@ In this Pokémon Mystery Dungeon fangame inspired by Explorers of Sky's special 
 - **Audino** - PMDO developer
 - **Palika** - script help and reference
 - **MistressNebula** - Script help
+- **Flower Snek** - Script help
 
 ## Graphics
 - **redblueyellow** - Spindas Cafe, Treasure Town, Sharpedo Bluff tile rips.
@@ -25,6 +26,7 @@ In this Pokémon Mystery Dungeon fangame inspired by Explorers of Sky's special 
 - All artists of the [PMD Sprite Collab](https://sprites.pmdcollab.org/)
 - **RRen** - Sky Peak map rip, Sky Moon Rip
 - **Hauntfuck** - Sky Mountain (Intro) Map Rips, Sky Moon Rip
+- **Deeshura** - Mega Evolution animation & sound effects, borrowed from their [Mega_Stones](https://github.com/Deeshura/Mega_Stones) mod for PMDO.
 -  **[MegaMinerd](https://projectpokemon.org/home/profile/73557-megaminerd/)** - Mystery Dungeon Sky Map Background Rip
 - **Spike Chunsoft** - Original PMD Time/Darkness/Sky tilesets, portraits, sprites and more
 - **FluffyBunny (Spriters Resource)** - Northern Range Boss Arena Rip
