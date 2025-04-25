@@ -40,7 +40,7 @@ function primal_canyon.ExitSegment(zone, result, rescue, segmentID, mapID)
     UI:WaitShowDialogue("Urk...[pause=20] This is harder than I thought...[pause=20] Let's head home for now...")
     COMMON.EndDungeonDay(result, 'mellow_town', -1, 0, 1)
   else
-    --COMMON.UnlockWithFanfare('stardust_peak', true)
+    COMMON.UnlockWithFanfare('stardust_peak', true)
     COMMON.EndDungeonDay(result, 'mellow_town', -1, 0, 1)
     SV.mellow_town.CanDoCutsceneVanguard1 = true
   end

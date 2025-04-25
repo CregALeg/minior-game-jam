@@ -142,7 +142,14 @@ SV.stardust_peak = {
   PostRayquazaCutsceneHad = false,
   CanDoEndingOne = false,
   CanDoEndingTwo = false,
-  CanDoEndingTrue = false
+  CanDoEndingTrue = false,
+  SeenEndingOne = false,
+  SeenEndingTwo = false
+}
+
+SV.mindscape_cavern = {
+  BossDefeated = false,
+  BossAttempted = false
 }
 
 --

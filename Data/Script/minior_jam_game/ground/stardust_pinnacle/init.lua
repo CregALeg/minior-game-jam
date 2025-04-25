@@ -165,6 +165,35 @@ function stardust_pinnacle.Cutscene_Pre_Rayquaza()
 end
 
 function stardust_pinnacle.Cutscene_First_Phase_Return()
+  local player = CH("PLAYER")
+  local partner = CH("TEAMMATE1")
+  local rayquaza = CH("BOSS_Rayquaza")
+  local sneasler = CH("NPC_Sneasler")
+  local tsareena = CH("NPC_Tsareena")
+  GROUND:Hide("NPC_Silvally")
+  GROUND:Hide("NPC_Noivern")
+  GROUND:Hide("NPC_Ceruledge")
+  GROUND:Unhide("BOSS_Rayquaza")
+  --Set Locations
+  GROUND:TeleportTo(player, 192, 648, Direction.Up)
+  GROUND:TeleportTo(partner, 216, 648, Direction.Up)
+  GROUND:TeleportTo(rayquaza, 192, 552, Direction.Down)
+  -- Start
+  GAME:FadeIn(20)
+  GROUND:CharSetAnim(rayquaza, "Shoot", false)
+  shake = RogueEssence.Content.ScreenMover(16, 20, 24)
+  GROUND:MoveScreen(shake)
+  SOUND:PlayBattleSE("EVT_Roar")
+  GAME:WaitFrames(30)
+
+  UI:SetSpeaker(partner)
+  UI:SetSpeakerEmotion("Determined")
+  UI:WaitShowDialogue("Okay, " ..player:GetDisplayName().."! It won't beat us this time!")
+
+  GAME:CutsceneMode(false)
+  COMMON.BossTransition()
+
+  GAME:ContinueDungeon('stardust_peak', 3, 0, 0)
 end
 
 function stardust_pinnacle.Cutscene_Phase_Transition()
@@ -379,11 +408,11 @@ function stardust_pinnacle.Phase_Two_Return()
   GAME:FadeIn(20)
 
   UI:SetSpeaker(sneasler)
-  UI:SetSpeaerEmotion("determined")
+  UI:SetSpeakerEmotion("determined")
   UI:WaitShowDialogue("Ready to do this again?[pause=30] We can't let this thing beat us again!")
 
   UI:SetSpeaker(partner)
-  UI:SetSpeaerEmotion("determined")
+  UI:SetSpeakerEmotion("determined")
   UI:WaitShowDialogue("Right![pause=20] Let's do this! Together!")
 
   -- Add charas to team as guests
@@ -478,6 +507,8 @@ end
 function stardust_pinnacle.EndingHandler()
   if SV.stardust_peak.CanDoEndingTrue == true then
     stardust_pinnacle.Cutscene_Ending_True()
+  elseif SV.stardust_peak.SeenEndingTwo == true then
+    COMMON.EndDungeonDay(RogueEssence.Data.GameProgress.ResultType.Cleared, 'mellow_town', -1, 0, 1)
   elseif stardust_pinnacle.GetMiniorRescued() == 7 then
     stardust_pinnacle.Cutscene_Ending_Two()
   else
@@ -492,6 +523,7 @@ function stardust_pinnacle.Cutscene_Ending_One()
   GROUND:Hide("NPC_Noivern")
   GROUND:Hide("NPC_Ceruledge")
   --Start
+  GAME:FadeIn(20)
   GROUND:MoveToPosition(player, 192, 600, false, 1)
   GROUND:MoveToPosition(partner, 216, 600, false, 1)
   SOUND:PlayBGM("Don't Ever Forget....ogg", true)
@@ -512,6 +544,7 @@ function stardust_pinnacle.Cutscene_Ending_One()
   UI:WaitShowDialogue("I'll go get my friends...")
   GAME:FadeOut(false, 20)
   rescued = stardust_pinnacle.GetMiniorRescued()
+  stardust_pinnacle.UnhideMinior()
   GAME:FadeIn(20)
   UI:WaitShowDialogue("It looks like...[pause=20] our adventure isn't over yet!")
   missing  = 7 - rescued
@@ -535,33 +568,50 @@ function stardust_pinnacle.GetMiniorRescued()
   local rescued = 0
   if SV.missions.FinishedMissions["RedMiniorRescue"] ~= nil then
     rescued = rescued + 1
-    GROUND:Unhide("RedMinior")
   end
   if SV.missions.FinishedMissions["OrangeMiniorRescue"] ~= nil then
     rescued = rescued + 1
-    GROUND:Unhide("OrangeMinior")
   end
   if SV.missions.FinishedMissions["YellowMiniorRescue"] ~= nil then
     rescued = rescued + 1
-    GROUND:Unhide("YellowMinior")
   end
   if SV.missions.FinishedMissions["BlueMiniorRescue"] ~= nil then
     rescued = rescued + 1
-    GROUND:Unhide("BlueMinior")
   end
   if SV.missions.FinishedMissions["GreenMiniorRescue"] ~= nil then
     rescued = rescued + 1
-    GROUND:Unhide("GreenMinior")
   end
   if SV.missions.FinishedMissions["IndigoMiniorRescue"] ~= nil then
     rescued = rescued + 1
-    GROUND:Unhide("IndigoMinior")
   end
   if SV.missions.FinishedMissions["VioletMiniorRescue"] ~= nil then
     rescued = rescued + 1
-    GROUND:Unhide("VioletMinior")
   end
   return rescued
+end
+
+function stardust_pinnacle.UnhideMinior()
+  if SV.missions.FinishedMissions["RedMiniorRescue"] ~= nil then
+    GROUND:Unhide("RedMinior")
+  end
+  if SV.missions.FinishedMissions["OrangeMiniorRescue"] ~= nil then
+    GROUND:Unhide("OrangeMinior")
+  end
+  if SV.missions.FinishedMissions["YellowMiniorRescue"] ~= nil then
+    GROUND:Unhide("YellowMinior")
+  end
+  if SV.missions.FinishedMissions["BlueMiniorRescue"] ~= nil then
+    GROUND:Unhide("BlueMinior")
+  end
+  if SV.missions.FinishedMissions["GreenMiniorRescue"] ~= nil then
+    GROUND:Unhide("GreenMinior")
+  end
+  if SV.missions.FinishedMissions["IndigoMiniorRescue"] ~= nil then
+    GROUND:Unhide("IndigoMinior")
+  end
+  if SV.missions.FinishedMissions["VioletMiniorRescue"] ~= nil then
+    GROUND:Unhide("VioletMinior")
+  end
 end
 
 function stardust_pinnacle.Cutscene_Ending_Two()
@@ -572,6 +622,7 @@ function stardust_pinnacle.Cutscene_Ending_Two()
   GROUND:Hide("NPC_Noivern")
   GROUND:Hide("NPC_Ceruledge")
   --Start
+  GAME:FadeIn(20)
   GROUND:MoveToPosition(player, 192, 600, false, 1)
   GROUND:MoveToPosition(partner, 216, 600, false, 1)
   SOUND:PlayBGM("Don't Ever Forget....ogg", true)
@@ -592,6 +643,7 @@ function stardust_pinnacle.Cutscene_Ending_Two()
   UI:WaitShowDialogue("I'll go get my friends...")
   GAME:FadeOut(false, 20)
   rescued = stardust_pinnacle.GetMiniorRescued()
+  stardust_pinnacle.UnhideMinior()
   GAME:FadeIn(20)
 
   UI:SetSpeaker(partner)
@@ -635,6 +687,8 @@ function stardust_pinnacle.Cutscene_Ending_Two()
   GROUND:MoveScreen(shake)
   SOUND:PlayBattleSE("EVT_Roar")
 
+  GAME:WaitFrames(30)
+
   UI:SetSpeaker(rayquaza)
   UI:WaitShowDialogue("[speed=0.7]DO NOT BE ALARMED.[PAUSE=0] I AM NOT HERE TO FIGHT.")
 
@@ -643,9 +697,9 @@ function stardust_pinnacle.Cutscene_Ending_Two()
   UI:WaitShowDialogue("What?![pause=30] Then how come you attacked us before! And everyone else before that!")
 
   UI:SetSpeaker(rayquaza)
-  UI:SetSpeaerEmotion("pain")
+  UI:SetSpeakerEmotion("pain")
   UI:WaitShowDialogue("[speed=0.7]I...[pause=30] I SINCERELY APOLOGISE.[PAUSE=0] MY MIND WAS NOT MY OWN.")
-  UI:SetSpeaerEmotion("normal")
+  UI:SetSpeakerEmotion("normal")
   UI:WaitShowDialogue("[speed=0.7]PLEASE BELIEVE ME WHEN I SAY I HAD NO CONTROL OVER MY ACTIONS.")
   UI:WaitShowDialogue("[speed=0.7]I CANNOT EXPRESS MY REGRET ENOUGH. I HAVE CAUSED YOU AND YOURS MUCH HARM. AND FOR THAT I APOLOGISE.")
 
@@ -673,7 +727,7 @@ function stardust_pinnacle.Cutscene_Ending_Two()
   UI:WaitShowDialogue("[speed=0.7]THERE EXISTS A POKEMON OF GREAT PSYCHIC POWER CAPABLE OF GRANTING WISHES.")
   UI:WaitShowDialogue("[speed=0.7]UNFORTUNATELY, IT IS A VAIN AND SELFISH CREATURE, TWISTING INNOCENT POKéMON'S WISHES FOR ITS OWN GAIN.")
   UI:WaitShowDialogue("[speed=0.7]IT IS CALLED,[PAUSE=30] [color=#009800]JIRACHI[color].")
-  UI:WaitShowDialogue("[speed=0.7]I BELIEVE [color=#009800]JIRACHI[color] USED YOUR WISH TO TURN ME AGAINST MY OWN SENSES.[pause=0]FOR WHAT PURPOSE, I DO NOT KNOW.")
+  UI:WaitShowDialogue("[speed=0.7]I BELIEVE [color=#009800]JIRACHI[color] USED YOUR WISH TO TURN ME AGAINST MY OWN SENSES.[pause=0] FOR WHAT PURPOSE, I DO NOT KNOW.")
 
   UI:SetSpeaker(partner)
   UI:SetSpeakerEmotion("worried")
@@ -681,7 +735,7 @@ function stardust_pinnacle.Cutscene_Ending_Two()
 
   UI:SetSpeaker(rayquaza)
   UI:WaitShowDialogue("[speed=0.7]I IMPLORE YOU, YOUNG ADVENTURERS. SEEK OUT [color=#009800]JIRACHI[color] AND ASCERTAIN THE TRUTH.")
-  UI:WaitShowDialogue("[speed=0.7]IF [color=#009800]JIRACHI[color] HAS TRULY COMMITTED THIS GRIEVOUS CRIME...[PAUSE=0] THEN THEY MUST BE BROUGHTO TO JUSTICE!")
+  UI:WaitShowDialogue("[speed=0.7]IF [color=#009800]JIRACHI[color] HAS TRULY COMMITTED THIS GRIEVOUS CRIME...[PAUSE=0] THEN THEY MUST BE BROUGH TO TO JUSTICE!")
 
   GROUND:CharTurnToChar(partner, player)
   GROUND:CharTurnToChar(player, partner)
@@ -742,6 +796,7 @@ function stardust_pinnacle.Cutscene_Ending_Two()
   GAME:FadeOut(false, 20)
   COMMON.UnlockWithFanfare("mindscape_cavern", false)
   GAME:CutsceneMode(false)
+  SV.stardust_peak.SeenEndingTwo = true
   COMMON.EndDungeonDay(RogueEssence.Data.GameProgress.ResultType.Cleared, 'mellow_town', -1, 0, 1)
 end
 

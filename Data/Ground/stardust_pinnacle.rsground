@@ -54072,19 +54072,19 @@
 }
 },
 {
-"Direction": 0,
+"Direction": 2,
 "IsInteracting": false,
 "AIEnabled": true,
-"EntName": "RedMinior_6",
+"EntName": "RedMinior",
 "EntEnabled": false,
 "EntOrder": 0,
 "InteractOrder": 0,
 "serializationLoc": {
-"X": 176,
-"Y": 544
+"X": 296,
+"Y": 602
 },
 "serializationHeight": 0,
-"serializationDir": 0,
+"serializationDir": 2,
 "triggerType": 1,
 "<AI>k__BackingField": null,
 "Data": {
@@ -54161,8 +54161,8 @@
 },
 "CollisionDisabled": false,
 "Collider": {
-"X": 176,
-"Y": 544,
+"X": 280,
+"Y": 595,
 "Width": 16,
 "Height": 16
 }
@@ -54333,7 +54333,7 @@
 "ScriptVars": null
 },
 "EntName": "TEAMMATE_2",
-"Direction": 0,
+"Direction": 4,
 "EntEnabled": true,
 "EntOrder": 0,
 "InteractOrder": 0,
@@ -54421,7 +54421,7 @@
 "ScriptVars": null
 },
 "EntName": "TEAMMATE_3",
-"Direction": 0,
+"Direction": 4,
 "EntEnabled": true,
 "EntOrder": 0,
 "InteractOrder": 0,

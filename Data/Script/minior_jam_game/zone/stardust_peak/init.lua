@@ -45,7 +45,7 @@ function stardust_peak.ExitSegment(zone, result, rescue, segmentID, mapID)
       GAME:EnterZone("stardust_peak", -1, 0, 0)
     elseif segmentID == 1 then --Exiting from second half of dungeon
       if SV.stardust_peak.BossDefeated == true then
-        -- Handling needs to be added here.
+        GAME:EnterZone("stardust_peak", -1, 1, 0) -- Send to ground map for cutscene
       else --Boss not defeated
         GAME:EnterZone("stardust_peak", -1, 1, 0) -- Send to ground map for cutscene
       end

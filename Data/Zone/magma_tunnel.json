@@ -7,7 +7,7 @@
 "LocalTexts": {}
 },
 "Released": true,
-"Comment": "Fifth dungeon. Everything is on fire with fire everwhere.",
+"Comment": "Fifth dungeon. Everything is on fire with fire everwhere.\r\nSecret exit on 7f takes you to Magma Tunnel.",
 "NoEXP": false,
 "ExpPercent": 100,
 "Level": 26,
@@ -3642,7 +3642,7 @@
 "Y": 0
 },
 "ID": "stairs_secret_down",
-"Revealed": false,
+"Revealed": true,
 "Owner": 0,
 "TileStates": [
 {

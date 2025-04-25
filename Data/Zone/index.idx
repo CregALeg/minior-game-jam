@@ -493,7 +493,7 @@ null
 "LocalTexts": {}
 },
 "Released": true,
-"Comment": "Fifth dungeon. Everything is on fire with fire everwhere.",
+"Comment": "Fifth dungeon. Everything is on fire with fire everwhere.\r\nSecret exit on 7f takes you to Magma Tunnel.",
 "SortOrder": 0
 },
 "primal_canyon": {
@@ -637,6 +637,57 @@ null
 },
 "Released": true,
 "Comment": "\"Final\" dungeon. 20 floors, with a rest stop after 15 floors, before transitioning\r\nto High Stardust Peak.",
+"SortOrder": 0
+},
+"mindscape_cavern": {
+"$type": "RogueEssence.Data.ZoneEntrySummary, RogueEssence",
+"ExpPercent": 100,
+"Level": 45,
+"LevelCap": false,
+"KeepSkills": false,
+"TeamRestrict": false,
+"TeamSize": -1,
+"MoneyRestrict": false,
+"BagRestrict": -1,
+"KeepTreasure": false,
+"BagSize": -1,
+"Rescues": 0,
+"CountedFloors": 0,
+"Rogue": 0,
+"Grounds": [
+"mindscape_cavern_rest_stop",
+"dreamscape_cavern_pit"
+],
+"Maps": [
+[
+0,
+1,
+2,
+3,
+4,
+5,
+6,
+7,
+8,
+9
+],
+[
+0,
+1,
+2,
+3,
+4
+],
+[
+0
+]
+],
+"Name": {
+"DefaultText": "Mindscape Cavern",
+"LocalTexts": {}
+},
+"Released": true,
+"Comment": "Actual final dungeon. Features wrapped terrain and occasional psychic terrain.",
 "SortOrder": 0
 }
 }
