@@ -88,6 +88,16 @@ COMMON.MISSION_INCOMPLETE = 0
 COMMON.MISSION_COMPLETE = 1
 COMMON.MISSION_ARCHIVED = 2
 
+----
+--
+---
+function COMMON.DungeonEndDialogue(result)
+  if result == RogueEssence.Data.GameProgress.ResultType.Failed then
+    UI:SetSpeaker(GAME:GetPlayerPartyMember(1))
+    UI:SetSpeakerEmotion("Pain")
+    UI:WaitShowDialogue("Urk...[pause=20] This is harder than I thought...[pause=20] Let's head home for now...")
+  end
+end
 
 ----------------------------------------------------------
 -- Convenience Scription Functions

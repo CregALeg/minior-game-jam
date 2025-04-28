@@ -172,6 +172,7 @@ function mellow_town.RescuedCutscene(minior_colour)
 
   GAME:FadeOut(false, 20)
   GROUND:TeleportTo(minior2, miniorx, miniory, miniorDir)
+  GAME:WaitFrames(30)
   GAME:FadeIn(20)
   GAME:CutsceneMode(false)
 end
@@ -1078,6 +1079,7 @@ end
 -- Teammates
 function mellow_town.Teammate1_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  GROUND:CharTurnToChar(chara, CH("PLAYER"))
   UI:SetSpeaker(chara)
   UI:WaitShowDialogue("Let's go, " ..CH("PLAYER"):GetDisplayName().."!")
 end
@@ -1085,11 +1087,13 @@ end
 -- Teammates
 function mellow_town.Teammate2_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  GROUND:CharTurnToChar(chara, CH("PLAYER"))
   COMMON.GroundInteract(activator, chara)
 end
 
 function mellow_town.Teammate3_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  GROUND:CharTurnToChar(chara, CH("PLAYER"))
   COMMON.GroundInteract(activator, chara)
 end
 
@@ -1654,6 +1658,9 @@ function mellow_town.CutsceneGlamour1()
     SV.mellow_town.CutsceneGlamour1Done = true
     GAME:CutsceneMode(false)
     AI:EnableCharacterAI(partner)
+    tsareena.CollisionDisabled = false
+    sneasler.CollisionDisabled = false
+    granbull.CollisionDisabled = false
   end
 end
 

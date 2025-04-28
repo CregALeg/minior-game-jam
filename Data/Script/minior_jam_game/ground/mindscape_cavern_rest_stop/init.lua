@@ -108,5 +108,26 @@ function mindscape_cavern_rest_stop.Storage_Action(obj, activator)
   COMMON:ShowTeamStorageMenu()
 end
 
+-- Teammates
+function mindscape_cavern_rest_stop.TEAMMATE1_Action(chara, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  GROUND:CharTurnToChar(chara, CH("PLAYER"))
+  UI:SetSpeaker(chara)
+  UI:WaitShowDialogue("We're almost there, " ..CH("PLAYER"):GetDisplayName().. ".[pause=30] Just a litte farther...")
+end
+
+-- Teammates
+function mindscape_cavern_rest_stop.TEAMMATE2_Action(chara, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  GROUND:CharTurnToChar(chara, CH("PLAYER"))
+  COMMON.GroundInteract(activator, chara)
+end
+
+function mindscape_cavern_rest_stop.TEAMMATE3_Action(chara, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  GROUND:CharTurnToChar(chara, CH("PLAYER"))
+  COMMON.GroundInteract(activator, chara)
+end
+
 
 return mindscape_cavern_rest_stop
